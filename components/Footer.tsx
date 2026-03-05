@@ -4,8 +4,8 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-lg font-bold mb-4">Fundación.EH</h3>
-            <p className="text-gray-400">Transformando vidas, creando impacto positivo</p>
+            <h3 className="text-lg font-bold mb-4">Fundación E.H.</h3>
+            <p className="text-gray-400">Carlos y Miriam E.H. — Transformando vidas a través de acciones concretas</p>
           </div>
           <div>
             <h4 className="font-bold mb-4">Enlaces</h4>

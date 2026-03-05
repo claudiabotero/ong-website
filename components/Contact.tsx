@@ -7,9 +7,9 @@ export function Contact() {
           <div>
             <h3 className="text-xl font-bold mb-6">Información de contacto</h3>
             <div className="space-y-4 text-gray-600">
-              <p>📍 Dirección: [Tu dirección aquí]</p>
-              <p>📧 Email: contacto@fundacion.eh.org</p>
-              <p>📱 Teléfono: [Tu teléfono]</p>
+              <p>📍 Encarnación, Paraguay</p>
+              <p>📧 Email: contacto@fundacioneh.org</p>
+              <p>📱 Para solicitudes de acompañamiento y consultas institucionales</p>
               <p>🌐 Redes sociales:</p>
               <div className="flex gap-4 pt-4">
                 <a href="#" className="text-blue-600 hover:underline">Instagram</a>
