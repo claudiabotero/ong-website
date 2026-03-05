@@ -13,7 +13,7 @@ export function Hero() {
       {/* Content overlay */}
       <div className="relative h-full flex items-center justify-center">
         <div className="max-w-3xl mx-auto px-4 text-center text-white">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 drop-shadow-lg">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 drop-shadow-lg" style={{ fontFamily: 'Playfair Display' }}>
             Transformar vidas a través de acciones concretas
           </h1>
           <p className="text-xl md:text-2xl mb-8 drop-shadow-md opacity-95">
