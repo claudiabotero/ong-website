@@ -13,7 +13,7 @@ export function Mission() {
             </p>
           </div>
           <div className="rounded-xl overflow-hidden shadow-xl">
-            <img src="/images/img4.jpg" alt="Evento Fundación" className="w-full h-full object-cover" />
+            <img src="/images/img2.jpg" alt="Evento Fundación" className="w-full h-full object-cover" />
           </div>
         </div>
 
