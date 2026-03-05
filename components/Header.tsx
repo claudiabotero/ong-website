@@ -5,14 +5,10 @@ export function Header() {
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img 
-              src="/images/img3.jpg" 
-              alt="Logo Fundación E.H."
-              className="h-12 w-12 object-contain"
+              src="/logo.png" 
+              alt="Logo Fundación Carlos y Miriam E.H."
+              className="h-16 w-16 object-contain"
             />
-            <div>
-              <div className="text-sm font-bold text-blue-700">Fundación E.H.</div>
-              <div className="text-xs text-gray-600">Carlos y Miriam</div>
-            </div>
           </div>
           <nav className="hidden md:flex gap-8">
             <a href="#mision" className="text-gray-600 hover:text-blue-600 font-medium">Misión</a>
