@@ -1,20 +1,27 @@
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <header className="sticky top-0 z-50 bg-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold text-blue-600">
-            Fundación E.H.
+          <div className="flex items-center gap-3">
+            <img 
+              src="/images/img3.jpg" 
+              alt="Logo Fundación E.H."
+              className="h-12 w-12 object-contain"
+            />
+            <div>
+              <div className="text-sm font-bold text-blue-700">Fundación E.H.</div>
+              <div className="text-xs text-gray-600">Carlos y Miriam</div>
+            </div>
           </div>
           <nav className="hidden md:flex gap-8">
-            <a href="#mision" className="text-gray-600 hover:text-blue-600">Misión</a>
-            <a href="#proyectos" className="text-gray-600 hover:text-blue-600">Proyectos</a>
-            <a href="#impacto" className="text-gray-600 hover:text-blue-600">Impacto</a>
-            <a href="#galeria" className="text-gray-600 hover:text-blue-600">Galería</a>
-            <a href="#contacto" className="text-gray-600 hover:text-blue-600">Contacto</a>
+            <a href="#mision" className="text-gray-600 hover:text-blue-600 font-medium">Misión</a>
+            <a href="#pilares" className="text-gray-600 hover:text-blue-600 font-medium">Pilares</a>
+            <a href="#galeria" className="text-gray-600 hover:text-blue-600 font-medium">Galería</a>
+            <a href="#contacto" className="text-gray-600 hover:text-blue-600 font-medium">Contacto</a>
           </nav>
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-            Donar
+          <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 font-bold">
+            Contacta
           </button>
         </div>
       </div>
