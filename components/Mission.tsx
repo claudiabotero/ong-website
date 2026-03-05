@@ -1,65 +1,43 @@
 export function Mission() {
   return (
-    <section id="mision" className="py-20 bg-white">
+    <section id="mision" className="bg-gray-50 py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
-          <div>
-            <h2 className="text-5xl font-bold mb-6 text-blue-600">Quiénes Somos</h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              La Fundación Carlos y Miriam E.H. nace del profundo vínculo que sus fundadores mantienen con Encarnación. Fue aquí donde comenzaron a construir su camino, donde nacieron sus primeras oportunidades y donde se forjaron los valores de trabajo, esfuerzo y compromiso.
-            </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida y el trabajo les permitieron construir. A través de iniciativas vinculadas a educación, salud e inclusión y deporte, buscamos generar oportunidades y contribuir al desarrollo de Encarnación.
-            </p>
-          </div>
-          <div className="rounded-xl overflow-hidden shadow-xl">
-            <img src="/quien-somos.jpg" alt="Hospital Día Oncológico - Nuestro Trabajo" className="w-full h-full object-cover" />
-          </div>
+        <div className="mb-20">
+          <h2 className="text-5xl font-bold text-gray-900 mb-8">Quiénes Somos</h2>
+          <p className="text-xl text-gray-600 max-w-3xl leading-relaxed">
+            La Fundación Carlos y Miriam E.H. nace del profundo vínculo que sus fundadores mantienen con Encarnación. A través de educación, salud e inclusión y deporte, buscamos generar oportunidades.
+          </p>
         </div>
 
-        <div className="border-t-4 border-blue-600 pt-16">
-          <h2 className="text-5xl font-bold text-center mb-16 text-gray-900">Nuestros Pilares</h2>
-          <div id="pilares" className="space-y-12">
-            {/* Educación */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl hover:shadow-xl transition">
-                <div className="text-6xl mb-4">📚</div>
-                <h3 className="text-2xl font-bold mb-4 text-blue-700">Educación</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Creemos en la educación como herramienta fundamental para el desarrollo. Acompañamos instituciones que promueven oportunidades de formación para niños y jóvenes.
-                </p>
+        <div id="pilares" className="mb-20">
+          <h2 className="text-4xl font-bold text-gray-900 mb-16">Nuestros Pilares</h2>
+          <div className="grid md:grid-cols-3 gap-12">
+            <div>
+              <div className="mb-6">
+                <div className="text-5xl">📚</div>
               </div>
-              <div className="rounded-xl overflow-hidden shadow-lg h-64">
-                <img src="/images/img6.jpg" alt="Educación" className="w-full h-full object-cover" />
-              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Educación</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Educación como herramienta fundamental. Acompañamos instituciones que promueven oportunidades.
+              </p>
             </div>
-
-            {/* Salud e Inclusión */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="rounded-xl overflow-hidden shadow-lg h-64 md:order-2">
-                <img src="/images/img1.jpg" alt="Salud e Inclusión" className="w-full h-full object-cover" />
+            <div>
+              <div className="mb-6">
+                <div className="text-5xl">🏥</div>
               </div>
-              <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl hover:shadow-xl transition md:order-1">
-                <div className="text-6xl mb-4">🏥</div>
-                <h3 className="text-2xl font-bold mb-4 text-green-700">Salud e Inclusión</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Apoyamos instituciones que trabajan por el bienestar e inclusión de personas en situación de vulnerabilidad, fortaleciendo espacios de contención y desarrollo.
-                </p>
-              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Salud e Inclusión</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Bienestar e inclusión de personas en vulnerabilidad, fortaleciendo espacios de contención.
+              </p>
             </div>
-
-            {/* Deporte */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-xl hover:shadow-xl transition">
-                <div className="text-6xl mb-4">⚽</div>
-                <h3 className="text-2xl font-bold mb-4 text-orange-700">Deporte</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Fomentamos el deporte como herramienta de formación, disciplina e integración social para niños y jóvenes.
-                </p>
+            <div>
+              <div className="mb-6">
+                <div className="text-5xl">⚽</div>
               </div>
-              <div className="rounded-xl overflow-hidden shadow-lg h-64">
-                <img src="/images/img7.jpg" alt="Deporte" className="w-full h-full object-cover" />
-              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Deporte</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Deporte como formación, disciplina e integración social para niños y jóvenes.
+              </p>
             </div>
           </div>
         </div>
