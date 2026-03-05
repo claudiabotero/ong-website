@@ -1,0 +1,6 @@
+{
+  "name": "fundacion-eh-website",
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "outputDirectory": ".next"
+}
