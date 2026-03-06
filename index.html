@@ -115,18 +115,18 @@
     
     .logo-box img { 
       height: 70px;
-      filter: invert(1) brightness(1.5);
       animation: neonPulse 3s ease-in-out infinite;
     }
     
-    .logo-text p { 
-      font-size: 14px;
-      background: linear-gradient(90deg, #ff00ff, #00ffff);
+    .logo-text h1 { 
+      font-size: 20px;
+      background: linear-gradient(90deg, #ffcc00, #ff00ff, #00ffff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: 600;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 2px;
+      font-family: 'Playfair Display', serif;
     }
     
     nav { display: flex; gap: 30px; }
@@ -549,7 +549,9 @@
       .stat-grid { grid-template-columns: 1fr; gap: 40px; }
       .contact-grid { grid-template-columns: 1fr; }
       nav { display: none; }
+      .logo-box { flex-direction: row; gap: 15px; }
       .logo-box img { height: 50px; }
+      .logo-text h1 { font-size: 14px; }
       header { padding: 15px; }
     }
   </style>
@@ -558,9 +560,9 @@
   <header>
     <div class="header-content">
       <div class="logo-box">
-        <img src="images/logo-oficial.png" alt="Logo Fundación Carlos y Miriam E.H." style="height: 90px; width: auto;">
+        <img src="images/logo-dorado.png" alt="Logo Fundación Carlos y Miriam E.H.">
         <div class="logo-text">
-          <p style="font-size: 16px; font-weight: 500; opacity: 0.95;">Transformar vidas a través de acciones concretas</p>
+          <h1>FUNDACIÓN CARLOS Y MIRIAM E.H.</h1>
         </div>
       </div>
       <nav>
