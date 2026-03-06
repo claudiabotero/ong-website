@@ -12,24 +12,24 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     
-    header { background: white; border-bottom: 1px solid #e5e7eb; padding: 20px; }
-    .header-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
-    .logo-box { display: flex; align-items: center; gap: 15px; }
-    .logo-box img { height: 60px; width: auto; }
-    .logo-text h1 { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
-    .logo-text p { font-size: 12px; color: #666; }
+    header { background: white; border-bottom: 1px solid #e5e7eb; padding: 15px 20px; }
+    .header-content { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
+    .logo-box { display: flex; align-items: center; gap: 20px; }
+    .logo-box img { height: 80px; width: 80px; border-radius: 6px; object-fit: cover; }
+    .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+    .logo-text p { font-size: 13px; color: #666; margin-top: 2px; }
     nav { display: flex; gap: 40px; }
-    nav a { color: #666; text-decoration: none; font-size: 14px; transition: color 0.3s; }
+    nav a { color: #666; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
     nav a:hover { color: #000; }
     
-    .hero { position: relative; height: 600px; background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('images/img5.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+    .hero { position: relative; height: 700px; background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.35)), url('images/img3.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
     .hero-content { max-width: 900px; padding: 0 40px; animation: slideUp 1s ease-out; }
-    .hero h2 { font-size: 64px; font-weight: 700; margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; }
-    .hero p { font-size: 22px; font-weight: 300; opacity: 0.95; }
+    .hero h2 { font-size: 68px; font-weight: 700; margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; }
+    .hero p { font-size: 24px; font-weight: 300; opacity: 0.95; }
     
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    section { padding: 100px 20px; }
-    h2 { font-size: 44px; font-weight: 700; margin-bottom: 40px; line-height: 1.2; }
+    section { padding: 120px 20px; }
+    h2 { font-size: 48px; font-weight: 700; margin-bottom: 40px; line-height: 1.2; }
     h3 { font-size: 24px; font-weight: 600; margin-bottom: 15px; }
     p { color: #555; font-size: 16px; line-height: 1.8; }
     
@@ -38,10 +38,10 @@
     
     .pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
     .pilar { text-align: center; }
-    .pilar-img { height: 280px; border-radius: 8px; overflow: hidden; margin-bottom: 30px; }
+    .pilar-img { height: 320px; border-radius: 8px; overflow: hidden; margin-bottom: 30px; }
     .pilar-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
     .pilar:hover .pilar-img img { transform: scale(1.05); }
-    .pilar h3 { font-size: 20px; }
+    .pilar h3 { font-size: 22px; }
     
     .instituciones { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-top: 40px; }
     .inst { padding: 20px; background: #f9fafb; border-radius: 6px; text-align: center; transition: all 0.3s; }
@@ -49,13 +49,13 @@
     .inst h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
     .inst p { font-size: 12px; color: #777; margin: 0; }
     
-    .stats { background: #1a1a1a; color: white; padding: 100px 20px; }
+    .stats { background: #1a1a1a; color: white; padding: 120px 20px; }
     .stats h2 { color: white; }
     .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; margin-top: 60px; }
     .stat-item { text-align: center; }
-    .stat-number { font-size: 56px; font-weight: 800; display: block; margin-bottom: 10px; }
+    .stat-number { font-size: 64px; font-weight: 800; display: block; margin-bottom: 10px; }
     .stat-label { font-size: 16px; opacity: 0.8; }
-    .quote { text-align: center; font-size: 24px; font-style: italic; margin-top: 60px; opacity: 0.8; }
+    .quote { text-align: center; font-size: 26px; font-style: italic; margin-top: 80px; opacity: 0.8; }
     
     .contact { background: #f9fafb; }
     .contact h2 { color: #1a1a1a; }
@@ -72,6 +72,7 @@
     footer p { color: #999; margin-bottom: 8px; }
     
     @media (max-width: 768px) {
+      .hero { height: 450px; }
       .hero h2 { font-size: 40px; }
       .section-with-image { grid-template-columns: 1fr; }
       .pilares { grid-template-columns: 1fr; }
@@ -79,6 +80,7 @@
       .stat-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       nav { display: none; }
+      .logo-box img { height: 60px; width: 60px; }
     }
   </style>
 </head>
@@ -86,7 +88,7 @@
   <header>
     <div class="header-content">
       <div class="logo-box">
-        <img src="images/img5.jpg" alt="Logo" style="height: 50px; width: 50px; border-radius: 4px;">
+        <img src="images/img5.jpg" alt="Logo Fundación">
         <div class="logo-text">
           <h1>Fundación E.H.</h1>
           <p>Carlos y Miriam</p>
@@ -115,7 +117,7 @@
         <div>
           <p><strong>La Fundación Carlos y Miriam E.H.</strong> nace del profundo vínculo que sus fundadores, <strong>Lic. Carlos Espínola y Arq. Miriam Harms</strong>, mantienen con Encarnación.</p>
           <p style="margin-top: 20px;">Fue aquí donde comenzaron a construir su camino, donde nacieron sus primeras oportunidades y donde se forjaron los valores de trabajo, esfuerzo y compromiso.</p>
-          <p style="margin-top: 20px;">Decidieron crear la Fundación para <strong>devolver a la comunidad</strong> parte de lo que la vida y el trabajo les permitieron construir.</p>
+          <p style="margin-top: 20px;">Decidieron crear la Fundación para <strong>devolver a la comunidad</strong> parte de lo que la vida y el trabajo les permitieron construir. A través de educación, salud e inclusión y deporte, buscamos generar oportunidades y contribuir al desarrollo de Encarnación.</p>
           <p style="margin-top: 30px; font-size: 15px; color: #888;"><strong>Ubicación:</strong> Encarnación, Paraguay</p>
         </div>
         <img src="images/img2.jpg" alt="Quiénes Somos">
@@ -155,7 +157,7 @@
   <section id="instituciones">
     <div class="container">
       <h2>Instituciones Acompañadas</h2>
-      <p style="text-align: center; margin-bottom: 40px;">Trabajamos con instituciones comprometidas con el bienestar social:</p>
+      <p style="text-align: center; margin-bottom: 40px; font-size: 16px; color: #666;">Trabajamos con instituciones comprometidas con el bienestar social:</p>
       <div class="instituciones">
         <div class="inst">
           <h4>Divino Niño</h4>
@@ -207,9 +209,9 @@
       <h2>Contacta con nosotros</h2>
       <div class="contact-grid">
         <div>
-          <h3 style="font-size: 18px; margin-bottom: 20px;">Información</h3>
-          <p><strong>Encarnación, Paraguay</strong></p>
-          <p style="margin-top: 15px;"><strong>contacto@fundacioneh.org</strong></p>
+          <h3 style="font-size: 20px; margin-bottom: 20px;">Información de Contacto</h3>
+          <p style="font-size: 16px;"><strong>📍 Encarnación, Paraguay</strong></p>
+          <p style="margin-top: 15px; font-size: 16px;"><strong>📧 contacto@fundacioneh.org</strong></p>
           <p style="margin-top: 30px; font-size: 14px; color: #777;">Para solicitudes de acompañamiento y consultas sobre nuestros programas.</p>
         </div>
         <form>
@@ -227,6 +229,7 @@
     <div class="container">
       <p><strong>Fundación Carlos y Miriam E.H.</strong></p>
       <p>Transformando vidas a través de acciones concretas</p>
+      <p style="margin-top: 20px; font-size: 12px;">© 2026. Encarnación, Paraguay.</p>
     </div>
   </footer>
 </body>
