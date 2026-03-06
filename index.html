@@ -3,84 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fundación Carlos y Miriam E.H.</title>
+  <title>Fundación Carlos y Miriam E.H. - Transformando vidas</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #fff; color: #1a1a1a; line-height: 1.6; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #fff; color: #1a1a1a; line-height: 1.6; }
     
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     
-    header { background: white; border-bottom: 1px solid #e5e7eb; padding: 15px 20px; }
-    .header-content { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
-    .logo-box { display: flex; align-items: center; gap: 20px; }
-    .logo-box img { height: 80px; width: 80px; border-radius: 6px; object-fit: cover; }
-    .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
-    .logo-text p { font-size: 13px; color: #666; margin-top: 2px; }
-    nav { display: flex; gap: 40px; }
-    nav a { color: #666; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
-    nav a:hover { color: #000; }
-    
-    .hero { position: relative; height: 700px; background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.35)), url('images/img3.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
-    .hero-content { max-width: 900px; padding: 0 40px; animation: slideUp 1s ease-out; }
-    .hero h2 { font-size: 68px; font-weight: 700; margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; }
-    .hero p { font-size: 24px; font-weight: 300; opacity: 0.95; }
+    header { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 50px 20px; }
+    .header-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
+    .logo-box { display: flex; align-items: center; gap: 15px; }
+    .logo-box img { height: 70px; width: auto; border-radius: 6px; }
+    .logo-text h1 { font-size: 26px; font-weight: 700; }
+    .logo-text p { font-size: 14px; opacity: 0.9; margin-top: 3px; }
+    nav { display: flex; gap: 35px; }
+    nav a { color: white; text-decoration: none; font-size: 15px; font-weight: 500; transition: opacity 0.3s; }
+    nav a:hover { opacity: 0.8; }
     
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    section { padding: 120px 20px; }
-    h2 { font-size: 48px; font-weight: 700; margin-bottom: 40px; line-height: 1.2; }
-    h3 { font-size: 24px; font-weight: 600; margin-bottom: 15px; }
+    section { padding: 100px 20px; }
+    h2 { font-size: 45px; font-weight: 700; margin-bottom: 40px; color: #2c3e50; }
+    h3 { font-size: 22px; font-weight: 600; margin-bottom: 15px; color: #2c3e50; }
     p { color: #555; font-size: 16px; line-height: 1.8; }
     
-    .section-with-image { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .section-with-image img { width: 100%; border-radius: 8px; }
+    .hero { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); padding: 140px 20px; text-align: center; color: white; }
+    .hero-content { max-width: 900px; margin: 0 auto; animation: slideUp 0.8s ease-out; }
+    .hero h2 { font-size: 56px; margin-bottom: 20px; color: white; }
+    .hero p { font-size: 22px; opacity: 0.95; margin-bottom: 40px; }
     
-    .pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
-    .pilar { text-align: center; }
-    .pilar-img { height: 320px; border-radius: 8px; overflow: hidden; margin-bottom: 30px; }
-    .pilar-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-    .pilar:hover .pilar-img img { transform: scale(1.05); }
-    .pilar h3 { font-size: 22px; }
+    .btn { display: inline-block; background: #e74c3c; color: white; padding: 14px 40px; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; border: none; font-size: 16px; transition: all 0.3s; }
+    .btn:hover { background: #c0392b; transform: translateY(-2px); }
+    
+    .section-with-image { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-top: 30px; }
+    .section-with-image img { width: 100%; border-radius: 10px; }
+    
+    .pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
+    .pilar { padding: 35px; background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%); border-radius: 10px; text-align: center; transition: transform 0.3s; }
+    .pilar:hover { transform: translateY(-8px); }
+    .pilar-img { height: 280px; border-radius: 8px; overflow: hidden; margin-bottom: 25px; }
+    .pilar-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .pilar:hover .pilar-img img { transform: scale(1.08); }
+    .pilar h3 { color: #2c3e50; }
+    
+    .pilares-section { background: #f8f9fa; }
     
     .instituciones { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-top: 40px; }
-    .inst { padding: 20px; background: #f9fafb; border-radius: 6px; text-align: center; transition: all 0.3s; }
-    .inst:hover { background: #f0f0f0; transform: translateY(-3px); }
-    .inst h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-    .inst p { font-size: 12px; color: #777; margin: 0; }
+    .inst { padding: 20px; background: white; border-left: 4px solid #3498db; border-radius: 6px; text-align: center; transition: all 0.3s; }
+    .inst:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+    .inst h4 { color: #2c3e50; margin-bottom: 8px; font-size: 16px; }
+    .inst p { font-size: 13px; color: #777; margin: 0; }
     
-    .stats { background: #1a1a1a; color: white; padding: 120px 20px; }
+    .stats { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 100px 20px; }
     .stats h2 { color: white; }
-    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; margin-top: 60px; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; margin-top: 50px; }
     .stat-item { text-align: center; }
-    .stat-number { font-size: 64px; font-weight: 800; display: block; margin-bottom: 10px; }
-    .stat-label { font-size: 16px; opacity: 0.8; }
-    .quote { text-align: center; font-size: 26px; font-style: italic; margin-top: 80px; opacity: 0.8; }
+    .stat-number { font-size: 56px; font-weight: 800; display: block; margin-bottom: 10px; color: #3498db; }
+    .stat-label { font-size: 16px; opacity: 0.9; }
+    .quote { text-align: center; font-size: 22px; font-style: italic; margin-top: 60px; opacity: 0.9; }
     
-    .contact { background: #f9fafb; }
-    .contact h2 { color: #1a1a1a; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 50px; }
+    .contact-section { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); padding: 80px 20px; color: white; }
+    .contact-section h2 { color: white; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 40px; align-items: start; }
     
     form { display: flex; flex-direction: column; gap: 15px; }
-    input, textarea { padding: 14px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 15px; transition: all 0.3s; }
-    input:focus, textarea:focus { outline: none; border-color: #000; box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+    input, textarea { padding: 12px; border: 2px solid rgba(255,255,255,0.3); border-radius: 6px; font-family: system-ui; font-size: 15px; background: rgba(255,255,255,0.1); color: white; transition: all 0.3s; }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.7); }
+    input:focus, textarea:focus { outline: none; border-color: white; background: rgba(255,255,255,0.2); }
     
-    .btn { display: inline-block; background: #000; color: white; padding: 12px 35px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; text-decoration: none; transition: all 0.3s; }
-    .btn:hover { background: #333; transform: translateY(-2px); }
-    
-    footer { background: #1a1a1a; color: white; padding: 60px 20px; text-align: center; }
-    footer p { color: #999; margin-bottom: 8px; }
+    footer { background: #2c3e50; color: white; padding: 50px 20px; text-align: center; }
+    footer p { color: rgba(255,255,255,0.8); margin-bottom: 8px; }
     
     @media (max-width: 768px) {
-      .hero { height: 450px; }
-      .hero h2 { font-size: 40px; }
+      h2 { font-size: 32px; }
+      .hero h2 { font-size: 36px; }
       .section-with-image { grid-template-columns: 1fr; }
       .pilares { grid-template-columns: 1fr; }
       .instituciones { grid-template-columns: repeat(2, 1fr); }
       .stat-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; }
       nav { display: none; }
-      .logo-box img { height: 60px; width: 60px; }
+      .logo-box img { height: 55px; }
     }
   </style>
 </head>
@@ -90,12 +94,12 @@
       <div class="logo-box">
         <img src="images/logo.png" alt="Logo Fundación">
         <div class="logo-text">
-          <h1>Fundación E.H.</h1>
-          <p>Carlos y Miriam</p>
+          <h1>🏛️ Fundación Carlos y Miriam E.H.</h1>
+          <p>Transformar vidas a través de acciones concretas</p>
         </div>
       </div>
       <nav>
-        <a href="#mision">Misión</a>
+        <a href="#mision">Quiénes Somos</a>
         <a href="#pilares">Pilares</a>
         <a href="#instituciones">Instituciones</a>
         <a href="#contacto">Contacto</a>
@@ -103,12 +107,13 @@
     </div>
   </header>
 
-  <div class="hero">
+  <section class="hero">
     <div class="hero-content">
       <h2>Transformar vidas a través de acciones concretas</h2>
-      <p>Educación. Salud e inclusión. Deporte.</p>
+      <p>Educación. Salud e inclusión. Deporte. Devolviéndole a Encarnación lo que permitió nuestro crecimiento.</p>
+      <button class="btn">Conoce nuestro trabajo</button>
     </div>
-  </div>
+  </section>
 
   <section id="mision">
     <div class="container">
@@ -117,15 +122,15 @@
         <div>
           <p><strong>La Fundación Carlos y Miriam E.H.</strong> nace del profundo vínculo que sus fundadores, <strong>Lic. Carlos Espínola y Arq. Miriam Harms</strong>, mantienen con Encarnación.</p>
           <p style="margin-top: 20px;">Fue aquí donde comenzaron a construir su camino, donde nacieron sus primeras oportunidades y donde se forjaron los valores de trabajo, esfuerzo y compromiso.</p>
-          <p style="margin-top: 20px;">Decidieron crear la Fundación para <strong>devolver a la comunidad</strong> parte de lo que la vida y el trabajo les permitieron construir. A través de educación, salud e inclusión y deporte, buscamos generar oportunidades y contribuir al desarrollo de Encarnación.</p>
-          <p style="margin-top: 30px; font-size: 15px; color: #888;"><strong>Ubicación:</strong> Encarnación, Paraguay</p>
+          <p style="margin-top: 20px;">Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida y el trabajo les permitieron construir. A través de iniciativas vinculadas a educación, salud e inclusión y deporte, buscamos generar oportunidades y contribuir al desarrollo de Encarnación.</p>
+          <p style="margin-top: 30px; font-size: 16px;"><strong>📍 Ubicación:</strong> Encarnación, Paraguay</p>
         </div>
-        <img src="images/img2.jpg" alt="Quiénes Somos">
+        <img src="images/img2.jpg" alt="Quiénes Somos" style="width: 100%; border-radius: 10px;">
       </div>
     </div>
   </section>
 
-  <section style="background: #f9fafb;" id="pilares">
+  <section class="pilares-section" id="pilares">
     <div class="container">
       <h2>Nuestros Pilares</h2>
       <div class="pilares">
@@ -133,21 +138,21 @@
           <div class="pilar-img">
             <img src="images/img6.jpg" alt="Educación">
           </div>
-          <h3>Educación</h3>
-          <p>Formación fundamental para el desarrollo. Acompañamos instituciones que promueven oportunidades para niños y jóvenes.</p>
+          <h3>📚 Educación</h3>
+          <p>Creemos en la educación como herramienta fundamental para el desarrollo. Acompañamos instituciones que promueven oportunidades de formación para niños y jóvenes.</p>
         </div>
         <div class="pilar">
           <div class="pilar-img">
             <img src="images/img1.jpg" alt="Salud e Inclusión">
           </div>
-          <h3>Salud e Inclusión</h3>
-          <p>Bienestar e inclusión de personas en vulnerabilidad. Fortalecemos espacios de contención y desarrollo.</p>
+          <h3>🏥 Salud e Inclusión</h3>
+          <p>Apoyamos instituciones que trabajan por el bienestar e inclusión de personas en situación de vulnerabilidad, fortaleciendo espacios de contención y desarrollo.</p>
         </div>
         <div class="pilar">
           <div class="pilar-img">
             <img src="images/img7.jpg" alt="Deporte">
           </div>
-          <h3>Deporte</h3>
+          <h3>⚽ Deporte</h3>
           <p>Formación, disciplina e integración social. El deporte como herramienta de transformación.</p>
         </div>
       </div>
@@ -157,26 +162,26 @@
   <section id="instituciones">
     <div class="container">
       <h2>Instituciones Acompañadas</h2>
-      <p style="text-align: center; margin-bottom: 40px; font-size: 16px; color: #666;">Trabajamos con instituciones comprometidas con el bienestar social:</p>
+      <p style="text-align: center; margin-bottom: 40px; font-size: 16px;">Trabajamos en articulación con instituciones debidamente constituidas y comprometidas con el bienestar social:</p>
       <div class="instituciones">
         <div class="inst">
-          <h4>Divino Niño</h4>
-          <p>Educación infantil</p>
+          <h4>👶 Fundación Divino Niño</h4>
+          <p>Educación y desarrollo infantil</p>
         </div>
         <div class="inst">
-          <h4>Sagrado Corazón</h4>
-          <p>Salud e inclusión</p>
+          <h4>❤️ Fundación Sagrado Corazón</h4>
+          <p>Salud e inclusión social</p>
         </div>
         <div class="inst">
-          <h4>Lazos del Sur</h4>
+          <h4>🤝 Fundación Lazos del Sur</h4>
           <p>Cohesión comunitaria</p>
         </div>
         <div class="inst">
-          <h4>PRODE</h4>
-          <p>Desarrollo</p>
+          <h4>🚀 Fundación PRODE</h4>
+          <p>Desarrollo y oportunidades</p>
         </div>
         <div class="inst">
-          <h4>CENADE</h4>
+          <h4>🎓 CENADE</h4>
           <p>Educación especializada</p>
         </div>
       </div>
@@ -204,22 +209,22 @@
     </div>
   </section>
 
-  <section class="contact" id="contacto">
+  <section class="contact-section" id="contacto">
     <div class="container">
       <h2>Contacta con nosotros</h2>
       <div class="contact-grid">
         <div>
-          <h3 style="font-size: 20px; margin-bottom: 20px;">Información de Contacto</h3>
-          <p style="font-size: 16px;"><strong>📍 Encarnación, Paraguay</strong></p>
-          <p style="margin-top: 15px; font-size: 16px;"><strong>📧 contacto@fundacioneh.org</strong></p>
-          <p style="margin-top: 30px; font-size: 14px; color: #777;">Para solicitudes de acompañamiento y consultas sobre nuestros programas.</p>
+          <h3 style="color: white; font-size: 24px;">Información de Contacto</h3>
+          <p style="font-size: 18px; margin-top: 20px;">📍 <strong>Ubicación:</strong><br>Encarnación, Paraguay</p>
+          <p style="font-size: 18px; margin-top: 20px;">📧 <strong>Email:</strong><br>contacto@fundacioneh.org</p>
+          <p style="margin-top: 30px; opacity: 0.95;">Para solicitudes de acompañamiento y consultas sobre nuestros programas.</p>
         </div>
         <form>
-          <input type="text" placeholder="Nombre" required>
-          <input type="email" placeholder="Email" required>
+          <input type="text" placeholder="Tu nombre" required>
+          <input type="email" placeholder="Tu email" required>
           <input type="text" placeholder="Asunto">
-          <textarea placeholder="Mensaje" rows="5" required></textarea>
-          <button type="submit" class="btn">Enviar</button>
+          <textarea placeholder="Tu mensaje" rows="5" required></textarea>
+          <button type="submit" class="btn" style="background: white; color: #e67e22; align-self: flex-start; font-size: 16px;">Enviar mensaje</button>
         </form>
       </div>
     </div>
@@ -227,9 +232,9 @@
 
   <footer>
     <div class="container">
-      <p><strong>Fundación Carlos y Miriam E.H.</strong></p>
-      <p>Transformando vidas a través de acciones concretas</p>
-      <p style="margin-top: 20px; font-size: 12px;">© 2026. Encarnación, Paraguay.</p>
+      <p style="font-size: 18px;"><strong>© 2026 Fundación Carlos y Miriam E.H.</strong></p>
+      <p style="margin-top: 10px; opacity: 0.9;">Encarnación, Paraguay</p>
+      <p style="margin-top: 20px; opacity: 0.8; font-size: 14px;">Transformando vidas a través de acciones concretas</p>
     </div>
   </footer>
 </body>
