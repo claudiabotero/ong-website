@@ -7,36 +7,53 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: system-ui, -apple-system, sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
-    header { background: #f8f8f8; border-bottom: 2px solid #000; padding: 30px 20px; }
+    
+    header { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 40px 20px; }
     .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-    h1 { font-size: 28px; margin-bottom: 10px; font-weight: 700; }
-    h2 { font-size: 36px; margin-bottom: 30px; font-weight: 700; }
-    h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
-    p { color: #666; margin-bottom: 15px; }
+    h1 { font-size: 32px; margin-bottom: 10px; font-weight: 700; }
+    .tagline { font-size: 18px; opacity: 0.9; }
+    h2 { font-size: 40px; margin-bottom: 30px; font-weight: 700; color: #2c3e50; }
+    h3 { font-size: 22px; font-weight: 600; margin-bottom: 10px; color: #2c3e50; }
+    p { color: #555; margin-bottom: 15px; font-size: 16px; }
     section { padding: 60px 20px; }
-    .hero { background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); padding: 80px 20px; text-align: center; }
-    .hero h2 { font-size: 48px; margin-bottom: 20px; }
-    .hero p { font-size: 20px; color: #555; max-width: 600px; margin: 0 auto 30px; }
-    .btn { display: inline-block; background: #000; color: #fff; padding: 12px 30px; border-radius: 4px; text-decoration: none; font-weight: 600; cursor: pointer; border: none; font-size: 16px; }
-    .btn:hover { background: #333; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-    .card { padding: 30px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; transition: all 0.3s; }
-    .card:hover { border-color: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-    .card h3 { color: #000; }
-    .stats { background: #000; color: #fff; padding: 60px 20px; }
-    .stats .container { text-align: center; }
-    .stat-item { display: inline-block; margin: 0 40px; }
-    .stat-number { font-size: 48px; font-weight: 700; display: block; }
-    .stat-label { font-size: 16px; margin-top: 10px; opacity: 0.9; }
-    footer { background: #f8f8f8; border-top: 1px solid #ddd; padding: 30px 20px; text-align: center; color: #666; }
-    .img-placeholder { width: 100%; height: 300px; background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; margin: 20px 0; }
+    
+    .hero { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); padding: 100px 20px; text-align: center; color: white; }
+    .hero h2 { font-size: 48px; margin-bottom: 20px; color: white; }
+    .hero p { font-size: 20px; color: #ecf0f1; max-width: 600px; margin: 0 auto 30px; }
+    
+    .btn { display: inline-block; background: #e74c3c; color: white; padding: 14px 40px; border-radius: 6px; text-decoration: none; font-weight: 600; cursor: pointer; border: none; font-size: 16px; transition: background 0.3s; }
+    .btn:hover { background: #c0392b; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+    .card { padding: 30px; background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%); border-radius: 10px; transition: transform 0.3s; }
+    .card:hover { transform: translateY(-5px); }
+    .card h3 { font-size: 28px; margin-bottom: 15px; }
+    
+    .stats { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 80px 20px; }
+    .stats h2 { color: white; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
+    .stat-item { text-align: center; }
+    .stat-number { font-size: 56px; font-weight: 700; display: block; color: #3498db; }
+    .stat-label { font-size: 18px; margin-top: 10px; opacity: 0.95; }
+    
+    .img-section { width: 100%; height: 350px; border-radius: 10px; object-fit: cover; margin: 20px 0; display: block; }
+    
+    .cta-section { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); padding: 60px 20px; color: white; }
+    .cta-section h2 { color: white; }
+    .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; align-items: center; }
+    
+    form { display: flex; flex-direction: column; gap: 15px; }
+    input, textarea { padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-family: system-ui; font-size: 16px; }
+    input:focus, textarea:focus { outline: none; border-color: #3498db; }
+    
+    footer { background: #2c3e50; color: white; padding: 40px 20px; text-align: center; }
   </style>
 </head>
 <body>
   <header>
     <div class="container">
-      <h1>Fundación Carlos y Miriam E.H.</h1>
-      <p>Transformar vidas a través de acciones concretas</p>
+      <h1>🏛️ Fundación Carlos y Miriam E.H.</h1>
+      <p class="tagline">Transformar vidas a través de acciones concretas</p>
     </div>
   </header>
 
@@ -44,7 +61,7 @@
     <div class="container">
       <h2>Transformar vidas a través de acciones concretas</h2>
       <p>Educación. Salud e inclusión. Deporte. Devolviéndole a Encarnación lo que permitió nuestro crecimiento.</p>
-      <button class="btn">Conoce nuestro trabajo</button>
+      <button class="btn">📌 Conoce nuestro trabajo</button>
     </div>
   </section>
 
@@ -53,15 +70,15 @@
       <h2>Quiénes Somos</h2>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
         <div>
-          <p>La Fundación Carlos y Miriam E.H. nace del profundo vínculo que sus fundadores mantienen con Encarnación. Fue aquí donde comenzaron a construir su camino.</p>
-          <p>Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida y el trabajo les permitieron construir.</p>
+          <p><strong>La Fundación Carlos y Miriam E.H.</strong> nace del profundo vínculo que sus fundadores mantienen con Encarnación. Fue aquí donde comenzaron a construir su camino.</p>
+          <p>Decidieron crear la Fundación para <strong>devolver a la comunidad</strong> parte de lo que la vida y el trabajo les permitieron construir.</p>
         </div>
-        <div class="img-placeholder">[Imagen: Quiénes Somos]</div>
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=350&fit=crop" alt="Quiénes Somos" class="img-section">
       </div>
     </div>
   </section>
 
-  <section style="background: #f5f5f5;">
+  <section style="background: #ecf0f1;">
     <div class="container">
       <h2>Nuestros Pilares</h2>
       <div class="grid">
@@ -83,17 +100,17 @@
 
   <section class="stats">
     <div class="container">
-      <h2 style="color: #fff; margin-bottom: 50px;">Nuestro Compromiso</h2>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
-        <div>
+      <h2>Nuestro Compromiso</h2>
+      <div class="stat-grid">
+        <div class="stat-item">
           <span class="stat-number">5</span>
           <span class="stat-label">Instituciones acompañadas</span>
         </div>
-        <div>
+        <div class="stat-item">
           <span class="stat-number">3</span>
           <span class="stat-label">Pilares de acción</span>
         </div>
-        <div>
+        <div class="stat-item">
           <span class="stat-number">∞</span>
           <span class="stat-label">Compromiso con Encarnación</span>
         </div>
@@ -101,20 +118,19 @@
     </div>
   </section>
 
-  <section>
+  <section class="cta-section">
     <div class="container">
-      <h2>Contacta</h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+      <div class="cta-grid">
         <div>
-          <h3>Información</h3>
-          <p><strong>Ubicación:</strong> Encarnación, Paraguay</p>
-          <p><strong>Email:</strong> contacto@fundacioneh.org</p>
+          <h2>Contacta con nosotros</h2>
+          <p style="font-size: 18px; margin-top: 20px;">📍 Encarnación, Paraguay</p>
+          <p style="font-size: 18px;">📧 contacto@fundacioneh.org</p>
         </div>
-        <form style="display: flex; flex-direction: column; gap: 15px;">
-          <input type="text" placeholder="Nombre" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;" />
-          <input type="email" placeholder="Email" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;" />
-          <textarea placeholder="Mensaje" rows="4" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: system-ui;"></textarea>
-          <button class="btn">Enviar</button>
+        <form>
+          <input type="text" placeholder="Tu nombre" required>
+          <input type="email" placeholder="Tu email" required>
+          <textarea placeholder="Tu mensaje" rows="4" required></textarea>
+          <button class="btn" style="background: white; color: #e67e22; align-self: flex-start;">Enviar mensaje</button>
         </form>
       </div>
     </div>
@@ -122,7 +138,8 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 Fundación Carlos y Miriam E.H. Encarnación, Paraguay</p>
+      <p><strong>© 2026 Fundación Carlos y Miriam E.H.</strong></p>
+      <p>Encarnación, Paraguay | Transformando vidas a través de acciones concretas</p>
     </div>
   </footer>
 </body>
