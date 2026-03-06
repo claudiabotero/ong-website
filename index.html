@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fundación Carlos y Miriam E.H.</title>
+  <title>Fundación Carlos y Miriam E.H. - Transformando vidas</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -12,17 +12,16 @@
     @keyframes slideUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes slideInLeft { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: translateX(0); } }
     @keyframes slideInRight { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
     
-    header { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 80px 20px; text-align: center; position: relative; overflow: hidden; }
+    header { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 50px 20px; text-align: center; position: relative; overflow: hidden; }
     header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%); }
     
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
     h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; animation: slideUp 0.8s ease-out; }
     .tagline { font-size: 20px; opacity: 0.85; font-weight: 300; animation: slideUp 0.8s ease-out 0.2s backwards; }
     h2 { font-size: 48px; font-weight: 700; margin-bottom: 30px; line-height: 1.2; animation: slideUp 0.8s ease-out; }
-    p { color: #555; margin-bottom: 18px; font-size: 17px; line-height: 1.8; }
+    p { color: #555; margin-bottom: 15px; font-size: 17px; line-height: 1.8; }
     section { padding: 120px 20px; position: relative; }
     
     .hero { background: linear-gradient(135deg, #0f4c75 0%, #1b6ca8 100%); color: white; padding: 160px 20px; text-align: center; position: relative; overflow: hidden; }
@@ -30,7 +29,7 @@
     .hero h2 { color: white; font-size: 56px; animation: slideUp 1s ease-out; }
     .hero p { color: rgba(255,255,255,0.9); font-size: 20px; max-width: 700px; margin: 0 auto 40px; animation: slideUp 1s ease-out 0.2s backwards; }
     
-    .btn { display: inline-block; background: #ff6b6b; color: white; padding: 16px 45px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 16px; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); animation: slideUp 1s ease-out 0.4s backwards; }
+    .btn { display: inline-block; background: #ff6b6b; color: white; padding: 16px 45px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 16px; text-decoration: none; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); animation: slideUp 1s ease-out 0.4s backwards; }
     .btn:hover { background: #ff5252; transform: translateY(-4px); box-shadow: 0 15px 40px rgba(255, 107, 107, 0.3); }
     
     .section-dark { background: #f9fafb; }
@@ -109,22 +108,24 @@
     </div>
   </header>
 
-  <section class="hero">
+  <section class="hero" id="inicio">
     <div class="container">
       <h2>Transformar vidas a través de acciones concretas</h2>
       <p>Educación. Salud e inclusión. Deporte. Devolviéndole a Encarnación lo que permitió nuestro crecimiento.</p>
-      <button class="btn">Conoce nuestro trabajo</button>
+      <a href="#mision" class="btn">Conoce nuestro trabajo</a>
     </div>
   </section>
 
-  <section>
+  <section id="mision">
     <div class="container">
       <h2>Quiénes Somos</h2>
       <div class="two-col">
         <div class="two-col-text">
           <p><strong style="font-size: 18px;">La Fundación Carlos y Miriam E.H.</strong> nace del profundo vínculo que sus fundadores, <strong>Lic. Carlos Espínola y Arq. Miriam Harms</strong>, mantienen con Encarnación.</p>
           <p>Fue aquí donde comenzaron a construir su camino, donde nacieron sus primeras oportunidades y donde se forjaron los valores de trabajo, esfuerzo y compromiso.</p>
-          <p>Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida y el trabajo les permitieron construir. A través de iniciativas vinculadas a educación, salud e inclusión y deporte, buscamos generar oportunidades y contribuir al desarrollo de Encarnación.</p>
+          <p>Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida y el trabajo les permitieron construir. A través de iniciativas vinculadas a <strong>educación, salud e inclusión y deporte</strong>, buscamos generar oportunidades y contribuir al desarrollo de Encarnación.</p>
+          <p style="margin-top: 30px;"><strong>Misión:</strong> Generar oportunidades de desarrollo a través de educación, salud e inclusión y deporte.</p>
+          <p><strong>Ubicación:</strong> Encarnación, Paraguay</p>
         </div>
         <div class="two-col-img">
           <div class="img-box">
@@ -135,7 +136,7 @@
     </div>
   </section>
 
-  <section class="section-dark">
+  <section class="section-dark" id="pilares">
     <div class="container">
       <h2>Nuestros Pilares</h2>
       <div class="grid">
@@ -145,7 +146,7 @@
           </div>
           <div class="card-content">
             <h3>📚 Educación</h3>
-            <p>Creemos en la educación como herramienta fundamental. Acompañamos instituciones que promueven oportunidades de formación para niños y jóvenes.</p>
+            <p>Creemos en la educación como herramienta fundamental para el desarrollo. Acompañamos instituciones que promueven oportunidades de formación para niños y jóvenes.</p>
           </div>
         </div>
         <div class="card">
@@ -154,7 +155,7 @@
           </div>
           <div class="card-content">
             <h3>🏥 Salud e Inclusión</h3>
-            <p>Apoyamos instituciones que trabajan por el bienestar e inclusión de personas en situación de vulnerabilidad, fortaleciendo espacios de contención.</p>
+            <p>Apoyamos instituciones que trabajan por el bienestar e inclusión de personas en situación de vulnerabilidad, fortaleciendo espacios de contención y desarrollo.</p>
           </div>
         </div>
         <div class="card">
@@ -170,25 +171,26 @@
     </div>
   </section>
 
-  <section>
+  <section id="instituciones">
     <div class="container">
       <h2>Instituciones Acompañadas</h2>
+      <p style="margin-bottom: 40px; text-align: center; font-size: 18px;">Trabajamos en articulación con instituciones debidamente constituidas y comprometidas con el bienestar social:</p>
       <div class="institutions-grid">
         <div class="inst-item" style="--i: 1;">
-          <h4>👶 Divino Niño</h4>
-          <p>Educación infantil</p>
+          <h4>👶 Fundación Divino Niño</h4>
+          <p>Educación y desarrollo infantil</p>
         </div>
         <div class="inst-item" style="--i: 2;">
-          <h4>❤️ Sagrado Corazón</h4>
-          <p>Salud e inclusión</p>
+          <h4>❤️ Fundación Sagrado Corazón</h4>
+          <p>Salud e inclusión social</p>
         </div>
         <div class="inst-item" style="--i: 3;">
-          <h4>🤝 Lazos del Sur</h4>
+          <h4>🤝 Fundación Lazos del Sur</h4>
           <p>Cohesión comunitaria</p>
         </div>
         <div class="inst-item" style="--i: 4;">
-          <h4>🚀 PRODE</h4>
-          <p>Desarrollo</p>
+          <h4>🚀 Fundación PRODE</h4>
+          <p>Desarrollo y oportunidades</p>
         </div>
         <div class="inst-item" style="--i: 5;">
           <h4>🎓 CENADE</h4>
@@ -204,36 +206,37 @@
       <div class="stat-grid">
         <div class="stat-item">
           <span class="stat-number">5</span>
-          <span class="stat-label">Instituciones</span>
+          <span class="stat-label">Instituciones acompañadas</span>
         </div>
         <div class="stat-item">
           <span class="stat-number">3</span>
-          <span class="stat-label">Pilares</span>
+          <span class="stat-label">Pilares de acción</span>
         </div>
         <div class="stat-item">
           <span class="stat-number">∞</span>
-          <span class="stat-label">Compromiso</span>
+          <span class="stat-label">Compromiso con Encarnación</span>
         </div>
       </div>
       <p style="text-align: center; font-size: 20px; margin-top: 80px; font-style: italic; opacity: 0.95;">"Encarnación es nuestro origen. Servir a su comunidad es nuestro compromiso."</p>
     </div>
   </section>
 
-  <section class="contact-section">
+  <section class="contact-section" id="contacto">
     <div class="container">
       <h2>Contacta con nosotros</h2>
       <div class="contact-grid">
         <div>
           <h3 style="font-size: 24px; margin-bottom: 20px;">Información de Contacto</h3>
-          <p style="font-size: 17px; margin: 20px 0;">📍 <strong>Encarnación, Paraguay</strong></p>
-          <p style="font-size: 17px;">📧 <strong>contacto@fundacioneh.org</strong></p>
+          <p style="font-size: 17px; margin: 20px 0;">📍 <strong>Ubicación:</strong><br>Encarnación, Paraguay</p>
+          <p style="font-size: 17px;">📧 <strong>Email:</strong><br>contacto@fundacioneh.org</p>
+          <p style="font-size: 17px; margin-top: 30px; opacity: 0.95;">Para solicitudes de acompañamiento y consultas sobre nuestros programas.</p>
         </div>
         <form>
-          <input type="text" placeholder="Nombre" required>
-          <input type="email" placeholder="Email" required>
+          <input type="text" placeholder="Tu nombre" required>
+          <input type="email" placeholder="Tu email" required>
           <input type="text" placeholder="Asunto">
-          <textarea placeholder="Mensaje" rows="5" required></textarea>
-          <button class="btn" style="background: white; color: #f97316; font-weight: 700; align-self: flex-start;">Enviar</button>
+          <textarea placeholder="Tu mensaje" rows="5" required></textarea>
+          <button type="submit" class="btn" style="background: white; color: #f97316; font-weight: 700; align-self: flex-start;">Enviar mensaje</button>
         </form>
       </div>
     </div>
@@ -241,8 +244,9 @@
 
   <footer>
     <div class="container">
-      <p style="font-size: 16px;"><strong>© 2026 Fundación Carlos y Miriam E.H.</strong></p>
-      <p style="margin-top: 10px; opacity: 0.7;">Transformando vidas a través de acciones concretas</p>
+      <p style="font-size: 18px;"><strong>© 2026 Fundación Carlos y Miriam E.H.</strong></p>
+      <p style="margin-top: 10px; opacity: 0.9;">Encarnación, Paraguay</p>
+      <p style="margin-top: 20px; opacity: 0.8; font-size: 14px;">Transformando vidas a través de acciones concretas</p>
     </div>
   </footer>
 </body>
