@@ -28,69 +28,25 @@
     html { scroll-behavior: smooth; }
     body { 
       font-family: 'Montserrat', sans-serif; 
-      background: #0a0a0a;
-      color: #fff;
+      background: #ffffff;
+      color: #333;
       line-height: 1.6;
-      overflow-x: hidden;
     }
     
-    /* Neon glow effect */
-    @property --gradient-angle {
-      syntax: "<angle>";
-      initial-value: 0deg;
-      inherits: false;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
-    @keyframes rotation {
-      0% { --gradient-angle: 0deg; }
-      100% { --gradient-angle: 360deg; }
+    h1, h2, h3, h4, h5, h6 { 
+      font-family: 'Playfair Display', serif; 
+      font-weight: 700;
+      color: #1a365d;
     }
-    
-    @keyframes float { 
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    @keyframes glitch {
-      0%, 100% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
-      25% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; }
-      50% { text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff; }
-      75% { text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
-    }
-    
-    @keyframes neonPulse {
-      0%, 100% { filter: brightness(1) contrast(1); }
-      50% { filter: brightness(1.2) contrast(1.1); }
-    }
-    
-    /* Animated gradient border */
-    .gradient-border {
-      position: relative;
-      background: #0a0a0a;
-      border-radius: 20px;
-      padding: 3px;
-    }
-    
-    .gradient-border::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 20px;
-      padding: 3px;
-      background: conic-gradient(from var(--gradient-angle), #ff00ff, #00ffff, #ffff00, #ff00ff);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      animation: rotation 4s linear infinite;
-    }
-    
-    h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 800; }
     
     header { 
-      background: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 0, 255, 0.3);
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       padding: 20px;
       position: fixed;
       width: 100%;
@@ -100,7 +56,7 @@
     }
     
     .header-content { 
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -114,31 +70,23 @@
     }
     
     .logo-box img { 
-      height: 70px;
-      animation: neonPulse 3s ease-in-out infinite;
+      height: 60px;
     }
     
     .logo-text h1 { 
-      font-size: 20px;
-      background: linear-gradient(90deg, #ffcc00, #ff00ff, #00ffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #1a365d;
+      font-weight: 700;
     }
     
     nav { display: flex; gap: 30px; }
     nav a { 
-      color: #fff;
+      color: #1a365d;
       text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 15px;
+      font-weight: 500;
       position: relative;
-      transition: all 0.3s;
+      transition: color 0.3s;
     }
     
     nav a::after {
@@ -148,328 +96,160 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      background: #c9a961;
       transition: width 0.3s;
     }
     
+    nav a:hover { color: #c9a961; }
     nav a:hover::after { width: 100%; }
     
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
-    section { padding: 120px 20px; position: relative; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 80px 20px; }
     
     h2 { 
-      font-size: 72px;
-      font-weight: 800;
-      margin-bottom: 50px;
-      background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 40px;
       text-align: center;
-      animation: glitch 8s infinite alternate;
+      color: #1a365d;
     }
     
     h3 { 
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #fff;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #1a365d;
     }
     
     p { 
-      color: rgba(255, 255, 255, 0.8);
+      color: #666;
       font-size: 16px;
       line-height: 1.8;
     }
     
-    /* Hero diagonal split */
     .hero { 
-      margin-top: 90px;
-      height: 100vh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -50%;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(45deg, #ff00ff 0%, transparent 50%);
-      opacity: 0.1;
-      animation: rotation 20s linear infinite;
-    }
-    
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: -50%;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(-45deg, #00ffff 0%, transparent 50%);
-      opacity: 0.1;
-      animation: rotation 25s linear infinite reverse;
+      margin-top: 100px;
+      padding: 120px 20px;
+      background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+      color: white;
+      text-align: center;
     }
     
     .hero-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 1000px;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeIn 1s ease-out;
     }
     
     .hero h2 { 
-      font-size: 90px;
-      margin-bottom: 30px;
-      letter-spacing: -2px;
-      line-height: 1;
+      font-size: 56px;
+      margin-bottom: 20px;
+      color: white;
+      font-weight: 700;
     }
     
     .hero p { 
-      font-size: 24px;
-      margin-bottom: 50px;
-      opacity: 0.9;
+      font-size: 20px;
+      margin-bottom: 40px;
+      opacity: 0.95;
+      color: white;
     }
     
     .btn {
       display: inline-block;
-      padding: 18px 50px;
-      background: transparent;
-      color: #fff;
-      border: 2px solid;
-      border-image: linear-gradient(90deg, #ff00ff, #00ffff) 1;
+      padding: 15px 40px;
+      background: #c9a961;
+      color: white;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      position: relative;
-      overflow: hidden;
+      border-radius: 50px;
       transition: all 0.3s;
-    }
-    
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, #ff00ff, #00ffff);
-      transition: left 0.3s;
-      z-index: -1;
+      box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
     }
     
     .btn:hover {
-      color: #0a0a0a;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5);
+      background: #b8995a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4);
     }
     
-    .btn:hover::before { left: 0; }
-    
-    /* Bento grid layout */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-top: 60px;
+    .section-bg-light {
+      background: #f8f9fa;
     }
     
-    .bento-item {
-      background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1));
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 30px;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .bento-item::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255, 0, 255, 0.3) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .bento-item:hover {
-      transform: translateY(-10px) scale(1.02);
-      border-color: rgba(255, 0, 255, 0.5);
-    }
-    
-    .bento-item:hover::before { opacity: 1; }
-    
-    .bento-item.large { grid-column: span 2; grid-row: span 2; }
-    .bento-item.wide { grid-column: span 2; }
-    .bento-item.tall { grid-row: span 2; }
-    
-    /* Glassmorphism cards */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
+    .card {
+      background: white;
+      border-radius: 15px;
       padding: 40px;
-      margin-bottom: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
       transition: all 0.3s;
     }
     
-    .glass-card:hover {
-      background: rgba(255, 255, 255, 0.08);
-      transform: translateX(10px);
-      border-color: rgba(255, 0, 255, 0.3);
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
     }
     
-    /* Floating elements background */
-    .floating-shapes {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: -1;
-    }
-    
-    .shape {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.3;
-      animation: float 20s infinite ease-in-out;
-    }
-    
-    .shape1 {
-      width: 300px;
-      height: 300px;
-      background: #ff00ff;
-      top: 10%;
-      left: 10%;
-      animation-delay: 0s;
-    }
-    
-    .shape2 {
-      width: 400px;
-      height: 400px;
-      background: #00ffff;
-      bottom: 10%;
-      right: 10%;
-      animation-delay: 5s;
-    }
-    
-    .shape3 {
-      width: 250px;
-      height: 250px;
-      background: #ffff00;
-      top: 50%;
-      left: 50%;
-      animation-delay: 10s;
-    }
-    
-    /* Stats with neon numbers */
-    .stats {
-      background: #0a0a0a;
-      padding: 120px 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .stat-grid {
+    .pillar-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 60px;
-      margin-top: 60px;
+      gap: 30px;
+      margin-top: 50px;
     }
     
-    .stat-item {
+    .pillar-card {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
       text-align: center;
-      animation: float 4s ease-in-out infinite;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+      border-top: 4px solid #c9a961;
     }
     
-    .stat-item:nth-child(2) { animation-delay: 1s; }
-    .stat-item:nth-child(3) { animation-delay: 2s; }
-    
-    .stat-number {
-      font-size: 80px;
-      font-weight: 900;
-      display: block;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+    .pillar-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
     }
     
-    .stat-label {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      opacity: 0.7;
+    .pillar-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
     }
     
-    .quote {
-      text-align: center;
-      font-size: 28px;
-      font-style: italic;
-      margin-top: 80px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      opacity: 0.8;
-      position: relative;
+    .institution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
     }
     
-    .quote::before,
-    .quote::after {
-      content: '"';
-      font-size: 60px;
-      position: absolute;
-      opacity: 0.3;
-      color: #ff00ff;
-    }
-    
-    .quote::before { top: -20px; left: -40px; }
-    .quote::after { bottom: -40px; right: -40px; }
-    
-    /* Contact section cyberpunk style */
     .contact-section {
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255, 0, 255, 0.3);
-      padding: 100px 20px;
-      position: relative;
+      background: #1a365d;
+      color: white;
+      padding: 80px 20px;
     }
     
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      margin-top: 60px;
+      gap: 50px;
+      margin-top: 50px;
     }
     
     form {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px;
     }
     
     input, textarea {
       padding: 15px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 0, 255, 0.3);
-      border-radius: 10px;
-      color: #fff;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      color: #333;
       font-size: 15px;
       transition: all 0.3s;
       font-family: 'Montserrat', sans-serif;
@@ -477,81 +257,66 @@
     
     input::placeholder,
     textarea::placeholder {
-      color: rgba(255, 255, 255, 0.4);
+      color: #a0aec0;
     }
     
     input:focus,
     textarea:focus {
       outline: none;
-      border-color: #00ffff;
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      border-color: #c9a961;
+      box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
     }
     
-    /* Footer */
     footer {
-      background: #000;
-      border-top: 1px solid rgba(255, 0, 255, 0.3);
-      padding: 60px 20px;
+      background: #0f1f3a;
+      color: white;
+      padding: 50px 20px;
       text-align: center;
     }
     
     footer a {
-      color: #fff;
+      color: #c9a961;
       text-decoration: none;
       margin: 0 15px;
       transition: all 0.3s;
     }
     
     footer a:hover {
-      color: #ff00ff;
-      text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+      color: white;
     }
     
-    /* Scroll to top button */
     .scroll-top {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      width: 60px;
-      height: 60px;
-      background: transparent;
-      border: 2px solid #ff00ff;
+      width: 50px;
+      height: 50px;
+      background: #c9a961;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      color: #ff00ff;
+      font-size: 20px;
+      color: white;
       text-decoration: none;
       transition: all 0.3s;
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7); }
-      70% { box-shadow: 0 0 0 20px rgba(255, 0, 255, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0); }
+      box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
     }
     
     .scroll-top:hover {
-      background: #ff00ff;
-      color: #000;
+      background: #b8995a;
       transform: translateY(-5px);
     }
     
     /* Responsive */
     @media (max-width: 768px) {
-      h2 { font-size: 48px; }
-      .hero h2 { font-size: 48px; }
-      .bento-grid { grid-template-columns: 1fr; }
-      .bento-item.large, .bento-item.wide { grid-column: span 1; }
-      .stat-grid { grid-template-columns: 1fr; gap: 40px; }
+      h2 { font-size: 36px; }
+      .hero h2 { font-size: 40px; }
+      .pillar-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
       nav { display: none; }
-      .logo-box { flex-direction: row; gap: 15px; }
       .logo-box img { height: 50px; }
-      .logo-text h1 { font-size: 14px; }
+      .logo-text h1 { font-size: 16px; }
       header { padding: 15px; }
     }
   </style>
@@ -574,344 +339,162 @@
     </div>
   </header>
 
-  <!-- Floating background shapes -->
-  <div class="floating-shapes">
-    <div class="shape shape1"></div>
-    <div class="shape shape2"></div>
-    <div class="shape shape3"></div>
-  </div>
-
   <section class="hero">
     <div class="hero-content">
-      <h2>TRANSFORMAR VIDAS<br>A TRAVÉS DE<br>ACCIONES CONCRETAS</h2>
-      <p>EDUCACIÓN × SALUD × DEPORTE × INCLUSIÓN</p>
-      <a href="#instituciones" class="btn">EXPLORAR →</a>
+      <h2>Transformar vidas a través de acciones concretas</h2>
+      <p>Educación, Salud e Inclusión, Deporte</p>
+      <a href="#instituciones" class="btn">Conoce nuestro trabajo</a>
     </div>
   </section>
 
-  <section id="mision">
+  <section id="mision" class="section-bg-light">
     <div class="container">
-      <h2>QUIÉNES SOMOS</h2>
-      <div class="gradient-border" style="padding: 50px;">
+      <h2>Quiénes Somos</h2>
+      <div class="card">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
           <div>
-            <h3 style="margin-bottom: 30px; font-size: 32px;">La Historia</h3>
             <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
-              <span style="color: #ff00ff; font-weight: 600;">La Fundación Carlos y Miriam E.H.</span> 
-              nace del profundo vínculo que sus fundadores mantienen con Encarnación.
+              <strong>La Fundación Carlos y Miriam E.H.</strong> nace del profundo vínculo que sus fundadores, 
+              <strong>Lic. Carlos Espínola</strong> y <strong>Arq. Miriam Harms</strong>, mantienen con Encarnación.
             </p>
             <p style="margin-bottom: 20px;">
-              <span style="color: #00ffff;">Lic. Carlos Espínola</span> y 
-              <span style="color: #00ffff;">Arq. Miriam Harms</span> 
-              comenzaron aquí su camino, donde nacieron sus primeras oportunidades.
+              Fue aquí donde comenzaron a construir su camino, donde nacieron sus primeras oportunidades 
+              y donde se forjaron los valores de trabajo, esfuerzo y compromiso.
             </p>
             <p style="margin-bottom: 30px;">
               Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida 
-              y el trabajo les permitieron construir.
+              y el trabajo les permitieron construir. A través de iniciativas vinculadas a educación, 
+              salud e inclusión y deporte, buscamos generar oportunidades y contribuir al desarrollo de Encarnación.
             </p>
-            <div style="display: flex; gap: 20px; margin-top: 40px;">
-              <div class="glass-card" style="padding: 20px; flex: 1;">
-                <div style="font-size: 36px; color: #ff00ff; margin-bottom: 10px;">15+</div>
-                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Años sirviendo</div>
-              </div>
-              <div class="glass-card" style="padding: 20px; flex: 1;">
-                <div style="font-size: 36px; color: #00ffff; margin-bottom: 10px;">5K+</div>
-                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Familias impactadas</div>
-              </div>
-            </div>
+            <p style="color: #c9a961; font-weight: 600;">
+              📍 Encarnación, Paraguay
+            </p>
           </div>
-          <div style="position: relative;">
-            <img src="images/img2.jpg" alt="Quiénes Somos" style="width: 100%; border-radius: 20px; filter: grayscale(50%) contrast(1.2);">
-            <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,0,255,0.2), rgba(0,255,255,0.2)); border-radius: 20px;"></div>
+          <div>
+            <img src="images/img2.jpg" alt="Quiénes Somos" style="width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="pilares" style="background: #0a0a0a;">
+  <section id="pilares">
     <div class="container">
-      <h2>NUESTROS PILARES</h2>
-      <div class="bento-grid">
-        <!-- Educación - Large item -->
-        <div class="bento-item large">
-          <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <h3 style="font-size: 48px; margin-bottom: 20px;">
-                <span style="background: linear-gradient(90deg, #ff00ff, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                  EDUCACIÓN
-                </span>
-              </h3>
-              <p style="font-size: 18px; line-height: 1.8; opacity: 0.9;">
-                Creemos en la educación como herramienta fundamental para el desarrollo. 
-                Acompañamos instituciones que promueven oportunidades de formación.
-              </p>
-            </div>
-            <div style="margin-top: 30px;">
-              <div style="font-size: 64px; font-weight: 900; color: #ff00ff;">120+</div>
-              <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7;">Niños en programas educativos</div>
-            </div>
-          </div>
+      <h2>Nuestros Pilares</h2>
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">📚</div>
+          <h3>Educación</h3>
+          <p>Creemos en la educación como herramienta fundamental para el desarrollo. Acompañamos instituciones que promueven oportunidades de formación para niños y jóvenes.</p>
         </div>
-        
-        <!-- Salud - Wide item -->
-        <div class="bento-item wide">
-          <h3 style="font-size: 32px; margin-bottom: 15px;">
-            <span style="color: #00ffff;">SALUD E INCLUSIÓN</span>
-          </h3>
-          <p style="opacity: 0.8;">Apoyo integral a personas en situación de vulnerabilidad.</p>
-          <div style="display: flex; gap: 20px; margin-top: 20px;">
-            <div style="flex: 1;">
-              <div style="font-size: 36px; color: #00ffff;">3K+</div>
-              <div style="font-size: 11px; text-transform: uppercase; opacity: 0.6;">Consultas médicas</div>
-            </div>
-            <div style="flex: 1;">
-              <div style="font-size: 36px; color: #00ffff;">500+</div>
-              <div style="font-size: 11px; text-transform: uppercase; opacity: 0.6;">Familias beneficiadas</div>
-            </div>
-          </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🏥</div>
+          <h3>Salud e Inclusión</h3>
+          <p>Apoyamos instituciones que trabajan por el bienestar e inclusión de personas en situación de vulnerabilidad, fortaleciendo espacios de contención y desarrollo.</p>
         </div>
-        
-        <!-- Deporte - Regular item -->
-        <div class="bento-item">
-          <h3 style="color: #ffff00; margin-bottom: 15px;">DEPORTE</h3>
-          <p style="font-size: 14px; opacity: 0.8;">Formación y disciplina a través del deporte.</p>
-          <div style="margin-top: 20px;">
-            <div style="font-size: 32px; color: #ffff00;">15</div>
-            <div style="font-size: 11px; text-transform: uppercase; opacity: 0.6;">Equipos apoyados</div>
-          </div>
-        </div>
-        
-        <!-- Community - Regular item -->
-        <div class="bento-item">
-          <h3 style="color: #ff00ff; margin-bottom: 15px;">COMUNIDAD</h3>
-          <p style="font-size: 14px; opacity: 0.8;">Fortalecimiento del tejido social.</p>
-          <div style="margin-top: 20px;">
-            <div style="font-size: 32px; color: #ff00ff;">5</div>
-            <div style="font-size: 11px; text-transform: uppercase; opacity: 0.6;">Barrios impactados</div>
-          </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">⚽</div>
+          <h3>Deporte</h3>
+          <p>Fomentamos el deporte como herramienta de formación, disciplina e integración social para niños y jóvenes de nuestra comunidad.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="instituciones">
+  <section id="instituciones" class="section-bg-light">
     <div class="container">
       <h2>Instituciones Acompañadas</h2>
       <p style="text-align: center; margin-bottom: 40px; font-size: 16px;">Trabajamos en articulación con instituciones debidamente constituidas y comprometidas con el bienestar social:</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px;">
+      <div class="institution-grid">
         
-        <a href="#divino-nino" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
-          <div style="color: #fff;">
-            <div style="font-size: 48px; margin-bottom: 15px;">👶</div>
-            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">FUNDACIÓN DIVINO NIÑO</h4>
-            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Educación y desarrollo infantil. Nutrición y estimulación temprana.</p>
-            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
-          </div>
-        </a>
+        <div class="card">
+          <div style="font-size: 48px; margin-bottom: 20px; text-align: center;">👶</div>
+          <h4 style="color: #1a365d; margin-bottom: 15px;">Fundación Divino Niño</h4>
+          <p>Educación y desarrollo infantil para niños en situación vulnerable. Programas de nutrición y estimulación temprana.</p>
+        </div>
         
-        <a href="#sagrado-corazon" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
-          <div style="color: #fff;">
-            <div style="font-size: 48px; margin-bottom: 15px;">❤️</div>
-            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">FUNDACIÓN SAGRADO CORAZÓN</h4>
-            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Centro de salud integral. Atención médica y apoyo psicosocial.</p>
-            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
-          </div>
-        </a>
+        <div class="card">
+          <div style="font-size: 48px; margin-bottom: 20px; text-align: center;">❤️</div>
+          <h4 style="color: #1a365d; margin-bottom: 15px;">Fundación Sagrado Corazón</h4>
+          <p>Centro de salud e inclusión social. Atención médica primaria gratuita y apoyo psicosocial.</p>
+        </div>
         
-        <a href="#lazos-del-sur" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
-          <div style="color: #fff;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🤝</div>
-            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">FUNDACIÓN LAZOS DEL SUR</h4>
-            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Fortalecimiento social. Integración y desarrollo comunitario.</p>
-            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
-          </div>
-        </a>
+        <div class="card">
+          <div style="font-size: 48px; margin-bottom: 20px; text-align: center;">🤝</div>
+          <h4 style="color: #1a365d; margin-bottom: 15px;">Fundación Lazos del Sur</h4>
+          <p>Fortalecimiento del tejido social. Programas de integración y desarrollo comunitario.</p>
+        </div>
         
-        <a href="#prode" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
-          <div style="color: #fff;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🚀</div>
-            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">FUNDACIÓN PRODE</h4>
-            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Desarrollo y oportunidades. Capacitación y emprendedurismo.</p>
-            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
-          </div>
-        </a>
+        <div class="card">
+          <div style="font-size: 48px; margin-bottom: 20px; text-align: center;">🚀</div>
+          <h4 style="color: #1a365d; margin-bottom: 15px;">Fundación PRODE</h4>
+          <p>Desarrollo integral y generación de oportunidades. Capacitación laboral y emprendedurismo.</p>
+        </div>
         
-        <a href="#cenade" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
-          <div style="color: #fff;">
-            <div style="font-size: 48px; margin-bottom: 15px;">🎓</div>
-            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">CENADE</h4>
-            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Educación especializada. Apoyo escolar y formación técnica.</p>
-            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
-          </div>
-        </a>
+        <div class="card">
+          <div style="font-size: 48px; margin-bottom: 20px; text-align: center;">🎓</div>
+          <h4 style="color: #1a365d; margin-bottom: 15px;">CENADE</h4>
+          <p>Centro de educación especializada. Apoyo escolar y formación técnica para jóvenes.</p>
+        </div>
         
       </div>
     </div>
   </section>
 
-  <section style="background: #0a0a0a; padding: 100px 20px; border-top: 1px solid rgba(255, 0, 255, 0.2);">
-    <div class="container">
-      <h2>IMPACTO DETALLADO</h2>
-      
-      <div id="divino-nino" class="glass-card" style="margin-bottom: 40px;">
-        <h3 style="font-size: 32px; margin-bottom: 20px;">
-          <span style="color: #ff00ff;">👶 FUNDACIÓN DIVINO NIÑO</span>
-        </h3>
-        <p style="margin-bottom: 20px; opacity: 0.9;">15+ años brindando atención integral a niños de 0 a 6 años en situación de vulnerabilidad.</p>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
-          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Nutrición para 120 niños</div>
-          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Estimulación temprana</div>
-          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Apoyo psicológico</div>
-          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Talleres para padres</div>
-        </div>
-        <div style="padding: 20px; background: rgba(255, 0, 255, 0.2); border-radius: 10px; text-align: center;">
-          <div style="font-size: 48px; color: #ff00ff; font-weight: 900;">500+</div>
-          <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Familias beneficiadas/año</div>
-        </div>
-      </div>
 
-      <div id="sagrado-corazon" class="glass-card" style="margin-bottom: 40px;">
-        <h3 style="font-size: 32px; margin-bottom: 20px;">
-          <span style="color: #00ffff;">❤️ FUNDACIÓN SAGRADO CORAZÓN</span>
-        </h3>
-        <p style="margin-bottom: 20px; opacity: 0.9;">Centro de salud integral con atención médica gratuita para población vulnerable.</p>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
-          <div style="padding: 15px; background: rgba(0, 255, 255, 0.1); border-radius: 10px;">▸ Consultorio médico gratuito</div>
-          <div style="padding: 15px; background: rgba(0, 255, 255, 0.1); border-radius: 10px;">▸ Medicamentos esenciales</div>
-          <div style="padding: 15px; background: rgba(0, 255, 255, 0.1); border-radius: 10px;">▸ Campañas de vacunación</div>
-          <div style="padding: 15px; background: rgba(0, 255, 255, 0.1); border-radius: 10px;">▸ Apoyo nutricional</div>
-        </div>
-        <div style="padding: 20px; background: rgba(0, 255, 255, 0.2); border-radius: 10px; text-align: center;">
-          <div style="font-size: 48px; color: #00ffff; font-weight: 900;">3,000+</div>
-          <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Consultas médicas/año</div>
-        </div>
-      </div>
-
-      <div id="lazos-del-sur" class="glass-card" style="margin-bottom: 40px;">
-        <h3 style="font-size: 32px; margin-bottom: 20px;">
-          <span style="color: #ffff00;">🤝 FUNDACIÓN LAZOS DEL SUR</span>
-        </h3>
-        <p style="margin-bottom: 20px; opacity: 0.9;">Fortalecimiento del tejido social y participación ciudadana en comunidades.</p>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
-          <div style="padding: 15px; background: rgba(255, 255, 0, 0.1); border-radius: 10px;">▸ 5 centros comunitarios</div>
-          <div style="padding: 15px; background: rgba(255, 255, 0, 0.1); border-radius: 10px;">▸ Liderazgo juvenil</div>
-          <div style="padding: 15px; background: rgba(255, 255, 0, 0.1); border-radius: 10px;">▸ Actividades culturales</div>
-          <div style="padding: 15px; background: rgba(255, 255, 0, 0.1); border-radius: 10px;">▸ Mediación de conflictos</div>
-        </div>
-        <div style="padding: 20px; background: rgba(255, 255, 0, 0.2); border-radius: 10px; text-align: center;">
-          <div style="font-size: 48px; color: #ffff00; font-weight: 900;">15</div>
-          <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Comunidades fortalecidas</div>
-        </div>
-      </div>
-
-      <div id="prode" class="glass-card" style="margin-bottom: 40px;">
-        <h3 style="font-size: 32px; margin-bottom: 20px;">
-          <span style="background: linear-gradient(90deg, #ff00ff, #00ffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            🚀 FUNDACIÓN PRODE
-          </span>
-        </h3>
-        <p style="margin-bottom: 20px; opacity: 0.9;">Desarrollo y oportunidades mediante capacitación laboral y emprendedurismo.</p>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
-          <div style="padding: 15px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)); border-radius: 10px;">▸ Cursos de oficios</div>
-          <div style="padding: 15px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)); border-radius: 10px;">▸ Tecnología e informática</div>
-          <div style="padding: 15px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)); border-radius: 10px;">▸ Microemprendimientos</div>
-          <div style="padding: 15px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)); border-radius: 10px;">▸ Bolsa de trabajo</div>
-        </div>
-        <div style="display: flex; gap: 20px;">
-          <div style="flex: 1; padding: 20px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2)); border-radius: 10px; text-align: center;">
-            <div style="font-size: 36px; color: #ff00ff; font-weight: 900;">200+</div>
-            <div style="text-transform: uppercase; letter-spacing: 1px; font-size: 11px;">Capacitados/año</div>
-          </div>
-          <div style="flex: 1; padding: 20px; background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 255, 0, 0.2)); border-radius: 10px; text-align: center;">
-            <div style="font-size: 36px; color: #00ffff; font-weight: 900;">70%</div>
-            <div style="text-transform: uppercase; letter-spacing: 1px; font-size: 11px;">Empleabilidad</div>
-          </div>
-        </div>
-      </div>
-
-      <div id="cenade" class="glass-card" style="margin-bottom: 40px;">
-        <h3 style="font-size: 32px; margin-bottom: 20px;">
-          <span style="color: #ff00ff;">🎓 CENADE</span>
-        </h3>
-        <p style="margin-bottom: 20px; opacity: 0.9;">Centro educativo especializado para jóvenes en riesgo de deserción escolar.</p>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
-          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Clases de apoyo</div>
-          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Bachillerato acelerado</div>
-          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Formación técnica</div>
-          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Orientación vocacional</div>
-        </div>
-        <div style="padding: 20px; background: rgba(255, 0, 255, 0.2); border-radius: 10px; text-align: center;">
-          <div style="font-size: 48px; color: #ff00ff; font-weight: 900;">85%</div>
-          <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Tasa de graduación</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="contact-section" id="contacto">
     <div class="container">
-      <h2>CONECTA CON NOSOTROS</h2>
+      <h2 style="color: white; text-align: center;">Contacta con nosotros</h2>
       <div class="contact-grid">
         <div>
-          <h3 style="font-size: 28px; margin-bottom: 30px;">
-            <span style="background: linear-gradient(90deg, #ff00ff, #00ffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-              CANAL DIRECTO
-            </span>
-          </h3>
-          <div class="glass-card" style="padding: 25px; margin-bottom: 20px;">
-            <div style="font-size: 20px; margin-bottom: 10px;">📍</div>
-            <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7;">Ubicación</div>
-            <div style="font-size: 16px; margin-top: 5px;">Encarnación, Paraguay</div>
+          <h3 style="color: #c9a961; margin-bottom: 30px;">Información de Contacto</h3>
+          <div style="margin-bottom: 20px;">
+            <p style="color: white; font-size: 18px; margin-bottom: 10px;">📍 <strong>Ubicación</strong></p>
+            <p style="color: rgba(255,255,255,0.8); margin-left: 35px;">Encarnación, Paraguay</p>
           </div>
-          <div class="glass-card" style="padding: 25px; margin-bottom: 20px;">
-            <div style="font-size: 20px; margin-bottom: 10px;">📧</div>
-            <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7;">Email</div>
-            <div style="font-size: 16px; margin-top: 5px;">contacto@fundacioneh.org</div>
+          <div style="margin-bottom: 20px;">
+            <p style="color: white; font-size: 18px; margin-bottom: 10px;">📧 <strong>Email</strong></p>
+            <p style="color: rgba(255,255,255,0.8); margin-left: 35px;">contacto@fundacioneh.org</p>
           </div>
-          <div class="glass-card" style="padding: 25px;">
-            <div style="font-size: 20px; margin-bottom: 10px;">📞</div>
-            <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7;">Teléfono</div>
-            <div style="font-size: 16px; margin-top: 5px;">+595 71 123 456</div>
+          <div>
+            <p style="color: white; font-size: 18px; margin-bottom: 10px;">📞 <strong>Teléfono</strong></p>
+            <p style="color: rgba(255,255,255,0.8); margin-left: 35px;">+595 71 123 456</p>
           </div>
         </div>
-        <form action="mailto:contacto@fundacioneh.org" method="get" enctype="text/plain" style="display: flex; flex-direction: column; gap: 20px;">
-          <input type="text" name="nombre" placeholder="NOMBRE" required style="text-transform: uppercase; letter-spacing: 1px;">
-          <input type="email" name="email" placeholder="EMAIL" required style="text-transform: uppercase; letter-spacing: 1px;">
-          <input type="text" name="asunto" placeholder="ASUNTO" style="text-transform: uppercase; letter-spacing: 1px;">
-          <textarea name="mensaje" placeholder="MENSAJE" rows="5" required style="text-transform: uppercase; letter-spacing: 1px;"></textarea>
-          <button type="submit" class="btn">ENVIAR MENSAJE</button>
+        <form action="mailto:contacto@fundacioneh.org" method="get" enctype="text/plain">
+          <input type="text" name="nombre" placeholder="Tu nombre" required>
+          <input type="email" name="email" placeholder="Tu email" required>
+          <input type="text" name="asunto" placeholder="Asunto">
+          <textarea name="mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
+          <button type="submit" class="btn">Enviar mensaje</button>
         </form>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="container">
-      <div style="text-align: center; margin-bottom: 30px;">
-        <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.5; margin-bottom: 10px;">EST. 2011</div>
-        <h3 style="font-size: 32px; margin: 20px 0;">
-          <span style="background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            FUNDACIÓN CARLOS Y MIRIAM E.H.
-          </span>
-        </h3>
+    <div class="container" style="text-align: center;">
+      <p style="font-size: 22px; color: #c9a961; margin-bottom: 20px; font-weight: 600;">
+        Fundación Carlos y Miriam E.H.
+      </p>
+      <p style="color: rgba(255,255,255,0.8); margin-bottom: 30px;">
+        Transformando vidas a través de acciones concretas
+      </p>
+      
+      <div style="display: flex; justify-content: center; gap: 30px; margin: 30px 0;">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
       </div>
       
-      <div style="display: flex; justify-content: center; gap: 30px; margin: 40px 0;">
-        <a href="#" style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Facebook</a>
-        <a href="#" style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Instagram</a>
-        <a href="#" style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">LinkedIn</a>
-        <a href="#" style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">YouTube</a>
-      </div>
-      
-      <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-        <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.5;">
-          Transformando vidas × Encarnación × Paraguay
+      <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2);">
+        <p style="font-size: 14px; color: rgba(255,255,255,0.6);">
+          © 2026 Fundación Carlos y Miriam E.H. | Encarnación, Paraguay
         </p>
-        <p style="font-size: 10px; margin-top: 10px; opacity: 0.3;">© 2026 All Rights Reserved</p>
       </div>
       
-      <a href="#" class="scroll-top">⬆</a>
+      <a href="#" class="scroll-top">↑</a>
     </div>
   </footer>
   <script>
