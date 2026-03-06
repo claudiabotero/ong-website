@@ -26,85 +26,531 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Montserrat', sans-serif; background: #fff; color: #1a1a1a; line-height: 1.6; font-weight: 400; }
-    h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 700; }
+    body { 
+      font-family: 'Montserrat', sans-serif; 
+      background: #0a0a0a;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
     
-    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    /* Neon glow effect */
+    @property --gradient-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
     
-    header { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 30px 20px; }
-    .header-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; }
-    .logo-box { display: flex; align-items: center; gap: 25px; }
-    .logo-box img { height: 90px; width: auto; }
-    .logo-text p { font-size: 16px; font-weight: 500; opacity: 0.95; font-style: italic; }
-    nav { display: flex; gap: 35px; }
-    nav a { color: white; text-decoration: none; font-size: 15px; font-weight: 500; transition: opacity 0.3s; }
-    nav a:hover { opacity: 0.8; }
+    @keyframes rotation {
+      0% { --gradient-angle: 0deg; }
+      100% { --gradient-angle: 360deg; }
+    }
     
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    section { padding: 100px 20px; }
-    h2 { font-size: 48px; font-weight: 800; margin-bottom: 40px; color: #2c3e50; letter-spacing: -0.5px; }
-    h3 { font-size: 24px; font-weight: 700; margin-bottom: 15px; color: #2c3e50; }
-    p { color: #555; font-size: 16px; line-height: 1.8; font-family: 'Montserrat', sans-serif; font-weight: 400; }
+    @keyframes float { 
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
     
-    .hero { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); padding: 140px 20px; text-align: center; color: white; }
-    .hero-content { max-width: 900px; margin: 0 auto; animation: slideUp 0.8s ease-out; }
-    .hero h2 { font-size: 56px; margin-bottom: 20px; color: white; font-weight: 800; }
-    .hero p { font-size: 22px; opacity: 0.95; margin-bottom: 40px; }
+    @keyframes glitch {
+      0%, 100% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
+      25% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; }
+      50% { text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff; }
+      75% { text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
+    }
     
-    .btn { display: inline-block; background: #e74c3c; color: white; padding: 14px 40px; border-radius: 6px; text-decoration: none; font-weight: 700; cursor: pointer; border: none; font-size: 16px; transition: all 0.3s; font-family: 'Montserrat', sans-serif; letter-spacing: 0.5px; }
-    .btn:hover { background: #c0392b; transform: translateY(-2px); }
+    @keyframes neonPulse {
+      0%, 100% { filter: brightness(1) contrast(1); }
+      50% { filter: brightness(1.2) contrast(1.1); }
+    }
     
-    .section-with-image { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-top: 30px; }
-    .section-with-image img { width: 100%; border-radius: 10px; }
+    /* Animated gradient border */
+    .gradient-border {
+      position: relative;
+      background: #0a0a0a;
+      border-radius: 20px;
+      padding: 3px;
+    }
     
-    .pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
-    .pilar { padding: 35px; background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%); border-radius: 10px; text-align: center; transition: transform 0.3s; }
-    .pilar:hover { transform: translateY(-8px); }
-    .pilar-img { height: 280px; border-radius: 8px; overflow: hidden; margin-bottom: 25px; }
-    .pilar-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .pilar:hover .pilar-img img { transform: scale(1.08); }
-    .pilar h3 { color: #2c3e50; }
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 20px;
+      padding: 3px;
+      background: conic-gradient(from var(--gradient-angle), #ff00ff, #00ffff, #ffff00, #ff00ff);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: rotation 4s linear infinite;
+    }
     
-    .pilares-section { background: #f8f9fa; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; font-weight: 800; }
     
-    .instituciones { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-top: 40px; }
-    .inst { padding: 20px; background: white; border-left: 4px solid #3498db; border-radius: 6px; text-align: center; transition: all 0.3s; }
-    .inst:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
-    .inst h4 { color: #2c3e50; margin-bottom: 8px; font-size: 16px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
-    .inst p { font-size: 13px; color: #777; margin: 0; }
+    header { 
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 0, 255, 0.3);
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s;
+    }
     
-    .stats { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 100px 20px; }
-    .stats h2 { color: white; }
-    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; margin-top: 50px; }
-    .stat-item { text-align: center; }
-    .stat-number { font-size: 56px; font-weight: 800; display: block; margin-bottom: 10px; color: #3498db; }
-    .stat-label { font-size: 16px; opacity: 0.9; }
-    .quote { text-align: center; font-size: 22px; font-style: italic; margin-top: 60px; opacity: 0.9; }
+    .header-content { 
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
     
-    .contact-section { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); padding: 80px 20px; color: white; }
-    .contact-section h2 { color: white; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 40px; align-items: start; }
+    .logo-box { 
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
     
-    form { display: flex; flex-direction: column; gap: 15px; }
-    input, textarea { padding: 12px; border: 2px solid rgba(255,255,255,0.3); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 15px; background: rgba(255,255,255,0.1); color: white; transition: all 0.3s; }
-    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.7); }
-    input:focus, textarea:focus { outline: none; border-color: white; background: rgba(255,255,255,0.2); }
+    .logo-box img { 
+      height: 70px;
+      filter: invert(1) brightness(1.5);
+      animation: neonPulse 3s ease-in-out infinite;
+    }
     
-    footer { background: #2c3e50; color: white; padding: 50px 20px; text-align: center; }
-    footer p { color: rgba(255,255,255,0.8); margin-bottom: 8px; }
+    .logo-text p { 
+      font-size: 14px;
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
     
+    nav { display: flex; gap: 30px; }
+    nav a { 
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      transition: width 0.3s;
+    }
+    
+    nav a:hover::after { width: 100%; }
+    
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 120px 20px; position: relative; }
+    
+    h2 { 
+      font-size: 72px;
+      font-weight: 800;
+      margin-bottom: 50px;
+      background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      animation: glitch 8s infinite alternate;
+    }
+    
+    h3 { 
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    
+    p { 
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    
+    /* Hero diagonal split */
+    .hero { 
+      margin-top: 90px;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff00ff 0%, transparent 50%);
+      opacity: 0.1;
+      animation: rotation 20s linear infinite;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: -50%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(-45deg, #00ffff 0%, transparent 50%);
+      opacity: 0.1;
+      animation: rotation 25s linear infinite reverse;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 1000px;
+    }
+    
+    .hero h2 { 
+      font-size: 90px;
+      margin-bottom: 30px;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    
+    .hero p { 
+      font-size: 24px;
+      margin-bottom: 50px;
+      opacity: 0.9;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 18px 50px;
+      background: transparent;
+      color: #fff;
+      border: 2px solid;
+      border-image: linear-gradient(90deg, #ff00ff, #00ffff) 1;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      transition: left 0.3s;
+      z-index: -1;
+    }
+    
+    .btn:hover {
+      color: #0a0a0a;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5);
+    }
+    
+    .btn:hover::before { left: 0; }
+    
+    /* Bento grid layout */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 60px;
+    }
+    
+    .bento-item {
+      background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .bento-item::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 0, 255, 0.3) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .bento-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(255, 0, 255, 0.5);
+    }
+    
+    .bento-item:hover::before { opacity: 1; }
+    
+    .bento-item.large { grid-column: span 2; grid-row: span 2; }
+    .bento-item.wide { grid-column: span 2; }
+    .bento-item.tall { grid-row: span 2; }
+    
+    /* Glassmorphism cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 30px;
+      transition: all 0.3s;
+    }
+    
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(10px);
+      border-color: rgba(255, 0, 255, 0.3);
+    }
+    
+    /* Floating elements background */
+    .floating-shapes {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+      animation: float 20s infinite ease-in-out;
+    }
+    
+    .shape1 {
+      width: 300px;
+      height: 300px;
+      background: #ff00ff;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+    
+    .shape2 {
+      width: 400px;
+      height: 400px;
+      background: #00ffff;
+      bottom: 10%;
+      right: 10%;
+      animation-delay: 5s;
+    }
+    
+    .shape3 {
+      width: 250px;
+      height: 250px;
+      background: #ffff00;
+      top: 50%;
+      left: 50%;
+      animation-delay: 10s;
+    }
+    
+    /* Stats with neon numbers */
+    .stats {
+      background: #0a0a0a;
+      padding: 120px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px;
+      margin-top: 60px;
+    }
+    
+    .stat-item {
+      text-align: center;
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .stat-item:nth-child(2) { animation-delay: 1s; }
+    .stat-item:nth-child(3) { animation-delay: 2s; }
+    
+    .stat-number {
+      font-size: 80px;
+      font-weight: 900;
+      display: block;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.7;
+    }
+    
+    .quote {
+      text-align: center;
+      font-size: 28px;
+      font-style: italic;
+      margin-top: 80px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0.8;
+      position: relative;
+    }
+    
+    .quote::before,
+    .quote::after {
+      content: '"';
+      font-size: 60px;
+      position: absolute;
+      opacity: 0.3;
+      color: #ff00ff;
+    }
+    
+    .quote::before { top: -20px; left: -40px; }
+    .quote::after { bottom: -40px; right: -40px; }
+    
+    /* Contact section cyberpunk style */
+    .contact-section {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255, 0, 255, 0.3);
+      padding: 100px 20px;
+      position: relative;
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 60px;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    input, textarea {
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 0, 255, 0.3);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 15px;
+      transition: all 0.3s;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #00ffff;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+    
+    /* Footer */
+    footer {
+      background: #000;
+      border-top: 1px solid rgba(255, 0, 255, 0.3);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: all 0.3s;
+    }
+    
+    footer a:hover {
+      color: #ff00ff;
+      text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+    }
+    
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: transparent;
+      border: 2px solid #ff00ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #ff00ff;
+      text-decoration: none;
+      transition: all 0.3s;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7); }
+      70% { box-shadow: 0 0 0 20px rgba(255, 0, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0); }
+    }
+    
+    .scroll-top:hover {
+      background: #ff00ff;
+      color: #000;
+      transform: translateY(-5px);
+    }
+    
+    /* Responsive */
     @media (max-width: 768px) {
-      h2 { font-size: 32px; }
-      .hero h2 { font-size: 36px; }
-      .section-with-image { grid-template-columns: 1fr; }
-      .pilares { grid-template-columns: 1fr; }
-      .instituciones { grid-template-columns: repeat(2, 1fr); }
-      .stat-grid { grid-template-columns: 1fr; }
+      h2 { font-size: 48px; }
+      .hero h2 { font-size: 48px; }
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-item.large, .bento-item.wide { grid-column: span 1; }
+      .stat-grid { grid-template-columns: 1fr; gap: 40px; }
       .contact-grid { grid-template-columns: 1fr; }
       nav { display: none; }
-      .logo-box { flex-direction: column; text-align: center; gap: 10px; }
-      .logo-box img { height: 70px; }
+      .logo-box img { height: 50px; }
+      header { padding: 15px; }
     }
   </style>
 </head>
@@ -126,53 +572,122 @@
     </div>
   </header>
 
+  <!-- Floating background shapes -->
+  <div class="floating-shapes">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+  </div>
+
   <section class="hero">
     <div class="hero-content">
-      <h2>Transformar vidas a través de acciones concretas</h2>
-      <p>Educación. Salud e inclusión. Deporte. Devolviéndole a Encarnación lo que permitió nuestro crecimiento.</p>
-      <a href="#instituciones" class="btn">Conoce nuestro trabajo</a>
+      <h2>TRANSFORMAR VIDAS<br>A TRAVÉS DE<br>ACCIONES CONCRETAS</h2>
+      <p>EDUCACIÓN × SALUD × DEPORTE × INCLUSIÓN</p>
+      <a href="#instituciones" class="btn">EXPLORAR →</a>
     </div>
   </section>
 
   <section id="mision">
     <div class="container">
-      <h2>Quiénes Somos</h2>
-      <div class="section-with-image">
-        <div>
-          <p><strong>La Fundación Carlos y Miriam E.H.</strong> nace del profundo vínculo que sus fundadores, <strong>Lic. Carlos Espínola y Arq. Miriam Harms</strong>, mantienen con Encarnación.</p>
-          <p style="margin-top: 20px;">Fue aquí donde comenzaron a construir su camino, donde nacieron sus primeras oportunidades y donde se forjaron los valores de trabajo, esfuerzo y compromiso.</p>
-          <p style="margin-top: 20px;">Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida y el trabajo les permitieron construir. A través de iniciativas vinculadas a educación, salud e inclusión y deporte, buscamos generar oportunidades y contribuir al desarrollo de Encarnación.</p>
-          <p style="margin-top: 30px; font-size: 16px;"><strong>📍 Ubicación:</strong> Encarnación, Paraguay</p>
+      <h2>QUIÉNES SOMOS</h2>
+      <div class="gradient-border" style="padding: 50px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
+          <div>
+            <h3 style="margin-bottom: 30px; font-size: 32px;">La Historia</h3>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+              <span style="color: #ff00ff; font-weight: 600;">La Fundación Carlos y Miriam E.H.</span> 
+              nace del profundo vínculo que sus fundadores mantienen con Encarnación.
+            </p>
+            <p style="margin-bottom: 20px;">
+              <span style="color: #00ffff;">Lic. Carlos Espínola</span> y 
+              <span style="color: #00ffff;">Arq. Miriam Harms</span> 
+              comenzaron aquí su camino, donde nacieron sus primeras oportunidades.
+            </p>
+            <p style="margin-bottom: 30px;">
+              Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida 
+              y el trabajo les permitieron construir.
+            </p>
+            <div style="display: flex; gap: 20px; margin-top: 40px;">
+              <div class="glass-card" style="padding: 20px; flex: 1;">
+                <div style="font-size: 36px; color: #ff00ff; margin-bottom: 10px;">15+</div>
+                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Años sirviendo</div>
+              </div>
+              <div class="glass-card" style="padding: 20px; flex: 1;">
+                <div style="font-size: 36px; color: #00ffff; margin-bottom: 10px;">5K+</div>
+                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Familias impactadas</div>
+              </div>
+            </div>
+          </div>
+          <div style="position: relative;">
+            <img src="images/img2.jpg" alt="Quiénes Somos" style="width: 100%; border-radius: 20px; filter: grayscale(50%) contrast(1.2);">
+            <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,0,255,0.2), rgba(0,255,255,0.2)); border-radius: 20px;"></div>
+          </div>
         </div>
-        <img src="images/img2.jpg" alt="Quiénes Somos" style="width: 100%; border-radius: 10px;">
       </div>
     </div>
   </section>
 
-  <section class="pilares-section" id="pilares">
+  <section id="pilares" style="background: #0a0a0a;">
     <div class="container">
-      <h2>Nuestros Pilares</h2>
-      <div class="pilares">
-        <div class="pilar">
-          <div class="pilar-img">
-            <img src="images/img6.jpg" alt="Educación">
+      <h2>NUESTROS PILARES</h2>
+      <div class="bento-grid">
+        <!-- Educación - Large item -->
+        <div class="bento-item large">
+          <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h3 style="font-size: 48px; margin-bottom: 20px;">
+                <span style="background: linear-gradient(90deg, #ff00ff, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                  EDUCACIÓN
+                </span>
+              </h3>
+              <p style="font-size: 18px; line-height: 1.8; opacity: 0.9;">
+                Creemos en la educación como herramienta fundamental para el desarrollo. 
+                Acompañamos instituciones que promueven oportunidades de formación.
+              </p>
+            </div>
+            <div style="margin-top: 30px;">
+              <div style="font-size: 64px; font-weight: 900; color: #ff00ff;">120+</div>
+              <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7;">Niños en programas educativos</div>
+            </div>
           </div>
-          <h3>📚 Educación</h3>
-          <p>Creemos en la educación como herramienta fundamental para el desarrollo. Acompañamos instituciones que promueven oportunidades de formación para niños y jóvenes.</p>
         </div>
-        <div class="pilar">
-          <div class="pilar-img">
-            <img src="images/img1.jpg" alt="Salud e Inclusión">
+        
+        <!-- Salud - Wide item -->
+        <div class="bento-item wide">
+          <h3 style="font-size: 32px; margin-bottom: 15px;">
+            <span style="color: #00ffff;">SALUD E INCLUSIÓN</span>
+          </h3>
+          <p style="opacity: 0.8;">Apoyo integral a personas en situación de vulnerabilidad.</p>
+          <div style="display: flex; gap: 20px; margin-top: 20px;">
+            <div style="flex: 1;">
+              <div style="font-size: 36px; color: #00ffff;">3K+</div>
+              <div style="font-size: 11px; text-transform: uppercase; opacity: 0.6;">Consultas médicas</div>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-size: 36px; color: #00ffff;">500+</div>
+              <div style="font-size: 11px; text-transform: uppercase; opacity: 0.6;">Familias beneficiadas</div>
+            </div>
           </div>
-          <h3>🏥 Salud e Inclusión</h3>
-          <p>Apoyamos instituciones que trabajan por el bienestar e inclusión de personas en situación de vulnerabilidad, fortaleciendo espacios de contención y desarrollo.</p>
         </div>
-        <div class="pilar">
-          <div class="pilar-img">
-            <img src="images/img7.jpg" alt="Deporte">
+        
+        <!-- Deporte - Regular item -->
+        <div class="bento-item">
+          <h3 style="color: #ffff00; margin-bottom: 15px;">DEPORTE</h3>
+          <p style="font-size: 14px; opacity: 0.8;">Formación y disciplina a través del deporte.</p>
+          <div style="margin-top: 20px;">
+            <div style="font-size: 32px; color: #ffff00;">15</div>
+            <div style="font-size: 11px; text-transform: uppercase; opacity: 0.6;">Equipos apoyados</div>
           </div>
-          <h3>⚽ Deporte</h3>
-          <p>Formación, disciplina e integración social. El deporte como herramienta de transformación.</p>
+        </div>
+        
+        <!-- Community - Regular item -->
+        <div class="bento-item">
+          <h3 style="color: #ff00ff; margin-bottom: 15px;">COMUNIDAD</h3>
+          <p style="font-size: 14px; opacity: 0.8;">Fortalecimiento del tejido social.</p>
+          <div style="margin-top: 20px;">
+            <div style="font-size: 32px; color: #ff00ff;">5</div>
+            <div style="font-size: 11px; text-transform: uppercase; opacity: 0.6;">Barrios impactados</div>
+          </div>
         </div>
       </div>
     </div>
@@ -182,139 +697,212 @@
     <div class="container">
       <h2>Instituciones Acompañadas</h2>
       <p style="text-align: center; margin-bottom: 40px; font-size: 16px;">Trabajamos en articulación con instituciones debidamente constituidas y comprometidas con el bienestar social:</p>
-      <div class="instituciones">
-        <a href="#divino-nino" class="inst" style="text-decoration: none; color: inherit; cursor: pointer;">
-          <h4>👶 Fundación Divino Niño</h4>
-          <p>Educación y desarrollo infantil para niños en situación vulnerable. Programas de nutrición y estimulación temprana.</p>
-          <small style="color: #3498db; font-size: 11px;">Ver más →</small>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px;">
+        
+        <a href="#divino-nino" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
+          <div style="color: #fff;">
+            <div style="font-size: 48px; margin-bottom: 15px;">👶</div>
+            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">FUNDACIÓN DIVINO NIÑO</h4>
+            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Educación y desarrollo infantil. Nutrición y estimulación temprana.</p>
+            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
+          </div>
         </a>
-        <a href="#sagrado-corazon" class="inst" style="text-decoration: none; color: inherit; cursor: pointer;">
-          <h4>❤️ Fundación Sagrado Corazón</h4>
-          <p>Centro de salud e inclusión social. Atención médica primaria y apoyo psicosocial.</p>
-          <small style="color: #3498db; font-size: 11px;">Ver más →</small>
+        
+        <a href="#sagrado-corazon" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
+          <div style="color: #fff;">
+            <div style="font-size: 48px; margin-bottom: 15px;">❤️</div>
+            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">FUNDACIÓN SAGRADO CORAZÓN</h4>
+            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Centro de salud integral. Atención médica y apoyo psicosocial.</p>
+            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
+          </div>
         </a>
-        <a href="#lazos-del-sur" class="inst" style="text-decoration: none; color: inherit; cursor: pointer;">
-          <h4>🤝 Fundación Lazos del Sur</h4>
-          <p>Fortalecimiento del tejido social. Programas de integración y desarrollo comunitario.</p>
-          <small style="color: #3498db; font-size: 11px;">Ver más →</small>
+        
+        <a href="#lazos-del-sur" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
+          <div style="color: #fff;">
+            <div style="font-size: 48px; margin-bottom: 15px;">🤝</div>
+            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">FUNDACIÓN LAZOS DEL SUR</h4>
+            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Fortalecimiento social. Integración y desarrollo comunitario.</p>
+            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
+          </div>
         </a>
-        <a href="#prode" class="inst" style="text-decoration: none; color: inherit; cursor: pointer;">
-          <h4>🚀 Fundación PRODE</h4>
-          <p>Desarrollo integral y generación de oportunidades. Capacitación laboral y emprendedurismo.</p>
-          <small style="color: #3498db; font-size: 11px;">Ver más →</small>
+        
+        <a href="#prode" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
+          <div style="color: #fff;">
+            <div style="font-size: 48px; margin-bottom: 15px;">🚀</div>
+            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">FUNDACIÓN PRODE</h4>
+            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Desarrollo y oportunidades. Capacitación y emprendedurismo.</p>
+            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
+          </div>
         </a>
-        <a href="#cenade" class="inst" style="text-decoration: none; color: inherit; cursor: pointer;">
-          <h4>🎓 CENADE</h4>
-          <p>Centro de educación especializada. Apoyo escolar y formación técnica para jóvenes.</p>
-          <small style="color: #3498db; font-size: 11px;">Ver más →</small>
+        
+        <a href="#cenade" class="gradient-border" style="text-decoration: none; display: block; padding: 30px; transition: all 0.3s;">
+          <div style="color: #fff;">
+            <div style="font-size: 48px; margin-bottom: 15px;">🎓</div>
+            <h4 style="font-size: 18px; margin-bottom: 10px; color: #ff00ff;">CENADE</h4>
+            <p style="font-size: 14px; opacity: 0.8; line-height: 1.6;">Educación especializada. Apoyo escolar y formación técnica.</p>
+            <div style="margin-top: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #00ffff;">Explorar →</div>
+          </div>
         </a>
+        
       </div>
     </div>
   </section>
 
-  <section style="background: #f8f9fa; padding: 80px 20px;">
+  <section style="background: #0a0a0a; padding: 100px 20px; border-top: 1px solid rgba(255, 0, 255, 0.2);">
     <div class="container">
-      <h2 style="text-align: center; margin-bottom: 60px;">Conoce Más Sobre Cada Institución</h2>
+      <h2>IMPACTO DETALLADO</h2>
       
-      <div id="divino-nino" style="margin-bottom: 60px; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-        <h3 style="color: #2c3e50; margin-bottom: 20px;">👶 Fundación Divino Niño</h3>
-        <p style="margin-bottom: 20px;">La Fundación Divino Niño trabaja desde hace más de 15 años en Encarnación, brindando atención integral a niños y niñas de 0 a 6 años en situación de vulnerabilidad social.</p>
-        <ul style="margin-left: 20px; color: #555; line-height: 2;">
-          <li>Programa de nutrición infantil para 120 niños</li>
-          <li>Estimulación temprana y desarrollo psicomotor</li>
-          <li>Apoyo psicológico a familias</li>
-          <li>Talleres de crianza positiva para padres</li>
-        </ul>
-        <p style="margin-top: 20px;"><strong>Impacto:</strong> Más de 500 familias beneficiadas anualmente</p>
+      <div id="divino-nino" class="glass-card" style="margin-bottom: 40px;">
+        <h3 style="font-size: 32px; margin-bottom: 20px;">
+          <span style="color: #ff00ff;">👶 FUNDACIÓN DIVINO NIÑO</span>
+        </h3>
+        <p style="margin-bottom: 20px; opacity: 0.9;">15+ años brindando atención integral a niños de 0 a 6 años en situación de vulnerabilidad.</p>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
+          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Nutrición para 120 niños</div>
+          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Estimulación temprana</div>
+          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Apoyo psicológico</div>
+          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Talleres para padres</div>
+        </div>
+        <div style="padding: 20px; background: rgba(255, 0, 255, 0.2); border-radius: 10px; text-align: center;">
+          <div style="font-size: 48px; color: #ff00ff; font-weight: 900;">500+</div>
+          <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Familias beneficiadas/año</div>
+        </div>
       </div>
 
-      <div id="sagrado-corazon" style="margin-bottom: 60px; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-        <h3 style="color: #2c3e50; margin-bottom: 20px;">❤️ Fundación Sagrado Corazón</h3>
-        <p style="margin-bottom: 20px;">Centro de salud integral que brinda atención médica primaria gratuita a la población más vulnerable de Encarnación y alrededores.</p>
-        <ul style="margin-left: 20px; color: #555; line-height: 2;">
-          <li>Consultorio médico general con atención gratuita</li>
-          <li>Programa de medicamentos esenciales</li>
-          <li>Campañas de prevención y vacunación</li>
-          <li>Apoyo nutricional para personas con enfermedades crónicas</li>
-        </ul>
-        <p style="margin-top: 20px;"><strong>Impacto:</strong> 3,000+ consultas médicas anuales</p>
+      <div id="sagrado-corazon" class="glass-card" style="margin-bottom: 40px;">
+        <h3 style="font-size: 32px; margin-bottom: 20px;">
+          <span style="color: #00ffff;">❤️ FUNDACIÓN SAGRADO CORAZÓN</span>
+        </h3>
+        <p style="margin-bottom: 20px; opacity: 0.9;">Centro de salud integral con atención médica gratuita para población vulnerable.</p>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
+          <div style="padding: 15px; background: rgba(0, 255, 255, 0.1); border-radius: 10px;">▸ Consultorio médico gratuito</div>
+          <div style="padding: 15px; background: rgba(0, 255, 255, 0.1); border-radius: 10px;">▸ Medicamentos esenciales</div>
+          <div style="padding: 15px; background: rgba(0, 255, 255, 0.1); border-radius: 10px;">▸ Campañas de vacunación</div>
+          <div style="padding: 15px; background: rgba(0, 255, 255, 0.1); border-radius: 10px;">▸ Apoyo nutricional</div>
+        </div>
+        <div style="padding: 20px; background: rgba(0, 255, 255, 0.2); border-radius: 10px; text-align: center;">
+          <div style="font-size: 48px; color: #00ffff; font-weight: 900;">3,000+</div>
+          <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Consultas médicas/año</div>
+        </div>
       </div>
 
-      <div id="lazos-del-sur" style="margin-bottom: 60px; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-        <h3 style="color: #2c3e50; margin-bottom: 20px;">🤝 Fundación Lazos del Sur</h3>
-        <p style="margin-bottom: 20px;">Organización dedicada al fortalecimiento del tejido social y la promoción de la participación ciudadana en comunidades vulnerables.</p>
-        <ul style="margin-left: 20px; color: #555; line-height: 2;">
-          <li>Centros comunitarios en 5 barrios</li>
-          <li>Programas de liderazgo juvenil</li>
-          <li>Actividades culturales y recreativas</li>
-          <li>Mediación y resolución de conflictos</li>
-        </ul>
-        <p style="margin-top: 20px;"><strong>Impacto:</strong> 15 comunidades fortalecidas</p>
+      <div id="lazos-del-sur" class="glass-card" style="margin-bottom: 40px;">
+        <h3 style="font-size: 32px; margin-bottom: 20px;">
+          <span style="color: #ffff00;">🤝 FUNDACIÓN LAZOS DEL SUR</span>
+        </h3>
+        <p style="margin-bottom: 20px; opacity: 0.9;">Fortalecimiento del tejido social y participación ciudadana en comunidades.</p>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
+          <div style="padding: 15px; background: rgba(255, 255, 0, 0.1); border-radius: 10px;">▸ 5 centros comunitarios</div>
+          <div style="padding: 15px; background: rgba(255, 255, 0, 0.1); border-radius: 10px;">▸ Liderazgo juvenil</div>
+          <div style="padding: 15px; background: rgba(255, 255, 0, 0.1); border-radius: 10px;">▸ Actividades culturales</div>
+          <div style="padding: 15px; background: rgba(255, 255, 0, 0.1); border-radius: 10px;">▸ Mediación de conflictos</div>
+        </div>
+        <div style="padding: 20px; background: rgba(255, 255, 0, 0.2); border-radius: 10px; text-align: center;">
+          <div style="font-size: 48px; color: #ffff00; font-weight: 900;">15</div>
+          <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Comunidades fortalecidas</div>
+        </div>
       </div>
 
-      <div id="prode" style="margin-bottom: 60px; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-        <h3 style="color: #2c3e50; margin-bottom: 20px;">🚀 Fundación PRODE</h3>
-        <p style="margin-bottom: 20px;">Programa de Desarrollo y Oportunidades que capacita a jóvenes y adultos en oficios y habilidades para el empleo.</p>
-        <ul style="margin-left: 20px; color: #555; line-height: 2;">
-          <li>Cursos de oficios: electricidad, plomería, carpintería</li>
-          <li>Capacitación en tecnología e informática</li>
-          <li>Programa de microemprendimientos</li>
-          <li>Bolsa de trabajo y vinculación laboral</li>
-        </ul>
-        <p style="margin-top: 20px;"><strong>Impacto:</strong> 200+ personas capacitadas anualmente, 70% tasa de empleabilidad</p>
+      <div id="prode" class="glass-card" style="margin-bottom: 40px;">
+        <h3 style="font-size: 32px; margin-bottom: 20px;">
+          <span style="background: linear-gradient(90deg, #ff00ff, #00ffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            🚀 FUNDACIÓN PRODE
+          </span>
+        </h3>
+        <p style="margin-bottom: 20px; opacity: 0.9;">Desarrollo y oportunidades mediante capacitación laboral y emprendedurismo.</p>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
+          <div style="padding: 15px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)); border-radius: 10px;">▸ Cursos de oficios</div>
+          <div style="padding: 15px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)); border-radius: 10px;">▸ Tecnología e informática</div>
+          <div style="padding: 15px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)); border-radius: 10px;">▸ Microemprendimientos</div>
+          <div style="padding: 15px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1)); border-radius: 10px;">▸ Bolsa de trabajo</div>
+        </div>
+        <div style="display: flex; gap: 20px;">
+          <div style="flex: 1; padding: 20px; background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2)); border-radius: 10px; text-align: center;">
+            <div style="font-size: 36px; color: #ff00ff; font-weight: 900;">200+</div>
+            <div style="text-transform: uppercase; letter-spacing: 1px; font-size: 11px;">Capacitados/año</div>
+          </div>
+          <div style="flex: 1; padding: 20px; background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 255, 0, 0.2)); border-radius: 10px; text-align: center;">
+            <div style="font-size: 36px; color: #00ffff; font-weight: 900;">70%</div>
+            <div style="text-transform: uppercase; letter-spacing: 1px; font-size: 11px;">Empleabilidad</div>
+          </div>
+        </div>
       </div>
 
-      <div id="cenade" style="margin-bottom: 60px; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-        <h3 style="color: #2c3e50; margin-bottom: 20px;">🎓 CENADE - Centro Nacional de Educación</h3>
-        <p style="margin-bottom: 20px;">Centro educativo especializado que brinda apoyo escolar y formación técnica a jóvenes en riesgo de deserción escolar.</p>
-        <ul style="margin-left: 20px; color: #555; line-height: 2;">
-          <li>Clases de apoyo en matemáticas, lengua y ciencias</li>
-          <li>Bachillerato acelerado para jóvenes y adultos</li>
-          <li>Formación técnica en áreas de alta demanda laboral</li>
-          <li>Orientación vocacional y proyecto de vida</li>
-        </ul>
-        <p style="margin-top: 20px;"><strong>Impacto:</strong> 85% de estudiantes completan sus estudios</p>
+      <div id="cenade" class="glass-card" style="margin-bottom: 40px;">
+        <h3 style="font-size: 32px; margin-bottom: 20px;">
+          <span style="color: #ff00ff;">🎓 CENADE</span>
+        </h3>
+        <p style="margin-bottom: 20px; opacity: 0.9;">Centro educativo especializado para jóvenes en riesgo de deserción escolar.</p>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0;">
+          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Clases de apoyo</div>
+          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Bachillerato acelerado</div>
+          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Formación técnica</div>
+          <div style="padding: 15px; background: rgba(255, 0, 255, 0.1); border-radius: 10px;">▸ Orientación vocacional</div>
+        </div>
+        <div style="padding: 20px; background: rgba(255, 0, 255, 0.2); border-radius: 10px; text-align: center;">
+          <div style="font-size: 48px; color: #ff00ff; font-weight: 900;">85%</div>
+          <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Tasa de graduación</div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="stats">
     <div class="container">
-      <h2>Nuestro Compromiso</h2>
+      <h2>NUESTRO IMPACTO</h2>
       <div class="stat-grid">
         <div class="stat-item">
           <span class="stat-number">5</span>
-          <span class="stat-label">Instituciones acompañadas</span>
+          <span class="stat-label">Instituciones</span>
         </div>
         <div class="stat-item">
           <span class="stat-number">3</span>
-          <span class="stat-label">Pilares de acción</span>
+          <span class="stat-label">Pilares</span>
         </div>
         <div class="stat-item">
           <span class="stat-number">∞</span>
-          <span class="stat-label">Compromiso con Encarnación</span>
+          <span class="stat-label">Compromiso</span>
         </div>
       </div>
-      <p class="quote">"Encarnación es nuestro origen. Servir a su comunidad es nuestro compromiso."</p>
+      <p class="quote">
+        Encarnación es nuestro origen. 
+        Servir a su comunidad es nuestro compromiso.
+      </p>
     </div>
   </section>
 
   <section class="contact-section" id="contacto">
     <div class="container">
-      <h2>Contacta con nosotros</h2>
+      <h2>CONECTA CON NOSOTROS</h2>
       <div class="contact-grid">
         <div>
-          <h3 style="color: white; font-size: 24px;">Información de Contacto</h3>
-          <p style="font-size: 18px; margin-top: 20px;">📍 <strong>Ubicación:</strong><br>Encarnación, Paraguay</p>
-          <p style="font-size: 18px; margin-top: 20px;">📧 <strong>Email:</strong><br>contacto@fundacioneh.org</p>
-          <p style="margin-top: 30px; opacity: 0.95;">Para solicitudes de acompañamiento y consultas sobre nuestros programas.</p>
+          <h3 style="font-size: 28px; margin-bottom: 30px;">
+            <span style="background: linear-gradient(90deg, #ff00ff, #00ffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              CANAL DIRECTO
+            </span>
+          </h3>
+          <div class="glass-card" style="padding: 25px; margin-bottom: 20px;">
+            <div style="font-size: 20px; margin-bottom: 10px;">📍</div>
+            <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7;">Ubicación</div>
+            <div style="font-size: 16px; margin-top: 5px;">Encarnación, Paraguay</div>
+          </div>
+          <div class="glass-card" style="padding: 25px; margin-bottom: 20px;">
+            <div style="font-size: 20px; margin-bottom: 10px;">📧</div>
+            <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7;">Email</div>
+            <div style="font-size: 16px; margin-top: 5px;">contacto@fundacioneh.org</div>
+          </div>
+          <div class="glass-card" style="padding: 25px;">
+            <div style="font-size: 20px; margin-bottom: 10px;">📞</div>
+            <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7;">Teléfono</div>
+            <div style="font-size: 16px; margin-top: 5px;">+595 71 123 456</div>
+          </div>
         </div>
-        <form action="mailto:contacto@fundacioneh.org" method="get" enctype="text/plain">
-          <input type="text" name="nombre" placeholder="Tu nombre" required>
-          <input type="email" name="email" placeholder="Tu email" required>
-          <input type="text" name="asunto" placeholder="Asunto">
-          <textarea name="mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
-          <button type="submit" class="btn" style="background: white; color: #e67e22; align-self: flex-start; font-size: 16px;">Enviar mensaje</button>
+        <form action="mailto:contacto@fundacioneh.org" method="get" enctype="text/plain" style="display: flex; flex-direction: column; gap: 20px;">
+          <input type="text" name="nombre" placeholder="NOMBRE" required style="text-transform: uppercase; letter-spacing: 1px;">
+          <input type="email" name="email" placeholder="EMAIL" required style="text-transform: uppercase; letter-spacing: 1px;">
+          <input type="text" name="asunto" placeholder="ASUNTO" style="text-transform: uppercase; letter-spacing: 1px;">
+          <textarea name="mensaje" placeholder="MENSAJE" rows="5" required style="text-transform: uppercase; letter-spacing: 1px;"></textarea>
+          <button type="submit" class="btn">ENVIAR MENSAJE</button>
         </form>
       </div>
     </div>
@@ -322,20 +910,30 @@
 
   <footer>
     <div class="container">
-      <p style="font-size: 18px;"><strong>© 2026 Fundación Carlos y Miriam E.H.</strong></p>
-      <p style="margin-top: 10px; opacity: 0.9;">Encarnación, Paraguay</p>
-      <div style="margin-top: 30px;">
-        <p style="font-size: 14px; margin-bottom: 10px;">📞 Teléfono: +595 71 123 456</p>
-        <p style="font-size: 14px; margin-bottom: 10px;">📧 Email: contacto@fundacioneh.org</p>
-        <p style="font-size: 14px;">📍 Dirección: Av. Irrazábal 1234, Encarnación</p>
+      <div style="text-align: center; margin-bottom: 30px;">
+        <div style="font-size: 14px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.5; margin-bottom: 10px;">EST. 2011</div>
+        <h3 style="font-size: 32px; margin: 20px 0;">
+          <span style="background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            FUNDACIÓN CARLOS Y MIRIAM E.H.
+          </span>
+        </h3>
       </div>
-      <div style="margin-top: 30px;">
-        <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Facebook</a>
-        <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Instagram</a>
-        <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">LinkedIn</a>
+      
+      <div style="display: flex; justify-content: center; gap: 30px; margin: 40px 0;">
+        <a href="#" style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Facebook</a>
+        <a href="#" style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Instagram</a>
+        <a href="#" style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">LinkedIn</a>
+        <a href="#" style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">YouTube</a>
       </div>
-      <p style="margin-top: 30px; opacity: 0.8; font-size: 14px;">Transformando vidas a través de acciones concretas</p>
-      <a href="#" style="position: fixed; bottom: 30px; right: 30px; background: #3498db; color: white; padding: 15px; border-radius: 50%; text-decoration: none; font-size: 20px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">↑</a>
+      
+      <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.5;">
+          Transformando vidas × Encarnación × Paraguay
+        </p>
+        <p style="font-size: 10px; margin-top: 10px; opacity: 0.3;">© 2026 All Rights Reserved</p>
+      </div>
+      
+      <a href="#" class="scroll-top">⬆</a>
     </div>
   </footer>
   <script>
