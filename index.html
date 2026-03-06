@@ -3,63 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Test Minimalista</title>
+  <title>Fundación E.H.</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: system-ui, sans-serif; background: #fff; color: #333; }
-    header { border-bottom: 1px solid #ddd; padding: 20px; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; }
-    h1 { font-size: 24px; margin-bottom: 5px; }
-    h2 { font-size: 32px; margin-bottom: 20px; }
-    p { line-height: 1.6; color: #666; font-size: 16px; }
-    section { max-width: 800px; margin: 0 auto; padding: 0 20px 60px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-    .card { padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
-    .cta { background: #f5f5f5; padding: 40px; border-radius: 8px; margin: 60px auto; max-width: 800px; }
-    button { padding: 10px 20px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
-    footer { border-top: 1px solid #ddd; padding: 20px; color: #999; font-size: 14px; text-align: center; max-width: 800px; margin: 0 auto; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #ffffff; color: #1a1a1a; line-height: 1.6; }
+    header { background: #f8f8f8; border-bottom: 2px solid #000; padding: 30px 20px; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    h1 { font-size: 28px; margin-bottom: 10px; font-weight: 700; }
+    h2 { font-size: 36px; margin-bottom: 30px; font-weight: 700; }
+    h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+    p { color: #666; margin-bottom: 15px; }
+    section { padding: 60px 20px; }
+    .hero { background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); padding: 80px 20px; text-align: center; }
+    .hero h2 { font-size: 48px; margin-bottom: 20px; }
+    .hero p { font-size: 20px; color: #555; max-width: 600px; margin: 0 auto 30px; }
+    .btn { display: inline-block; background: #000; color: #fff; padding: 12px 30px; border-radius: 4px; text-decoration: none; font-weight: 600; cursor: pointer; border: none; font-size: 16px; }
+    .btn:hover { background: #333; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+    .card { padding: 30px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; transition: all 0.3s; }
+    .card:hover { border-color: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .card h3 { color: #000; }
+    .stats { background: #000; color: #fff; padding: 60px 20px; }
+    .stats .container { text-align: center; }
+    .stat-item { display: inline-block; margin: 0 40px; }
+    .stat-number { font-size: 48px; font-weight: 700; display: block; }
+    .stat-label { font-size: 16px; margin-top: 10px; opacity: 0.9; }
+    footer { background: #f8f8f8; border-top: 1px solid #ddd; padding: 30px 20px; text-align: center; color: #666; }
+    .img-placeholder { width: 100%; height: 300px; background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; margin: 20px 0; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Test Site</h1>
-    <p>Verificando diseño minimalista</p>
+    <div class="container">
+      <h1>Fundación Carlos y Miriam E.H.</h1>
+      <p>Transformar vidas a través de acciones concretas</p>
+    </div>
   </header>
 
-  <section>
-    <h2>Bienvenido</h2>
-    <p>Esta es una página de prueba para verificar que el diseño minimalista funciona correctamente en GitHub Pages. Sin imágenes complicadas, solo HTML y CSS simple.</p>
+  <section class="hero">
+    <div class="container">
+      <h2>Transformar vidas a través de acciones concretas</h2>
+      <p>Educación. Salud e inclusión. Deporte. Devolviéndole a Encarnación lo que permitió nuestro crecimiento.</p>
+      <button class="btn">Conoce nuestro trabajo</button>
+    </div>
   </section>
 
   <section>
-    <h2>Características</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Limpio</h3>
-        <p>Diseño minimalista sin distracciones</p>
-      </div>
-      <div class="card">
-        <h3>Rápido</h3>
-        <p>Carga inmediata y responsive</p>
-      </div>
-      <div class="card">
-        <h3>Simple</h3>
-        <p>Sin dependencias complicadas</p>
-      </div>
-      <div class="card">
-        <h3>Profesional</h3>
-        <p>Tipografía clara y espaciado elegante</p>
+    <div class="container">
+      <h2>Quiénes Somos</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+        <div>
+          <p>La Fundación Carlos y Miriam E.H. nace del profundo vínculo que sus fundadores mantienen con Encarnación. Fue aquí donde comenzaron a construir su camino.</p>
+          <p>Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida y el trabajo les permitieron construir.</p>
+        </div>
+        <div class="img-placeholder">[Imagen: Quiénes Somos]</div>
       </div>
     </div>
   </section>
 
-  <div class="cta">
-    <h2 style="margin-top: 0;">Contacto</h2>
-    <p>mati@example.com</p>
-    <button>Enviar mensaje</button>
-  </div>
+  <section style="background: #f5f5f5;">
+    <div class="container">
+      <h2>Nuestros Pilares</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>📚 Educación</h3>
+          <p>Formación fundamental para el desarrollo de niños y jóvenes en Encarnación.</p>
+        </div>
+        <div class="card">
+          <h3>🏥 Salud e Inclusión</h3>
+          <p>Bienestar e inclusión de personas en situación de vulnerabilidad.</p>
+        </div>
+        <div class="card">
+          <h3>⚽ Deporte</h3>
+          <p>Formación, disciplina e integración social para jóvenes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container">
+      <h2 style="color: #fff; margin-bottom: 50px;">Nuestro Compromiso</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+        <div>
+          <span class="stat-number">5</span>
+          <span class="stat-label">Instituciones acompañadas</span>
+        </div>
+        <div>
+          <span class="stat-number">3</span>
+          <span class="stat-label">Pilares de acción</span>
+        </div>
+        <div>
+          <span class="stat-number">∞</span>
+          <span class="stat-label">Compromiso con Encarnación</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Contacta</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+        <div>
+          <h3>Información</h3>
+          <p><strong>Ubicación:</strong> Encarnación, Paraguay</p>
+          <p><strong>Email:</strong> contacto@fundacioneh.org</p>
+        </div>
+        <form style="display: flex; flex-direction: column; gap: 15px;">
+          <input type="text" placeholder="Nombre" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;" />
+          <input type="email" placeholder="Email" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;" />
+          <textarea placeholder="Mensaje" rows="4" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: system-ui;"></textarea>
+          <button class="btn">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <p>© 2026 Test Site. All rights reserved.</p>
+    <div class="container">
+      <p>© 2026 Fundación Carlos y Miriam E.H. Encarnación, Paraguay</p>
+    </div>
   </footer>
 </body>
 </html>
