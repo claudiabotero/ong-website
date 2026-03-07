@@ -369,6 +369,46 @@
       font-size: 14px;
     }
     
+    /* Gallery Section */
+    .gallery-section {
+      padding: 100px 40px;
+      background: #f8f9fa;
+    }
+    
+    .gallery-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+    
     /* Contact */
     .contact-section {
       background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
@@ -445,6 +485,7 @@
         <a href="#mision">Quiénes Somos</a>
         <a href="#trabajo">Nuestro Trabajo</a>
         <a href="#instituciones">Instituciones</a>
+        <a href="#galeria">Galería de Fotos</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
@@ -510,7 +551,7 @@
       <p><strong>Deporte:</strong> Fomentamos el deporte como herramienta de formación, disciplina e integración social.</p>
     </div>
     <div class="visual-image">
-      <img src="images/aula.jpg" alt="Programas educativos de la fundación">
+      <img src="images/img7.jpg" alt="Programas de la fundación">
     </div>
   </section>
 
@@ -546,6 +587,73 @@
       <div class="institution-card reveal">
         <h3>CENADE</h3>
         <p>Centro de educación especializada y formación técnica.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery -->
+  <section id="galeria" class="gallery-section">
+    <h2 style="text-align: center; margin-bottom: 60px;">Galería de Fotos</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="images/monumento-dia.jpg" alt="Monumento San Roque González">
+      </div>
+      <div class="gallery-item">
+        <img src="images/monumento-noche-evento.jpg" alt="Evento nocturno en el monumento">
+      </div>
+      <div class="gallery-item">
+        <img src="images/monumento-noche.jpg" alt="Monumento iluminado">
+      </div>
+      <div class="gallery-item">
+        <img src="images/hospital-cielo.jpg" alt="Hospital Día Oncológico">
+      </div>
+      <div class="gallery-item">
+        <img src="images/entrada-edificio.jpg" alt="Entrada del edificio">
+      </div>
+      <div class="gallery-item">
+        <img src="images/escuela-exterior.jpg" alt="Escuela exterior">
+      </div>
+      <div class="gallery-item">
+        <img src="images/estudiantes-comedor.jpg" alt="Estudiantes en el comedor">
+      </div>
+      <div class="gallery-item">
+        <img src="images/aula.jpg" alt="Aula educativa">
+      </div>
+      <div class="gallery-item">
+        <img src="images/placas-cenade.jpg" alt="Placas CENADE">
+      </div>
+      <div class="gallery-item">
+        <img src="images/ceremonia-autoridades.jpg" alt="Ceremonia con autoridades">
+      </div>
+      <div class="gallery-item">
+        <img src="images/evento-fundacion.jpg" alt="Evento de la fundación">
+      </div>
+      <div class="gallery-item">
+        <img src="images/ceremonia-local.jpg" alt="Ceremonia local">
+      </div>
+      <div class="gallery-item">
+        <img src="images/evento-prensa.jpg" alt="Evento de prensa">
+      </div>
+      <div class="gallery-item">
+        <img src="images/camioneta-prode.jpg" alt="Camioneta PRODE">
+      </div>
+      <div class="gallery-item">
+        <img src="images/estudiantes-grupo.jpg" alt="Grupo de estudiantes">
+      </div>
+      <div class="gallery-item">
+        <img src="images/donacion-cheque.jpg" alt="Donación">
+      </div>
+      <div class="gallery-item">
+        <img src="images/patio-interior.jpg" alt="Patio interior">
+      </div>
+      <div class="gallery-item">
+        <img src="images/comedor.jpg" alt="Comedor">
+      </div>
+      <div class="gallery-item">
+        <img src="images/oficina.jpg" alt="Oficina">
+      </div>
+      <div class="gallery-item">
+        <img src="images/pasillo.jpg" alt="Instalaciones">
       </div>
     </div>
   </section>
