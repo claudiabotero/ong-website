@@ -102,7 +102,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('images/img6.jpg') center/cover no-repeat;
+      background: url('images/hospital-cielo.jpg') center/cover no-repeat;
       background-attachment: fixed;
       transform: scale(1.1);
     }
@@ -326,6 +326,56 @@
       opacity: 0.9;
     }
     
+    /* Projects Section */
+    .projects-section {
+      padding: 100px 40px;
+      background: white;
+    }
+    
+    .projects-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+    
+    .project-card {
+      background: white;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    .project-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    
+    .project-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .project-card h3 {
+      padding: 20px 20px 10px;
+      font-size: 22px;
+      color: #2c3e50;
+    }
+    
+    .project-card p {
+      padding: 0 20px 20px;
+      color: #666;
+      font-size: 15px;
+    }
+    
     /* Institution Grid */
     .institutions-section {
       padding: 100px 40px;
@@ -448,6 +498,7 @@
       <nav>
         <a href="#mision">Quiénes Somos</a>
         <a href="#pilares">Nuestro Trabajo</a>
+        <a href="#proyectos">Proyectos</a>
         <a href="#instituciones">Instituciones</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -498,7 +549,7 @@
   </section>
 
   <!-- Parallax Statistics -->
-  <section class="parallax-section" style="background-image: url('images/oficina.jpg');">
+  <section class="parallax-section" style="background-image: url('images/monumento-noche-evento.jpg');">
     <div class="parallax-overlay"></div>
     <div class="parallax-content">
       <h2>15 años transformando vidas</h2>
@@ -521,11 +572,48 @@
   </section>
 
   <!-- Parallax Impact -->
-  <section class="parallax-section" style="background-image: url('images/pasillo.jpg');">
+  <section class="parallax-section" style="background-image: url('images/ceremonia-autoridades.jpg');">
     <div class="parallax-overlay"></div>
     <div class="parallax-content">
       <h2>Construyendo futuro</h2>
       <p>Cada acción cuenta, cada vida transformada importa</p>
+    </div>
+  </section>
+
+  <!-- Proyectos Destacados -->
+  <section id="proyectos" class="projects-section">
+    <h2 style="text-align: center; margin-bottom: 60px;">Proyectos Destacados</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="images/monumento-dia.jpg" alt="Monumento San Roque González">
+        <h3>Monumento a San Roque González</h3>
+        <p>Homenaje al fundador de Encarnación, punto de encuentro cultural y espiritual.</p>
+      </div>
+      <div class="project-card">
+        <img src="images/hospital-cielo.jpg" alt="Hospital Día Oncológico">
+        <h3>Hospital Día Oncológico</h3>
+        <p>Centro de atención especializada para pacientes oncológicos de la región.</p>
+      </div>
+      <div class="project-card">
+        <img src="images/placas-cenade.jpg" alt="CENADE">
+        <h3>Centro Educativo CENADE</h3>
+        <p>Formación técnica y profesional para jóvenes de Encarnación.</p>
+      </div>
+      <div class="project-card">
+        <img src="images/evento-fundacion.jpg" alt="Eventos Comunitarios">
+        <h3>Eventos Comunitarios</h3>
+        <p>Actividades de integración y apoyo a la comunidad.</p>
+      </div>
+      <div class="project-card">
+        <img src="images/estudiantes-comedor.jpg" alt="Programa de Alimentación">
+        <h3>Programa de Alimentación</h3>
+        <p>Nutrición para estudiantes en situación vulnerable.</p>
+      </div>
+      <div class="project-card">
+        <img src="images/camioneta-prode.jpg" alt="PRODE">
+        <h3>Apoyo a PRODE</h3>
+        <p>Colaboración con programas de desarrollo comunitario.</p>
+      </div>
     </div>
   </section>
 
