@@ -112,20 +112,25 @@
     /* Logo Watermark */
     .hero-watermark {
       position: absolute;
-      top: 35%;
+      top: 30%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
-      opacity: 0.5;
+      width: 350px;
+      height: 350px;
       z-index: 1;
-      filter: brightness(0) saturate(100%) invert(51%) sepia(94%) saturate(1933%) hue-rotate(165deg) brightness(101%) contrast(101%);
     }
     
-    .hero-watermark img {
+    .hero-watermark::before {
+      content: '';
+      position: absolute;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      background-image: url('images/logo-dorado.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.4;
+      filter: sepia(1) saturate(10) hue-rotate(170deg) brightness(1.5);
     }
     
     .hero-content {
@@ -472,9 +477,7 @@
 
   <!-- Hero Section with Logo Watermark -->
   <section class="hero">
-    <div class="hero-watermark">
-      <img src="images/logo-dorado.png" alt="">
-    </div>
+    <div class="hero-watermark"></div>
     <div class="hero-content">
       <h1>Transformar vidas a través de acciones concretas</h1>
       <p>Educación. Salud e Inclusión. Deporte.</p>
