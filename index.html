@@ -6,15 +6,16 @@
   <title>Fundación Carlos y Miriam E.H. - Transformando vidas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { 
-      font-family: 'Montserrat', sans-serif; 
+      font-family: 'Montserrat', -apple-system, sans-serif; 
       background: #fff; 
       color: #333; 
       line-height: 1.6;
+      overflow-x: hidden;
     }
     
     h1, h2, h3, h4, h5, h6 {
@@ -23,13 +24,14 @@
     
     /* Header */
     header { 
-      background: rgba(255, 255, 255, 0.95);
-      padding: 20px 0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.97);
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
+      padding: 20px 0;
+      transition: all 0.3s;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
     }
     
     .header-content { 
@@ -52,9 +54,9 @@
     }
     
     .logo-text h1 { 
-      font-size: 24px;
-      font-weight: 700;
-      color: #2c3e50;
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
     }
     
     nav { 
@@ -63,7 +65,7 @@
     }
     
     nav a { 
-      color: #2c3e50;
+      color: #333;
       text-decoration: none;
       font-size: 15px;
       font-weight: 500;
@@ -78,7 +80,7 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: #e67e22;
+      background: #f39c12;
       transition: width 0.3s;
     }
     
@@ -86,56 +88,61 @@
       width: 100%;
     }
     
-    /* Hero Section */
+    /* Hero with Parallax */
     .hero {
       margin-top: 70px;
-      height: calc(100vh - 70px);
+      height: 100vh;
       position: relative;
       overflow: hidden;
-      background: url('images/img1.jpg') center center/cover no-repeat;
-      background-position: center 75%;
-      background-attachment: fixed;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     
-    .hero::before {
-      content: '';
+    .hero-bg {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.4));
+      background: url('images/img6.jpg') center/cover no-repeat;
+      background-attachment: fixed;
+      transform: scale(1.1);
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5));
     }
     
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       color: white;
-      max-width: 900px;
       padding: 0 20px;
     }
     
-    .hero-content h1 {
+    .hero h1 {
       font-size: 72px;
-      font-weight: 400;
-      margin-bottom: 40px;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-      line-height: 1.1;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
       animation: fadeInUp 1s ease;
       font-family: 'Playfair Display', serif;
     }
     
-    .hero-content p {
+    .hero p {
       font-size: 24px;
-      font-weight: 400;
+      font-weight: 300;
       margin-bottom: 40px;
-      color: white;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      opacity: 0.9;
       animation: fadeInUp 1s ease 0.2s;
       animation-fill-mode: backwards;
     }
@@ -143,7 +150,7 @@
     .btn {
       display: inline-block;
       padding: 16px 40px;
-      background: #e67e22;
+      background: #f39c12;
       color: white;
       text-decoration: none;
       font-weight: 500;
@@ -155,7 +162,7 @@
     }
     
     .btn:hover {
-      background: #d35400;
+      background: #e67e22;
       transform: translateY(-2px);
     }
     
@@ -187,7 +194,7 @@
       padding: 40px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.1);
       transition: all 0.3s;
-      border-top: 4px solid #e67e22;
+      border-top: 4px solid #f39c12;
     }
     
     .feature-card:hover {
@@ -203,7 +210,7 @@
     .feature-card h3 {
       font-size: 24px;
       margin-bottom: 15px;
-      color: #2c3e50;
+      color: #000;
     }
     
     .feature-card p {
@@ -211,37 +218,11 @@
       line-height: 1.6;
     }
     
-    /* Content Sections */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-    
-    section {
-      padding: 100px 40px;
-    }
-    
-    h2 {
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 30px;
-      color: #2c3e50;
-    }
-    
-    p {
-      font-size: 17px;
-      color: #666;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-    
     /* Visual Sections */
     .visual-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 600px;
-      align-items: center;
+      min-height: 700px;
     }
     
     .visual-section.reverse {
@@ -253,8 +234,20 @@
     }
     
     .visual-content {
-      padding: 80px;
+      padding: 100px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       background: white;
+    }
+    
+    .visual-content h2 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #000;
+      letter-spacing: -0.5px;
+      font-family: 'Playfair Display', serif;
     }
     
     .visual-content .lead {
@@ -262,12 +255,18 @@
       font-weight: 400;
       color: #666;
       margin-bottom: 30px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .visual-content p {
+      font-size: 17px;
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 20px;
     }
     
     .visual-image {
       position: relative;
-      height: 100%;
-      min-height: 600px;
       overflow: hidden;
     }
     
@@ -317,13 +316,13 @@
       font-size: 56px;
       font-weight: 700;
       margin-bottom: 20px;
-      color: white;
+      letter-spacing: -0.5px;
+      font-family: 'Playfair Display', serif;
     }
     
     .parallax-content p {
       font-size: 24px;
       font-weight: 300;
-      color: white;
       opacity: 0.9;
     }
     
@@ -335,7 +334,11 @@
     
     .institutions-section h2 {
       text-align: center;
+      font-size: 48px;
+      font-weight: 700;
       margin-bottom: 60px;
+      color: #000;
+      font-family: 'Playfair Display', serif;
     }
     
     .institution-grid {
@@ -362,7 +365,7 @@
     .institution-card h3 {
       font-size: 18px;
       margin: 15px 0 10px;
-      color: #2c3e50;
+      color: #000;
     }
     
     .institution-card p {
@@ -379,8 +382,10 @@
     }
     
     .contact-section h2 {
-      color: white;
+      font-size: 48px;
+      font-weight: 700;
       margin-bottom: 40px;
+      font-family: 'Playfair Display', serif;
     }
     
     .contact-info {
@@ -391,7 +396,6 @@
     .contact-info p {
       font-size: 20px;
       margin-bottom: 20px;
-      color: white;
       opacity: 0.9;
     }
     
@@ -406,10 +410,9 @@
     footer p {
       opacity: 0.8;
       margin-bottom: 10px;
-      color: white;
     }
     
-    /* Reveal animations */
+    /* Scroll animations */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -424,7 +427,7 @@
     /* Responsive */
     @media (max-width: 768px) {
       nav { display: none; }
-      .hero-content h1 { font-size: 48px; }
+      .hero h1 { font-size: 48px; }
       .visual-section { grid-template-columns: 1fr; }
       .visual-content { padding: 60px 40px; }
       .feature-cards { margin-top: 0; }
@@ -444,7 +447,7 @@
       </div>
       <nav>
         <a href="#mision">Quiénes Somos</a>
-        <a href="#trabajo">Nuestro Trabajo</a>
+        <a href="#pilares">Nuestro Trabajo</a>
         <a href="#instituciones">Instituciones</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -453,25 +456,28 @@
 
   <!-- Hero Section -->
   <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1>Transformar vidas a través de acciones concretas</h1>
+      <p>Educación. Salud e Inclusión. Deporte.</p>
       <a href="#mision" class="btn">Conoce nuestro trabajo</a>
     </div>
   </section>
 
   <!-- Feature Cards -->
   <div class="feature-cards">
-    <div class="feature-card reveal">
+    <div class="feature-card">
       <div class="feature-icon">📚</div>
       <h3>Educación</h3>
       <p>Formación integral para niños y jóvenes, creando oportunidades de desarrollo y crecimiento.</p>
     </div>
-    <div class="feature-card reveal">
+    <div class="feature-card">
       <div class="feature-icon">🏥</div>
       <h3>Salud e Inclusión</h3>
       <p>Atención médica primaria y apoyo psicosocial para familias en situación vulnerable.</p>
     </div>
-    <div class="feature-card reveal">
+    <div class="feature-card">
       <div class="feature-icon">⚽</div>
       <h3>Deporte</h3>
       <p>El deporte como herramienta de transformación social y desarrollo comunitario.</p>
@@ -485,15 +491,15 @@
       <p class="lead">Una fundación nacida del amor por Encarnación</p>
       <p>La Fundación Carlos y Miriam E.H. nace del profundo vínculo que sus fundadores, <strong>Lic. Carlos Espínola</strong> y <strong>Arq. Miriam Harms</strong>, mantienen con Encarnación.</p>
       <p>Decidieron crear la Fundación para devolver a la comunidad parte de lo que la vida y el trabajo les permitieron construir, generando oportunidades y contribuyendo al desarrollo de la ciudad.</p>
-      <a href="#trabajo" class="btn" style="margin-top: 30px; width: fit-content;">Ver nuestro impacto</a>
+      <a href="#pilares" class="btn" style="margin-top: 30px; width: fit-content;">Ver nuestro impacto</a>
     </div>
     <div class="visual-image">
-      <img src="images/img2.jpg" alt="Fundación en acción">
+      <img src="images/comedor.jpg" alt="Comedor de la fundación">
     </div>
   </section>
 
   <!-- Parallax Statistics -->
-  <section class="parallax-section" style="background-image: url('images/img6.jpg');">
+  <section class="parallax-section" style="background-image: url('images/oficina.jpg');">
     <div class="parallax-overlay"></div>
     <div class="parallax-content">
       <h2>15 años transformando vidas</h2>
@@ -502,7 +508,7 @@
   </section>
 
   <!-- Nuestro Trabajo -->
-  <section id="trabajo" class="visual-section reverse reveal">
+  <section id="pilares" class="visual-section reverse reveal">
     <div class="visual-content">
       <h2>Nuestro Trabajo</h2>
       <p class="lead">Tres pilares fundamentales</p>
@@ -511,12 +517,12 @@
       <p><strong>Deporte:</strong> Fomentamos el deporte como herramienta de formación, disciplina e integración social.</p>
     </div>
     <div class="visual-image">
-      <img src="images/img5.jpg" alt="Programas de la fundación">
+      <img src="images/aula.jpg" alt="Aula educativa">
     </div>
   </section>
 
   <!-- Parallax Impact -->
-  <section class="parallax-section" style="background-image: url('images/img7.jpg');">
+  <section class="parallax-section" style="background-image: url('images/pasillo.jpg');">
     <div class="parallax-overlay"></div>
     <div class="parallax-content">
       <h2>Construyendo futuro</h2>
@@ -571,9 +577,9 @@
     // Parallax effect on scroll
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
-      const parallax = document.querySelector('.hero');
+      const parallax = document.querySelector('.hero-bg');
       if (parallax) {
-        parallax.style.backgroundPositionY = `${scrolled * 0.5}px`;
+        parallax.style.transform = `translateY(${scrolled * 0.5}px) scale(1.1)`;
       }
     });
 
