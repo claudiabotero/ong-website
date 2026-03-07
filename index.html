@@ -92,23 +92,15 @@
       height: calc(100vh - 70px);
       position: relative;
       overflow: hidden;
+      background: url('images/img1.jpg') center center/cover no-repeat;
+      background-attachment: fixed;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     
-    .hero-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('images/img1.jpg') center/cover no-repeat;
-      background-attachment: fixed;
-      transform: scale(1.1);
-    }
-    
-    .hero-overlay {
+    .hero::before {
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
@@ -502,8 +494,6 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1>Transformar vidas a través de acciones concretas</h1>
       <a href="#mision" class="btn">Conoce nuestro trabajo</a>
@@ -686,14 +676,7 @@
   </footer>
 
   <script>
-    // Parallax effect on scroll
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const parallax = document.querySelector('.hero-bg');
-      if (parallax) {
-        parallax.style.transform = `translateY(${scrolled * 0.5}px) scale(1.1)`;
-      }
-    });
+    // El parallax ahora funciona con CSS puro (background-attachment: fixed)
 
     // Reveal animations
     const reveals = document.querySelectorAll('.reveal');
