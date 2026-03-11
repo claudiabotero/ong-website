@@ -4,17 +4,22 @@
 
 1. **Fundación Divino Niño Jesús**
    - Facebook: https://www.facebook.com/profile.php?id=100064841810356
+   - Sitio web: NO TIENE (solo Facebook)
 
-2. **Fundación Sagrado Corazón**
+2. **Fundación Sagrado Corazón** ✅
+   - Sitio web oficial: https://sagradocorazon.org.py
    - Facebook: https://www.facebook.com/FundacionSagradoCorazonPY
 
-3. **Fundación Lazos del Sur**
+3. **Fundación Lazos del Sur** ✅
+   - Sitio web oficial: https://lazosdelsur.org.py
    - Facebook: https://www.facebook.com/fundacionlazosdelsur
 
 4. **PRODE Básquetbol**
    - Facebook: https://www.facebook.com/prodebasquetbol
+   - Sitio web: NO TIENE (solo Facebook)
 
-5. **CENADE**
+5. **CENADE** ✅
+   - Sitio web oficial: https://cenade.org.py
    - Facebook: https://www.facebook.com/cenade.encarnacion
 
 ## Nota:
