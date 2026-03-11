@@ -1,0 +1,37 @@
+INSTRUCCIONES PARA APARECER EN GOOGLE
+======================================
+
+1. VE A GOOGLE SEARCH CONSOLE
+   https://search.google.com/search-console
+
+2. AGREGA TU PROPIEDAD
+   - Click en "Agregar propiedad"
+   - Escribe: fundacion-eh.com
+   - Elige método de verificación HTML
+
+3. VERIFICA LA PROPIEDAD
+   - Google te dará un código
+   - Reemplaza "pending" en el meta tag con ese código
+   - O descarga el archivo HTML que te dan
+
+4. ENVÍA EL SITEMAP
+   - Una vez verificado, ve a "Sitemaps"
+   - Agrega: sitemap.xml
+   - Click en "Enviar"
+
+5. SOLICITA INDEXACIÓN
+   - Ve a "Inspección de URLs"
+   - Escribe: https://fundacion-eh.com
+   - Click en "Solicitar indexación"
+
+TIEMPO ESTIMADO
+---------------
+- Verificación: Inmediata
+- Primera aparición en Google: 3-7 días
+- Indexación completa: 2-4 semanas
+
+MIENTRAS TANTO
+--------------
+- Comparte el link en redes sociales
+- Pide a otras páginas que te enlacen
+- Actualiza contenido regularmente
