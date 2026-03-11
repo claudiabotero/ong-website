@@ -431,6 +431,7 @@
       height: 250px;
       object-fit: cover;
       transition: transform 0.3s;
+      cursor: pointer;
     }
     
     .gallery-item:hover img {
@@ -498,6 +499,70 @@
       .parallax-content h2 { font-size: 36px; }
       .institution-grid { grid-template-columns: 1fr; }
       .logo-text h1 { font-size: 18px; white-space: nowrap; }
+    }
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      overflow: auto;
+      animation: fadeIn 0.3s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .lightbox-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: zoomIn 0.3s;
+    }
+    
+    @keyframes zoomIn {
+      from { transform: translate(-50%, -50%) scale(0.8); }
+      to { transform: translate(-50%, -50%) scale(1); }
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+      z-index: 10000;
+    }
+    
+    .lightbox-close:hover,
+    .lightbox-close:focus {
+      color: #e67e22;
+    }
+    
+    .lightbox-caption {
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      font-size: 16px;
     }
   </style>
 </head>
@@ -631,14 +696,14 @@
         <p>La Fundación Divino Niño Jesús es una entidad de servicio que brinda apoyo integral a niños y familias de escasos recursos. Su labor se enfoca en la alimentación (comedor comunitario), salud y educación, buscando mejorar la calidad de vida en zonas vulnerables.</p>
       </div>
       <div class="institution-card reveal">
-        <a href="https://www.facebook.com/FundacionSagradoCorazonPY" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+        <a href="https://sagradocorazon.org.py" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
           <img src="images/logo-sagrado-corazon.jpg" alt="Fundación Sagrado Corazón" class="institution-logo" style="border-radius: 15px; cursor: pointer;">
         </a>
         <h3>Fundación Sagrado Corazón – Hogar de Niñas</h3>
         <p>El Hogar de Niñas de la Fundación Sagrado Corazón es una institución dedicada a la protección, cuidado y formación integral de niñas en situación de vulnerabilidad.</p>
       </div>
       <div class="institution-card reveal">
-        <a href="https://www.facebook.com/fundacionlazosdelsur" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+        <a href="https://lazosdelsur.org.py" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
           <img src="images/logo-lazos-del-sur.jpg" alt="Fundación Lazos del Sur" class="institution-logo" style="border-radius: 15px; cursor: pointer;">
         </a>
         <h3>Fundación Lazos del Sur</h3>
@@ -652,7 +717,7 @@
         <p>PRODE Básquetbol ("Programa de Desarrollo Básquetbol para Todos") es una organización sin fines de lucro en Encarnación, Paraguay, que crea escuelas gratuitas de baloncesto en barrios periféricos para niños y adolescentes.</p>
       </div>
       <div class="institution-card reveal">
-        <a href="https://www.facebook.com/cenade.encarnacion" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+        <a href="https://cenade.org.py" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
           <img src="images/logo-cenade.jpg" alt="CENADE" class="institution-logo" style="border-radius: 15px; cursor: pointer;">
         </a>
         <h3>CENADE</h3>
@@ -782,6 +847,53 @@
           });
         }
       });
+    });
+  </script>
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <script>
+    // Lightbox functionality
+    function openLightbox(imgSrc, caption) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      
+      lightbox.style.display = 'block';
+      lightboxImg.src = imgSrc;
+      lightboxCaption.innerHTML = caption || '';
+    }
+    
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+    
+    // Add click event to all gallery images
+    document.addEventListener('DOMContentLoaded', function() {
+      const galleryImages = document.querySelectorAll('.gallery-item img');
+      galleryImages.forEach(function(img) {
+        img.onclick = function() {
+          openLightbox(this.src, this.alt);
+        }
+      });
+    });
+    
+    // Close lightbox when clicking outside the image
+    document.getElementById('lightbox').onclick = function(event) {
+      if (event.target === this) {
+        closeLightbox();
+      }
+    }
+    
+    // Close lightbox with ESC key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
     });
   </script>
 </body>
