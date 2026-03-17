@@ -530,15 +530,29 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .main-container {
+        flex-direction: column-reverse;
+    }
+    
     .booking-panel {
-        position: absolute;
+        position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
         width: 100%;
         height: auto;
-        max-height: 70vh;
+        max-height: 60vh;
         border-radius: 20px 20px 0 0;
+        z-index: 1000;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+        overflow-y: auto;
+        padding: 20px;
+    }
+    
+    .map-container {
+        height: 100vh;
+        margin-top: -60px;
+        padding-top: 60px;
     }
     
     .stats-bar {
@@ -551,5 +565,36 @@ body {
     
     .destination-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .logo span {
+        display: none;
+    }
+    
+    .header-content {
+        padding: 0 15px;
+    }
+    
+    .ride-type-selector {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 8px;
+    }
+    
+    .ride-type {
+        min-width: 90px;
+        padding: 10px 8px;
+    }
+    
+    .ride-type span {
+        font-size: 10px;
+    }
+    
+    .payment-options {
+        justify-content: space-between;
+    }
+    
+    .payment-option {
+        padding: 10px 8px;
     }
 }

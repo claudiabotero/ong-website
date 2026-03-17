@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RideASU - Tu viaje en Asunción</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f9fafb;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+        
+        /* Header simplificado para móvil */
+        .mobile-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .mobile-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #5046E5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .menu-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: none;
+            font-size: 20px;
+            color: #6B7280;
+        }
+        
+        /* Mapa a pantalla completa */
+        #map {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 1;
+        }
+        
+        /* Panel flotante inferior */
+        .bottom-sheet {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
+            z-index: 999;
+            transition: transform 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .bottom-sheet.minimized {
+            transform: translateY(calc(100% - 120px));
+        }
+        
+        .sheet-handle {
+            width: 100%;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .handle-bar {
+            width: 40px;
+            height: 4px;
+            background: #D1D5DB;
+            border-radius: 2px;
+        }
+        
+        .sheet-content {
+            padding: 0 20px 20px;
+        }
+        
+        /* Selector de tipo de viaje */
+        .ride-types {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .ride-type-card {
+            min-width: 100px;
+            padding: 12px;
+            background: #F3F4F6;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .ride-type-card.active {
+            background: #5046E5;
+            color: white;
+            border-color: #5046E5;
+        }
+        
+        .ride-type-card i {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .ride-type-card span {
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        /* Inputs de ubicación */
+        .location-section {
+            margin-bottom: 20px;
+        }
+        
+        .location-input-group {
+            position: relative;
+            margin-bottom: 12px;
+        }
+        
+        .location-input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .location-input:focus {
+            outline: none;
+            border-color: #5046E5;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .input-icon.pickup {
+            background: #10B981;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #10B981;
+        }
+        
+        .input-icon.destination {
+            background: #EF4444;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #EF4444;
+        }
+        
+        /* Botón principal */
+        .request-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #5046E5, #7C3AED);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .request-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* Destinos rápidos */
+        .quick-places {
+            margin: 20px 0;
+        }
+        
+        .quick-places h3 {
+            font-size: 14px;
+            color: #6B7280;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .place-btn {
+            padding: 12px 8px;
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 11px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .place-btn:active {
+            background: #5046E5;
+            color: white;
+        }
+        
+        .place-btn i {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        
+        /* Fare estimate */
+        .fare-box {
+            background: #F0F9FF;
+            border: 1px solid #BFDBFE;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: none;
+        }
+        
+        .fare-box.show {
+            display: block;
+        }
+        
+        .fare-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1E40AF;
+        }
+        
+        .fare-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #64748B;
+        }
+        
+        /* Floating action buttons */
+        .fab-container {
+            position: fixed;
+            bottom: 140px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .fab {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #6B7280;
+            cursor: pointer;
+        }
+        
+        .fab:active {
+            transform: scale(0.95);
+        }
+        
+        .fab.primary {
+            background: #5046E5;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="mobile-header">
+        <div class="mobile-logo">
+            <i class="fas fa-car"></i>
+            <span>RideASU</span>
+        </div>
+        <button class="menu-btn">
+            <i class="fas fa-user-circle"></i>
+        </button>
+    </div>
+    
+    <!-- Mapa -->
+    <div id="map"></div>
+    
+    <!-- Botones flotantes -->
+    <div class="fab-container">
+        <button class="fab" onclick="centerMap()">
+            <i class="fas fa-location-crosshairs"></i>
+        </button>
+    </div>
+    
+    <!-- Panel inferior -->
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="sheet-handle" onclick="toggleSheet()">
+            <div class="handle-bar"></div>
+        </div>
+        
+        <div class="sheet-content">
+            <h2 style="font-size: 20px; margin-bottom: 15px;">¿A dónde vamos?</h2>
+            
+            <!-- Tipos de viaje -->
+            <div class="ride-types">
+                <div class="ride-type-card active" onclick="selectRideType(this, 'standard')">
+                    <i class="fas fa-car"></i>
+                    <span>Standard</span>
+                </div>
+                <div class="ride-type-card" onclick="selectRideType(this, 'comfort')">
+                    <i class="fas fa-car-side"></i>
+                    <span>Comfort</span>
+                </div>
+                <div class="ride-type-card" onclick="selectRideType(this, 'xl')">
+                    <i class="fas fa-van-shuttle"></i>
+                    <span>XL</span>
+                </div>
+            </div>
+            
+            <!-- Inputs de ubicación -->
+            <div class="location-section">
+                <div class="location-input-group">
+                    <div class="input-icon pickup"></div>
+                    <input type="text" class="location-input" id="pickupInput" 
+                           placeholder="Lugar de recogida" readonly onclick="selectLocationOnMap('pickup')">
+                </div>
+                
+                <div class="location-input-group">
+                    <div class="input-icon destination"></div>
+                    <input type="text" class="location-input" id="destinationInput" 
+                           placeholder="¿A dónde vamos?" readonly onclick="selectLocationOnMap('destination')">
+                </div>
+            </div>
+            
+            <!-- Destinos rápidos -->
+            <div class="quick-places">
+                <h3>Lugares populares</h3>
+                <div class="places-grid">
+                    <button class="place-btn" onclick="setDestination('Shopping del Sol')">
+                        <i class="fas fa-shopping-bag"></i>
+                        Shopping Sol
+                    </button>
+                    <button class="place-btn" onclick="setDestination('Aeropuerto')">
+                        <i class="fas fa-plane"></i>
+                        Aeropuerto
+                    </button>
+                    <button class="place-btn" onclick="setDestination('Terminal')">
+                        <i class="fas fa-bus"></i>
+                        Terminal
+                    </button>
+                    <button class="place-btn" onclick="setDestination('Paseo Galería')">
+                        <i class="fas fa-shopping-cart"></i>
+                        P. Galería
+                    </button>
+                    <button class="place-btn" onclick="setDestination('Hospital IPS')">
+                        <i class="fas fa-hospital"></i>
+                        Hospital
+                    </button>
+                    <button class="place-btn" onclick="setDestination('Costanera')">
+                        <i class="fas fa-water"></i>
+                        Costanera
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Estimado de tarifa -->
+            <div class="fare-box" id="fareBox">
+                <div class="fare-price">₲ 25,000</div>
+                <div class="fare-details">
+                    <span><i class="fas fa-route"></i> 5.2 km</span>
+                    <span><i class="fas fa-clock"></i> 12 min</span>
+                </div>
+            </div>
+            
+            <!-- Botón de solicitar -->
+            <button class="request-btn" onclick="requestRide()">
+                <i class="fas fa-car"></i>
+                <span>Solicitar RideASU</span>
+            </button>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Inicializar mapa centrado en Asunción
+        let map = L.map('map', {
+            center: [-25.2637, -57.5759],
+            zoom: 13,
+            zoomControl: false
+        });
+        
+        // Agregar tiles del mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+        
+        // Agregar control de zoom en posición personalizada
+        L.control.zoom({
+            position: 'topright'
+        }).addTo(map);
+        
+        // Variables globales
+        let pickupMarker = null;
+        let destinationMarker = null;
+        let selectingLocation = null;
+        let sheetMinimized = false;
+        
+        // Locations en Asunción
+        const locations = {
+            'Shopping del Sol': [-25.2821, -57.5670],
+            'Aeropuerto': [-25.2396, -57.5191],
+            'Terminal': [-25.2714, -57.6389],
+            'Paseo Galería': [-25.2906, -57.5793],
+            'Hospital IPS': [-25.2797, -57.6318],
+            'Costanera': [-25.2885, -57.6284]
+        };
+        
+        // Toggle sheet
+        function toggleSheet() {
+            const sheet = document.getElementById('bottomSheet');
+            sheetMinimized = !sheetMinimized;
+            sheet.classList.toggle('minimized');
+        }
+        
+        // Seleccionar tipo de viaje
+        function selectRideType(element, type) {
+            document.querySelectorAll('.ride-type-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+        
+        // Centrar mapa
+        function centerMap() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        map.setView([lat, lng], 15);
+                        
+                        // Agregar marcador de ubicación actual
+                        if (pickupMarker) map.removeLayer(pickupMarker);
+                        pickupMarker = L.marker([lat, lng]).addTo(map);
+                        document.getElementById('pickupInput').value = 'Mi ubicación actual';
+                    },
+                    () => {
+                        // Si falla, usar centro de Asunción
+                        map.setView([-25.2637, -57.5759], 13);
+                    }
+                );
+            }
+        }
+        
+        // Seleccionar ubicación en el mapa
+        function selectLocationOnMap(type) {
+            selectingLocation = type;
+            alert('Toca en el mapa para seleccionar ' + 
+                  (type === 'pickup' ? 'lugar de recogida' : 'destino'));
+            
+            // Minimizar sheet para ver mejor el mapa
+            if (!sheetMinimized) toggleSheet();
+        }
+        
+        // Click en el mapa
+        map.on('click', function(e) {
+            if (!selectingLocation) return;
+            
+            const lat = e.latlng.lat;
+            const lng = e.latlng.lng;
+            
+            if (selectingLocation === 'pickup') {
+                if (pickupMarker) map.removeLayer(pickupMarker);
+                pickupMarker = L.marker([lat, lng]).addTo(map);
+                document.getElementById('pickupInput').value = `Ubicación seleccionada`;
+            } else {
+                if (destinationMarker) map.removeLayer(destinationMarker);
+                destinationMarker = L.marker([lat, lng]).addTo(map);
+                document.getElementById('destinationInput').value = `Destino seleccionado`;
+                showFareEstimate();
+            }
+            
+            selectingLocation = null;
+            if (sheetMinimized) toggleSheet();
+        });
+        
+        // Establecer destino
+        function setDestination(place) {
+            const coords = locations[place];
+            if (coords) {
+                if (destinationMarker) map.removeLayer(destinationMarker);
+                destinationMarker = L.marker(coords).addTo(map);
+                document.getElementById('destinationInput').value = place;
+                map.setView(coords, 15);
+                showFareEstimate();
+            }
+        }
+        
+        // Mostrar estimado de tarifa
+        function showFareEstimate() {
+            const fareBox = document.getElementById('fareBox');
+            fareBox.classList.add('show');
+            
+            // Calcular precio aleatorio para demo
+            const price = Math.floor(Math.random() * 30000) + 15000;
+            const distance = (Math.random() * 10 + 2).toFixed(1);
+            const time = Math.floor(Math.random() * 20) + 5;
+            
+            fareBox.innerHTML = `
+                <div class="fare-price">₲ ${price.toLocaleString('es-PY')}</div>
+                <div class="fare-details">
+                    <span><i class="fas fa-route"></i> ${distance} km</span>
+                    <span><i class="fas fa-clock"></i> ${time} min</span>
+                </div>
+            `;
+        }
+        
+        // Solicitar viaje
+        function requestRide() {
+            if (!pickupMarker || !destinationMarker) {
+                alert('Por favor selecciona origen y destino');
+                return;
+            }
+            
+            alert('¡Buscando conductor cerca de ti!\n\nTiempo estimado: 3-5 minutos');
+            
+            // Simular conductor encontrado
+            setTimeout(() => {
+                alert('¡Conductor encontrado!\n\nJuan González\n⭐ 4.8\nToyota Corolla Blanco\nLlega en 3 minutos');
+            }, 2000);
+        }
+        
+        // Agregar algunos conductores de ejemplo en el mapa
+        function addSampleDrivers() {
+            for (let i = 0; i < 10; i++) {
+                const lat = -25.2637 + (Math.random() - 0.5) * 0.05;
+                const lng = -57.5759 + (Math.random() - 0.5) * 0.05;
+                
+                L.marker([lat, lng], {
+                    icon: L.divIcon({
+                        className: 'driver-icon',
+                        html: '<div style="background:#5046E5; width:20px; height:10px; border-radius:3px; border:2px solid white;"></div>',
+                        iconSize: [20, 10]
+                    })
+                }).addTo(map);
+            }
+        }
+        
+        // Inicializar
+        addSampleDrivers();
+        centerMap();
+    </script>
+</body>
+</html>
