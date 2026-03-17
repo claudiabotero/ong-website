@@ -1,0 +1,104 @@
+{
+  "drivers": [
+    {
+      "id": 1,
+      "name": "Juan González",
+      "photo": "https://randomuser.me/api/portraits/men/1.jpg",
+      "rating": 4.8,
+      "trips": 1543,
+      "vehicle": {
+        "make": "Toyota",
+        "model": "Corolla",
+        "year": 2020,
+        "color": "Blanco",
+        "plate": "ABC 123"
+      },
+      "phone": "+595981234567",
+      "status": "available",
+      "location": {
+        "lat": -25.2637,
+        "lng": -57.5759
+      }
+    },
+    {
+      "id": 2,
+      "name": "María López",
+      "photo": "https://randomuser.me/api/portraits/women/2.jpg",
+      "rating": 4.9,
+      "trips": 2103,
+      "vehicle": {
+        "make": "Nissan",
+        "model": "Versa",
+        "year": 2021,
+        "color": "Gris",
+        "plate": "XYZ 789"
+      },
+      "phone": "+595982345678",
+      "status": "available",
+      "location": {
+        "lat": -25.2821,
+        "lng": -57.5670
+      }
+    },
+    {
+      "id": 3,
+      "name": "Carlos Fernández",
+      "photo": "https://randomuser.me/api/portraits/men/3.jpg",
+      "rating": 4.7,
+      "trips": 892,
+      "vehicle": {
+        "make": "Hyundai",
+        "model": "HB20",
+        "year": 2022,
+        "color": "Negro",
+        "plate": "QWE 456"
+      },
+      "phone": "+595983456789",
+      "status": "busy",
+      "location": {
+        "lat": -25.2906,
+        "lng": -57.5793
+      }
+    },
+    {
+      "id": 4,
+      "name": "Ana Martínez",
+      "photo": "https://randomuser.me/api/portraits/women/4.jpg",
+      "rating": 4.9,
+      "trips": 3421,
+      "vehicle": {
+        "make": "Volkswagen",
+        "model": "Gol",
+        "year": 2021,
+        "color": "Rojo",
+        "plate": "RTY 321"
+      },
+      "phone": "+595984567890",
+      "status": "available",
+      "location": {
+        "lat": -25.2797,
+        "lng": -57.6318
+      }
+    },
+    {
+      "id": 5,
+      "name": "Roberto Silva",
+      "photo": "https://randomuser.me/api/portraits/men/5.jpg",
+      "rating": 4.6,
+      "trips": 567,
+      "vehicle": {
+        "make": "Kia",
+        "model": "Rio",
+        "year": 2020,
+        "color": "Azul",
+        "plate": "UIO 654"
+      },
+      "phone": "+595985678901",
+      "status": "available",
+      "location": {
+        "lat": -25.2714,
+        "lng": -57.6389
+      }
+    }
+  ]
+}

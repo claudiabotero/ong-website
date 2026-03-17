@@ -1,0 +1,59 @@
+{
+  "app": {
+    "name": "RideASU",
+    "version": "1.0.0",
+    "currency": "₲",
+    "currencyCode": "PYG",
+    "language": "es-PY",
+    "country": "Paraguay",
+    "city": "Asunción",
+    "timezone": "America/Asuncion"
+  },
+  "map": {
+    "center": {
+      "lat": -25.2637,
+      "lng": -57.5759
+    },
+    "defaultZoom": 13,
+    "maxZoom": 18,
+    "minZoom": 10
+  },
+  "business": {
+    "commission": 0.25,
+    "minimumFare": 10000,
+    "cancellationFee": 5000,
+    "waitingTimePerMinute": 500,
+    "surgeMultiplier": {
+      "normal": 1.0,
+      "moderate": 1.5,
+      "high": 2.0,
+      "extreme": 3.0
+    },
+    "peakHours": [
+      {"start": "07:00", "end": "09:00", "surge": "moderate"},
+      {"start": "17:00", "end": "19:00", "surge": "high"},
+      {"start": "22:00", "end": "02:00", "surge": "moderate"}
+    ]
+  },
+  "support": {
+    "phone": "+595211234567",
+    "email": "soporte@rideasu.com.py",
+    "whatsapp": "+595981000000"
+  },
+  "features": {
+    "allowCashPayment": true,
+    "allowCardPayment": true,
+    "allowQRPayment": true,
+    "allowTipping": true,
+    "allowScheduledRides": false,
+    "allowMultipleStops": false,
+    "allowSharedRides": false,
+    "requirePhoneVerification": true,
+    "requireEmailVerification": false
+  },
+  "promotions": {
+    "newUserDiscount": 0.5,
+    "referralBonus": 10000,
+    "loyaltyProgram": true
+  }
+}

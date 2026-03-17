@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideASU - Tu viaje en Asunción</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <span>RideASU</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active">Viajar</a>
+                <a href="#" class="nav-link">Mis viajes</a>
+                <a href="#" class="nav-link">Ayuda</a>
+                <div class="user-menu">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mi cuenta</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar - Booking Panel -->
+        <div class="booking-panel">
+            <h2>¿A dónde vamos?</h2>
+            
+            <!-- Ride Type Selector -->
+            <div class="ride-type-selector">
+                <button class="ride-type active" data-type="standard">
+                    <i class="fas fa-car"></i>
+                    <span>Standard</span>
+                </button>
+                <button class="ride-type" data-type="comfort">
+                    <i class="fas fa-car-side"></i>
+                    <span>Comfort</span>
+                </button>
+                <button class="ride-type" data-type="xl">
+                    <i class="fas fa-van-shuttle"></i>
+                    <span>XL (6 pasajeros)</span>
+                </button>
+            </div>
+
+            <!-- Location Inputs -->
+            <div class="location-inputs">
+                <div class="input-group">
+                    <div class="input-icon">
+                        <div class="location-dot pickup"></div>
+                    </div>
+                    <input type="text" id="pickup-input" placeholder="Lugar de recogida" class="location-input">
+                </div>
+                
+                <div class="input-connector"></div>
+                
+                <div class="input-group">
+                    <div class="input-icon">
+                        <div class="location-dot destination"></div>
+                    </div>
+                    <input type="text" id="destination-input" placeholder="¿A dónde vamos?" class="location-input">
+                </div>
+            </div>
+
+            <!-- Quick Destinations -->
+            <div class="quick-destinations">
+                <h3>Destinos populares</h3>
+                <div class="destination-grid">
+                    <button class="quick-destination" data-location="Shopping del Sol">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Shopping del Sol</span>
+                    </button>
+                    <button class="quick-destination" data-location="Aeropuerto Silvio Pettirossi">
+                        <i class="fas fa-plane"></i>
+                        <span>Aeropuerto</span>
+                    </button>
+                    <button class="quick-destination" data-location="Paseo La Galería">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Paseo Galería</span>
+                    </button>
+                    <button class="quick-destination" data-location="Hospital Central IPS">
+                        <i class="fas fa-hospital"></i>
+                        <span>Hospital IPS</span>
+                    </button>
+                    <button class="quick-destination" data-location="Terminal de Ómnibus">
+                        <i class="fas fa-bus"></i>
+                        <span>Terminal</span>
+                    </button>
+                    <button class="quick-destination" data-location="Costanera de Asunción">
+                        <i class="fas fa-water"></i>
+                        <span>Costanera</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fare Estimate -->
+            <div class="fare-estimate" style="display: none;">
+                <h3>Estimado del viaje</h3>
+                <div class="fare-details">
+                    <div class="fare-row">
+                        <span>Distancia:</span>
+                        <span id="distance">-</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Tiempo estimado:</span>
+                        <span id="duration">-</span>
+                    </div>
+                    <div class="fare-row total">
+                        <span>Precio estimado:</span>
+                        <span id="price">₲ -</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Request Button -->
+            <button class="request-ride-btn" id="request-ride">
+                <i class="fas fa-car"></i>
+                <span>Solicitar viaje</span>
+            </button>
+
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+                <h4>Método de pago</h4>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="cash" checked>
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Efectivo</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="card">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Tarjeta</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="qr">
+                        <i class="fas fa-qrcode"></i>
+                        <span>QR Pagos</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Container -->
+        <div id="map" class="map-container"></div>
+    </div>
+
+    <!-- Driver Modal (Hidden by default) -->
+    <div class="driver-modal" id="driver-modal" style="display: none;">
+        <div class="modal-content">
+            <h3>¡Conductor en camino!</h3>
+            <div class="driver-info">
+                <img src="https://via.placeholder.com/80" alt="Driver" class="driver-photo">
+                <div class="driver-details">
+                    <h4 id="driver-name">Juan González</h4>
+                    <div class="driver-rating">
+                        <i class="fas fa-star"></i>
+                        <span>4.8</span>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-info">
+                <i class="fas fa-car"></i>
+                <span id="vehicle-info">Toyota Corolla Blanco - ABC 123</span>
+            </div>
+            <div class="arrival-time">
+                <i class="fas fa-clock"></i>
+                <span>Llega en <strong id="arrival-time">3 minutos</strong></span>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="cancelRide()">Cancelar viaje</button>
+                <button class="btn-primary" onclick="callDriver()">
+                    <i class="fas fa-phone"></i>
+                    Llamar conductor
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat">
+            <i class="fas fa-car"></i>
+            <span><strong id="drivers-online">127</strong> conductores cerca</span>
+        </div>
+        <div class="stat">
+            <i class="fas fa-clock"></i>
+            <span>Tiempo promedio: <strong>3-5 min</strong></span>
+        </div>
+        <div class="stat">
+            <i class="fas fa-shield-alt"></i>
+            <span>Viajes seguros</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>

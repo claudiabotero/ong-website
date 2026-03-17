@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideASU Driver - Panel de Conductor</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .driver-header {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+        }
+        
+        .earnings-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .earnings-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: #10B981;
+        }
+        
+        .status-toggle {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .toggle-btn {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: none;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .toggle-btn.online {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+        }
+        
+        .toggle-btn.offline {
+            background: #E5E7EB;
+            color: #6B7280;
+        }
+        
+        .trip-request {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .trip-request.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Driver Header -->
+    <header class="header driver-header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <span>RideASU Driver</span>
+            </div>
+            <nav class="nav-menu">
+                <div class="user-menu" style="background: rgba(255,255,255,0.2);">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Juan González</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Driver Dashboard -->
+        <div class="booking-panel" style="width: 450px;">
+            <h2>Panel de Conductor</h2>
+            
+            <!-- Earnings Card -->
+            <div class="earnings-card">
+                <h3 style="color: #6B7280; font-size: 14px; margin-bottom: 10px;">
+                    GANANCIAS DE HOY
+                </h3>
+                <div class="earnings-amount">₲ 245,500</div>
+                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                    <div>
+                        <div style="color: #6B7280; font-size: 12px;">Viajes</div>
+                        <div style="font-weight: 600;">12</div>
+                    </div>
+                    <div>
+                        <div style="color: #6B7280; font-size: 12px;">Tiempo en línea</div>
+                        <div style="font-weight: 600;">6h 23m</div>
+                    </div>
+                    <div>
+                        <div style="color: #6B7280; font-size: 12px;">Distancia</div>
+                        <div style="font-weight: 600;">87 km</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Toggle -->
+            <div class="status-toggle">
+                <button class="toggle-btn offline" id="status-toggle">
+                    <i class="fas fa-power-off" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <br>OFFLINE
+                </button>
+                <p style="margin-top: 15px; color: #6B7280;">
+                    Presiona para comenzar a recibir viajes
+                </p>
+            </div>
+
+            <!-- Trip Request (Hidden by default) -->
+            <div class="trip-request" id="trip-request">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3>Nueva solicitud de viaje</h3>
+                    <div style="font-size: 24px; font-weight: 700; color: #10B981;">
+                        ₲ 35,000
+                    </div>
+                </div>
+                
+                <div style="background: #F3F4F6; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <div style="width: 10px; height: 10px; background: #10B981; border-radius: 50%;"></div>
+                        <div>
+                            <div style="font-size: 12px; color: #6B7280;">RECOGER EN</div>
+                            <div style="font-weight: 600;">Av. Mariscal López 2345</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 10px; height: 10px; background: #EF4444; border-radius: 50%;"></div>
+                        <div>
+                            <div style="font-size: 12px; color: #6B7280;">DESTINO</div>
+                            <div style="font-weight: 600;">Shopping del Sol</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <span style="background: #E0E7FF; color: #5046E5; padding: 5px 10px; border-radius: 20px; font-size: 12px;">
+                        <i class="fas fa-route"></i> 5.2 km
+                    </span>
+                    <span style="background: #FEF3C7; color: #F59E0B; padding: 5px 10px; border-radius: 20px; font-size: 12px;">
+                        <i class="fas fa-clock"></i> 12 min
+                    </span>
+                    <span style="background: #D1FAE5; color: #10B981; padding: 5px 10px; border-radius: 20px; font-size: 12px;">
+                        <i class="fas fa-money-bill"></i> Efectivo
+                    </span>
+                </div>
+                
+                <div id="countdown" style="text-align: center; font-size: 36px; font-weight: 700; color: #EF4444; margin: 20px 0;">
+                    15
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="rejectTrip()" style="flex: 1; padding: 15px; background: #F3F4F6; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+                        Rechazar
+                    </button>
+                    <button onclick="acceptTrip()" style="flex: 2; padding: 15px; background: #10B981; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+                        Aceptar viaje
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Trips -->
+            <div style="margin-top: 30px;">
+                <h3 style="margin-bottom: 15px;">Viajes recientes</h3>
+                <div style="background: white; border: 1px solid #E5E7EB; border-radius: 10px; padding: 15px; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <div style="font-weight: 600;">Terminal → Paseo Galería</div>
+                            <div style="font-size: 12px; color: #6B7280;">10:45 AM - 11:02 AM</div>
+                        </div>
+                        <div style="font-size: 18px; font-weight: 600; color: #10B981;">
+                            ₲ 28,500
+                        </div>
+                    </div>
+                </div>
+                <div style="background: white; border: 1px solid #E5E7EB; border-radius: 10px; padding: 15px; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <div style="font-weight: 600;">Costanera → Aeropuerto</div>
+                            <div style="font-size: 12px; color: #6B7280;">09:15 AM - 09:48 AM</div>
+                        </div>
+                        <div style="font-size: 18px; font-weight: 600; color: #10B981;">
+                            ₲ 45,000
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div id="map" class="map-container"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize map for driver
+        let map = L.map('map').setView([-25.2637, -57.5759], 14);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        // Driver location
+        let driverMarker = L.marker([-25.2637, -57.5759], {
+            icon: L.divIcon({
+                className: 'driver-marker',
+                html: '<div style="background: #10B981; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            })
+        }).addTo(map);
+
+        // Toggle online/offline
+        let isOnline = false;
+        let tripInterval;
+        
+        document.getElementById('status-toggle').addEventListener('click', function() {
+            isOnline = !isOnline;
+            if (isOnline) {
+                this.className = 'toggle-btn online';
+                this.innerHTML = '<i class="fas fa-check-circle" style="font-size: 40px; margin-bottom: 10px;"></i><br>ONLINE';
+                // Simulate trip request after 5 seconds
+                setTimeout(showTripRequest, 5000);
+            } else {
+                this.className = 'toggle-btn offline';
+                this.innerHTML = '<i class="fas fa-power-off" style="font-size: 40px; margin-bottom: 10px;"></i><br>OFFLINE';
+            }
+        });
+
+        // Show trip request
+        function showTripRequest() {
+            if (!isOnline) return;
+            
+            document.getElementById('trip-request').classList.add('active');
+            let countdown = 15;
+            
+            tripInterval = setInterval(() => {
+                countdown--;
+                document.getElementById('countdown').textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(tripInterval);
+                    rejectTrip();
+                }
+            }, 1000);
+        }
+
+        // Accept trip
+        function acceptTrip() {
+            clearInterval(tripInterval);
+            document.getElementById('trip-request').classList.remove('active');
+            alert('¡Viaje aceptado! Dirígete al punto de recogida.');
+            
+            // Add route to map
+            L.polyline([
+                [-25.2637, -57.5759],
+                [-25.2821, -57.5670]
+            ], {color: '#10B981', weight: 4}).addTo(map);
+        }
+
+        // Reject trip
+        function rejectTrip() {
+            clearInterval(tripInterval);
+            document.getElementById('trip-request').classList.remove('active');
+            
+            // Show another request after 10 seconds if online
+            if (isOnline) {
+                setTimeout(showTripRequest, 10000);
+            }
+        }
+    </script>
+</body>
+</html>
