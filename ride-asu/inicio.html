@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideASU - Tu Uber en Asunción</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+        }
+        .logo {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .tagline {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 50px;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background: white;
+            color: #667eea;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        .btn.driver {
+            background: #10B981;
+            color: white;
+        }
+        .features {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            opacity: 0.9;
+        }
+        .feature {
+            text-align: center;
+        }
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .feature-text {
+            font-size: 14px;
+        }
+        .footer {
+            margin-top: 60px;
+            opacity: 0.7;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🚗</div>
+        <h1>RideASU</h1>
+        <p class="tagline">Tu viaje seguro en Asunción, Paraguay</p>
+        
+        <div class="buttons">
+            <a href="index.html" class="btn">
+                <span>📱</span>
+                <span>Soy Pasajero</span>
+            </a>
+            <a href="driver.html" class="btn driver">
+                <span>🚘</span>
+                <span>Soy Conductor</span>
+            </a>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">💵</div>
+                <div class="feature-text">Pagos en<br>Guaraníes</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📍</div>
+                <div class="feature-text">Toda<br>Asunción</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-text">Respuesta<br>Rápida</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-text">Viajes<br>Seguros</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Hecho con ❤️ para Asunción</p>
+            <p>© 2026 RideASU - Demo</p>
+        </div>
+    </div>
+</body>
+</html>
