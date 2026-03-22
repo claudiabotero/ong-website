@@ -204,8 +204,8 @@ function updateTotal() {
     document.getElementById('totalAmount').textContent = `₲ ${total.toLocaleString('es-PY')}`;
 }
 
-// Procesar pago
-function processPayment() {
+// Procesar pago con Dinelco real
+async function processPayment() {
     if (cart.length === 0) {
         alert('Tu carrito está vacío');
         return;
@@ -219,11 +219,54 @@ function processPayment() {
     const paymentModal = document.getElementById('paymentModal');
     paymentModal.classList.add('active');
     
-    // Simular procesamiento de pago
-    setTimeout(() => {
+    try {
+        // Inicializar servicio Dinelco
+        const dinelco = new DinelcoPaymentService();
+        
+        // Crear orden de pago
+        const paymentResult = await dinelco.createPayment({
+            amount: total,
+            orderId: String(orderNumber).padStart(4, '0'),
+            description: `Club Condesa - ${cart.length} items`,
+            customerEmail: 'cliente@clubcondesa.com'
+        });
+        
+        if (paymentResult.success && paymentResult.status === 'completed') {
+            // Pago exitoso
+            paymentModal.classList.remove('active');
+            
+            // Guardar datos para página de éxito
+            localStorage.setItem('lastOrder', String(orderNumber).padStart(4, '0'));
+            localStorage.setItem('lastAmount', total);
+            localStorage.setItem('lastTransaction', paymentResult.transactionId);
+            localStorage.setItem('lastAuth', paymentResult.authorization_code);
+            localStorage.setItem('lastCard', paymentResult.card_last_digits);
+            
+            // Enviar orden al sistema
+            completeOrder();
+            
+            // Redirigir a página de éxito
+            setTimeout(() => {
+                window.location.href = `payment-success.html?order=${orderNumber}&amount=${total}&auth=${paymentResult.authorization_code}&card=${paymentResult.card_last_digits}`;
+            }, 500);
+            
+        } else if (paymentResult.status === 'pending') {
+            // Pago pendiente
+            alert('Tu pago está siendo procesado. Por favor espera la confirmación.');
+            paymentModal.classList.remove('active');
+            
+        } else {
+            // Pago rechazado
+            throw new Error(paymentResult.message || 'Pago rechazado');
+        }
+        
+    } catch (error) {
+        console.error('Error en el pago:', error);
         paymentModal.classList.remove('active');
-        completeOrder();
-    }, 3000);
+        
+        // Mostrar error al usuario
+        alert(`Error en el pago: ${error.message || 'Por favor intenta nuevamente'}`);
+    }
 }
 
 // Completar orden
