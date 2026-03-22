@@ -1,45 +1,45 @@
 // BarTouch - Sistema de Pedidos Automático para Bar
 
-// Base de datos de productos
+// Base de datos de productos con imágenes reales
 const products = [
     // Cervezas
-    { id: 1, name: 'Pilsen Lata 354ml', category: 'cervezas', price: 10000, icon: '🍺' },
-    { id: 2, name: 'Brahma Lata 354ml', category: 'cervezas', price: 10000, icon: '🍺' },
-    { id: 3, name: 'Heineken Lata 330ml', category: 'cervezas', price: 15000, icon: '🍺' },
-    { id: 4, name: 'Corona 330ml', category: 'cervezas', price: 18000, icon: '🍺' },
-    { id: 5, name: 'Stella Artois 330ml', category: 'cervezas', price: 16000, icon: '🍺' },
+    { id: 1, name: 'Pilsen Lata 354ml', category: 'cervezas', price: 10000, image: 'https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300', icon: '🍺' },
+    { id: 2, name: 'Brahma Lata 354ml', category: 'cervezas', price: 10000, image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=300', icon: '🍺' },
+    { id: 3, name: 'Heineken Lata 330ml', category: 'cervezas', price: 15000, image: 'https://images.unsplash.com/photo-1618183479302-1e0aa382c36b?w=300', icon: '🍺' },
+    { id: 4, name: 'Corona 330ml', category: 'cervezas', price: 18000, image: 'https://images.unsplash.com/photo-1558642891-54be180ea339?w=300', icon: '🍺' },
+    { id: 5, name: 'Stella Artois 330ml', category: 'cervezas', price: 16000, image: 'https://images.unsplash.com/photo-1553247407-23251ce81f59?w=300', icon: '🍺' },
     
     // Tragos
-    { id: 6, name: 'Fernet con Coca', category: 'tragos', price: 25000, icon: '🥃' },
-    { id: 7, name: 'Vodka con Energizante', category: 'tragos', price: 30000, icon: '🥃' },
-    { id: 8, name: 'Whisky con Coca', category: 'tragos', price: 35000, icon: '🥃' },
-    { id: 9, name: 'Ron con Coca', category: 'tragos', price: 25000, icon: '🥃' },
-    { id: 10, name: 'Gin Tonic', category: 'tragos', price: 35000, icon: '🥃' },
+    { id: 6, name: 'Fernet con Coca', category: 'tragos', price: 25000, image: 'https://images.unsplash.com/photo-1609345265499-2133bbeb6ce5?w=300', icon: '🥃' },
+    { id: 7, name: 'Vodka con Energizante', category: 'tragos', price: 30000, image: 'https://images.unsplash.com/photo-1560512823-829485b8bf24?w=300', icon: '🥃' },
+    { id: 8, name: 'Whisky con Coca', category: 'tragos', price: 35000, image: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=300', icon: '🥃' },
+    { id: 9, name: 'Ron con Coca', category: 'tragos', price: 25000, image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=300', icon: '🥃' },
+    { id: 10, name: 'Gin Tonic', category: 'tragos', price: 35000, image: 'https://images.unsplash.com/photo-1587316205943-b15dc52a12e0?w=300', icon: '🥃' },
     
     // Cocktails
-    { id: 11, name: 'Aperol Spritz', category: 'cocktails', price: 35000, icon: '🍹' },
-    { id: 12, name: 'Mojito', category: 'cocktails', price: 30000, icon: '🍹' },
-    { id: 13, name: 'Margarita', category: 'cocktails', price: 35000, icon: '🍹' },
-    { id: 14, name: 'Piña Colada', category: 'cocktails', price: 35000, icon: '🍹' },
-    { id: 15, name: 'Cosmopolitan', category: 'cocktails', price: 38000, icon: '🍹' },
-    { id: 16, name: 'Caipirinha', category: 'cocktails', price: 28000, icon: '🍹' },
-    { id: 17, name: 'Negroni', category: 'cocktails', price: 40000, icon: '🍹' },
-    { id: 18, name: 'Daiquiri', category: 'cocktails', price: 32000, icon: '🍹' },
+    { id: 11, name: 'Aperol Spritz', category: 'cocktails', price: 35000, image: 'https://images.unsplash.com/photo-1596463059299-95ab8a3f4f10?w=300', icon: '🍹' },
+    { id: 12, name: 'Mojito', category: 'cocktails', price: 30000, image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=300', icon: '🍹' },
+    { id: 13, name: 'Margarita', category: 'cocktails', price: 35000, image: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=300', icon: '🍹' },
+    { id: 14, name: 'Piña Colada', category: 'cocktails', price: 35000, image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=300', icon: '🍹' },
+    { id: 15, name: 'Cosmopolitan', category: 'cocktails', price: 38000, image: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=300', icon: '🍹' },
+    { id: 16, name: 'Caipirinha', category: 'cocktails', price: 28000, image: 'https://images.unsplash.com/photo-1607446045875-de57c995726b?w=300', icon: '🍹' },
+    { id: 17, name: 'Negroni', category: 'cocktails', price: 40000, image: 'https://images.unsplash.com/photo-1570598912132-0ba1dc952b7d?w=300', icon: '🍹' },
+    { id: 18, name: 'Daiquiri', category: 'cocktails', price: 32000, image: 'https://images.unsplash.com/photo-1582093236149-516a8be696fe?w=300', icon: '🍹' },
     
     // Gaseosas y agua
-    { id: 19, name: 'Coca Cola 500ml', category: 'gaseosas', price: 8000, icon: '🥤' },
-    { id: 20, name: 'Coca Zero 500ml', category: 'gaseosas', price: 8000, icon: '🥤' },
-    { id: 21, name: 'Sprite 500ml', category: 'gaseosas', price: 8000, icon: '🥤' },
-    { id: 22, name: 'Agua Mineral 500ml', category: 'gaseosas', price: 6000, icon: '💧' },
-    { id: 23, name: 'Agua con Gas 500ml', category: 'gaseosas', price: 7000, icon: '💧' },
-    { id: 24, name: 'Jugo de Naranja', category: 'gaseosas', price: 10000, icon: '🍊' },
+    { id: 19, name: 'Coca Cola 500ml', category: 'gaseosas', price: 8000, image: 'https://images.unsplash.com/photo-1624552184280-9e9631bbeee9?w=300', icon: '🥤' },
+    { id: 20, name: 'Coca Zero 500ml', category: 'gaseosas', price: 8000, image: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=300', icon: '🥤' },
+    { id: 21, name: 'Sprite 500ml', category: 'gaseosas', price: 8000, image: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=300', icon: '🥤' },
+    { id: 22, name: 'Agua Mineral 500ml', category: 'gaseosas', price: 6000, image: 'https://images.unsplash.com/photo-1559839914-17aae19cec71?w=300', icon: '💧' },
+    { id: 23, name: 'Agua con Gas 500ml', category: 'gaseosas', price: 7000, image: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=300', icon: '💧' },
+    { id: 24, name: 'Jugo de Naranja', category: 'gaseosas', price: 10000, image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=300', icon: '🍊' },
     
     // Cigarrillos
-    { id: 25, name: 'Marlboro Box', category: 'otros', price: 30000, icon: '🚬' },
-    { id: 26, name: 'Marlboro Gold', category: 'otros', price: 30000, icon: '🚬' },
-    { id: 27, name: 'Lucky Strike', category: 'otros', price: 25000, icon: '🚬' },
-    { id: 28, name: 'Camel', category: 'otros', price: 28000, icon: '🚬' },
-    { id: 29, name: 'Pall Mall', category: 'otros', price: 22000, icon: '🚬' }
+    { id: 25, name: 'Marlboro Box', category: 'otros', price: 30000, image: 'https://images.unsplash.com/photo-1571618933454-84e7cdf2a0b3?w=300', icon: '🚬' },
+    { id: 26, name: 'Marlboro Gold', category: 'otros', price: 30000, image: 'https://images.unsplash.com/photo-1571618933454-84e7cdf2a0b3?w=300', icon: '🚬' },
+    { id: 27, name: 'Lucky Strike', category: 'otros', price: 25000, image: 'https://images.unsplash.com/photo-1616093619181-5bab3b3dab15?w=300', icon: '🚬' },
+    { id: 28, name: 'Camel', category: 'otros', price: 28000, image: 'https://images.unsplash.com/photo-1616093619181-5bab3b3dab15?w=300', icon: '🚬' },
+    { id: 29, name: 'Pall Mall', category: 'otros', price: 22000, image: 'https://images.unsplash.com/photo-1616093619181-5bab3b3dab15?w=300', icon: '🚬' }
 ];
 
 // Carrito de compras
@@ -69,8 +69,8 @@ function renderProducts(category) {
             <button class="add-to-cart" onclick="addToCart(${product.id})">
                 <i class="fas fa-plus"></i>
             </button>
-            <div class="product-image">
-                ${product.icon}
+            <div class="product-image" style="padding: 0;">
+                <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 150px; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='${product.icon}'; this.parentElement.style.padding='50px 0';">
             </div>
             <div class="product-info">
                 <div class="product-name">${product.name}</div>
@@ -164,9 +164,12 @@ function renderCartItems() {
             const itemDiv = document.createElement('div');
             itemDiv.className = 'cart-item';
             itemDiv.innerHTML = `
-                <div class="cart-item-info">
-                    <div class="cart-item-name">${item.icon} ${item.name}</div>
-                    <div class="cart-item-price">₲ ${(item.price * item.quantity).toLocaleString('es-PY')}</div>
+                <div class="cart-item-info" style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                    <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;" onerror="this.style.display='none'">
+                    <div style="flex: 1;">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">₲ ${(item.price * item.quantity).toLocaleString('es-PY')}</div>
+                    </div>
                 </div>
                 <div class="quantity-controls">
                     <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">
