@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarTouch - Panel de Bartender</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a2e;
+            color: white;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 36px;
+            color: #ff6b35;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff6b35;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Orders Container */
+        .orders-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .orders-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .orders-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .column {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 600px;
+        }
+
+        .column-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .column-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .column-count {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Order Card */
+        .order-card {
+            background: white;
+            color: #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .order-card.urgent {
+            border-left: 5px solid #ff0066;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+            50% { box-shadow: 0 4px 25px rgba(255,0,102,0.4); }
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .order-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .order-time {
+            font-size: 12px;
+            color: #95a5a6;
+        }
+
+        .order-timer {
+            background: #ff6b35;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .order-items {
+            margin-bottom: 15px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .item-quantity {
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .order-footer {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .order-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-preparing {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-complete {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-print {
+            background: #3498db;
+            color: white;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .order-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Status indicators */
+        .status-pending {
+            background: #e74c3c;
+        }
+
+        .status-preparing {
+            background: #f39c12;
+        }
+
+        .status-ready {
+            background: #27ae60;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b35;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: none;
+            animation: slideInRight 0.3s;
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Print Preview */
+        .print-preview {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: black;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1000;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        .print-header {
+            text-align: center;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .print-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+
+        .print-footer {
+            border-top: 2px dashed #000;
+            padding-top: 10px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 107, 53, 0.2);
+            border-color: #ff6b35;
+        }
+
+        .filter-btn.active {
+            background: #ff6b35;
+            border-color: #ff6b35;
+        }
+
+        /* Audio Alert Button */
+        .alert-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .alert-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .alert-toggle.muted {
+            background: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-cocktail"></i>
+            <h1>BarTouch - Bartender</h1>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value" id="pendingCount">0</div>
+                <div class="stat-label">Pendientes</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="preparingCount">0</div>
+                <div class="stat-label">Preparando</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="completedCount">0</div>
+                <div class="stat-label">Completadas</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterOrders('all')">
+            <i class="fas fa-list"></i> Todas
+        </button>
+        <button class="filter-btn" onclick="filterOrders('cervezas')">
+            <i class="fas fa-beer"></i> Cervezas
+        </button>
+        <button class="filter-btn" onclick="filterOrders('tragos')">
+            <i class="fas fa-glass-martini"></i> Tragos
+        </button>
+        <button class="filter-btn" onclick="filterOrders('cocktails')">
+            <i class="fas fa-cocktail"></i> Cocktails
+        </button>
+    </div>
+
+    <!-- Orders Columns -->
+    <div class="orders-container">
+        <!-- Columna Pendientes -->
+        <div class="column">
+            <div class="column-header">
+                <span class="column-title">📥 Nuevas Órdenes</span>
+                <span class="column-count" id="pendingBadge">0</span>
+            </div>
+            <div id="pendingOrders"></div>
+        </div>
+
+        <!-- Columna En Preparación -->
+        <div class="column">
+            <div class="column-header">
+                <span class="column-title">🍹 En Preparación</span>
+                <span class="column-count" id="preparingBadge">0</span>
+            </div>
+            <div id="preparingOrders"></div>
+        </div>
+
+        <!-- Columna Listas -->
+        <div class="column">
+            <div class="column-header">
+                <span class="column-title">✅ Listas para Entregar</span>
+                <span class="column-count" id="readyBadge">0</span>
+            </div>
+            <div id="readyOrders"></div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-bell"></i> Nueva orden recibida!
+    </div>
+
+    <!-- Print Preview (Hidden) -->
+    <div class="print-preview" id="printPreview">
+        <div class="print-header">
+            <strong>BARTOUCH</strong><br>
+            COMANDA<br>
+            <span id="printOrderNumber">#0001</span><br>
+            <span id="printDateTime">--</span>
+        </div>
+        <div id="printItems"></div>
+        <div class="print-footer">
+            <strong id="printTotal">TOTAL: ₲ 0</strong><br>
+            PAGADO CON DINELCO
+        </div>
+    </div>
+
+    <!-- Audio Alert Toggle -->
+    <button class="alert-toggle" id="alertToggle" onclick="toggleSound()">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+    <script>
+        // Estado de las órdenes
+        let orders = {
+            pending: [],
+            preparing: [],
+            ready: []
+        };
+
+        let soundEnabled = true;
+        let currentFilter = 'all';
+
+        // Cargar órdenes del localStorage
+        function loadOrders() {
+            const savedOrders = JSON.parse(localStorage.getItem('barOrders') || '[]');
+            
+            // Agregar nuevas órdenes como pendientes
+            savedOrders.forEach(order => {
+                if (!orders.pending.find(o => o.orderNumber === order.orderNumber) &&
+                    !orders.preparing.find(o => o.orderNumber === order.orderNumber) &&
+                    !orders.ready.find(o => o.orderNumber === order.orderNumber)) {
+                    
+                    order.status = 'pending';
+                    order.startTime = Date.now();
+                    orders.pending.push(order);
+                    showNotification();
+                }
+            });
+            
+            renderOrders();
+            updateStats();
+        }
+
+        // Renderizar órdenes
+        function renderOrders() {
+            renderOrderColumn('pending', 'pendingOrders');
+            renderOrderColumn('preparing', 'preparingOrders');
+            renderOrderColumn('ready', 'readyOrders');
+            
+            updateBadges();
+        }
+
+        // Renderizar columna de órdenes
+        function renderOrderColumn(status, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            const ordersToShow = orders[status];
+            
+            ordersToShow.forEach(order => {
+                const card = createOrderCard(order, status);
+                container.appendChild(card);
+            });
+        }
+
+        // Crear tarjeta de orden
+        function createOrderCard(order, status) {
+            const card = document.createElement('div');
+            card.className = 'order-card';
+            
+            const elapsedTime = Math.floor((Date.now() - order.startTime) / 1000 / 60);
+            if (elapsedTime > 10 && status === 'pending') {
+                card.classList.add('urgent');
+            }
+            
+            card.innerHTML = `
+                <div class="order-header">
+                    <div class="order-number">Orden ${order.orderNumber}</div>
+                    <div class="order-timer">${elapsedTime} min</div>
+                </div>
+                <div class="order-time">${order.timestamp}</div>
+                <div class="order-items">
+                    ${order.items.map(item => `
+                        <div class="order-item">
+                            <span class="item-name">${item.name}</span>
+                            <span class="item-quantity">${item.quantity}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="order-footer">
+                    ${getOrderButtons(order, status)}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Obtener botones según estado
+        function getOrderButtons(order, status) {
+            switch(status) {
+                case 'pending':
+                    return `
+                        <button class="order-btn btn-preparing" onclick="moveOrder('${order.orderNumber}', 'pending', 'preparing')">
+                            <i class="fas fa-play"></i> Preparar
+                        </button>
+                        <button class="order-btn btn-print" onclick="printOrder('${order.orderNumber}')">
+                            <i class="fas fa-print"></i>
+                        </button>
+                    `;
+                case 'preparing':
+                    return `
+                        <button class="order-btn btn-complete" onclick="moveOrder('${order.orderNumber}', 'preparing', 'ready')">
+                            <i class="fas fa-check"></i> Listo
+                        </button>
+                    `;
+                case 'ready':
+                    return `
+                        <button class="order-btn btn-complete" onclick="completeOrder('${order.orderNumber}')">
+                            <i class="fas fa-check-double"></i> Entregado
+                        </button>
+                    `;
+                default:
+                    return '';
+            }
+        }
+
+        // Mover orden entre estados
+        function moveOrder(orderNumber, from, to) {
+            const orderIndex = orders[from].findIndex(o => o.orderNumber === orderNumber);
+            if (orderIndex !== -1) {
+                const order = orders[from].splice(orderIndex, 1)[0];
+                order.status = to;
+                orders[to].push(order);
+                renderOrders();
+                updateStats();
+            }
+        }
+
+        // Completar orden
+        function completeOrder(orderNumber) {
+            const orderIndex = orders.ready.findIndex(o => o.orderNumber === orderNumber);
+            if (orderIndex !== -1) {
+                orders.ready.splice(orderIndex, 1);
+                renderOrders();
+                updateStats();
+                
+                // Limpiar del localStorage
+                const savedOrders = JSON.parse(localStorage.getItem('barOrders') || '[]');
+                const filteredOrders = savedOrders.filter(o => o.orderNumber !== orderNumber);
+                localStorage.setItem('barOrders', JSON.stringify(filteredOrders));
+            }
+        }
+
+        // Imprimir orden
+        function printOrder(orderNumber) {
+            const order = [...orders.pending, ...orders.preparing, ...orders.ready]
+                .find(o => o.orderNumber === orderNumber);
+            
+            if (order) {
+                document.getElementById('printOrderNumber').textContent = `#${order.orderNumber}`;
+                document.getElementById('printDateTime').textContent = order.timestamp;
+                
+                const itemsHtml = order.items.map(item => `
+                    <div class="print-item">
+                        <span>${item.quantity}x ${item.name}</span>
+                    </div>
+                `).join('');
+                
+                document.getElementById('printItems').innerHTML = itemsHtml;
+                document.getElementById('printTotal').textContent = `TOTAL: ₲ ${order.total.toLocaleString('es-PY')}`;
+                
+                // Mostrar preview
+                const preview = document.getElementById('printPreview');
+                preview.style.display = 'block';
+                
+                setTimeout(() => {
+                    preview.style.display = 'none';
+                    window.print();
+                }, 2000);
+            }
+        }
+
+        // Actualizar estadísticas
+        function updateStats() {
+            document.getElementById('pendingCount').textContent = orders.pending.length;
+            document.getElementById('preparingCount').textContent = orders.preparing.length;
+            document.getElementById('completedCount').textContent = orders.ready.length;
+        }
+
+        // Actualizar badges
+        function updateBadges() {
+            document.getElementById('pendingBadge').textContent = orders.pending.length;
+            document.getElementById('preparingBadge').textContent = orders.preparing.length;
+            document.getElementById('readyBadge').textContent = orders.ready.length;
+        }
+
+        // Mostrar notificación
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            
+            if (soundEnabled) {
+                // Reproducir sonido de alerta
+                playAlertSound();
+            }
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Toggle sonido
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('alertToggle');
+            btn.classList.toggle('muted');
+            btn.innerHTML = soundEnabled 
+                ? '<i class="fas fa-volume-up"></i>' 
+                : '<i class="fas fa-volume-mute"></i>';
+        }
+
+        // Reproducir sonido de alerta
+        function playAlertSound() {
+            // En producción, reproducir archivo de audio
+            console.log('🔔 Nueva orden!');
+        }
+
+        // Filtrar órdenes
+        function filterOrders(category) {
+            currentFilter = category;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Implementar filtrado
+            renderOrders();
+        }
+
+        // Auto-actualizar cada 5 segundos
+        setInterval(loadOrders, 5000);
+
+        // Inicializar
+        loadOrders();
+    </script>
+</body>
+</html>

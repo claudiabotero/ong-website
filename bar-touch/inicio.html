@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarTouch - Sistema de Gestión para Bares</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .logo {
+            font-size: 100px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 20px;
+            margin-bottom: 50px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b35, #ff8e53);
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .option-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .option-card.customer {
+            --color: #ff6b35;
+        }
+
+        .option-card.bartender {
+            --color: #3498db;
+        }
+
+        .option-card.admin {
+            --color: #2ecc71;
+        }
+
+        .option-card.demo {
+            --color: #e74c3c;
+        }
+
+        .option-icon {
+            color: var(--color);
+        }
+
+        .option-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .option-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .option-button {
+            background: var(--color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .option-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .features {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .features h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .feature-text {
+            font-size: 16px;
+        }
+
+        .demo-info {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .demo-credentials {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .credential {
+            background: #f8f9fa;
+            padding: 15px 25px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .credential-label {
+            color: #7f8c8d;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .credential-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .badge {
+            background: #ff0066;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-cocktail"></i>
+            </div>
+            <h1>BarTouch</h1>
+            <p class="subtitle">Sistema Inteligente de Pedidos para Bares</p>
+        </div>
+
+        <!-- Options Grid -->
+        <div class="options-grid">
+            <!-- Cliente -->
+            <div class="option-card customer">
+                <div class="option-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3 class="option-title">Terminal de Cliente</h3>
+                <p class="option-description">
+                    Interfaz táctil para que los clientes realicen sus pedidos y paguen con tarjeta Dinelco de forma autónoma.
+                </p>
+                <a href="index.html" class="option-button">
+                    Abrir Terminal
+                </a>
+            </div>
+
+            <!-- Bartender -->
+            <div class="option-card bartender">
+                <div class="option-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3 class="option-title">Panel de Bartender</h3>
+                <p class="option-description">
+                    Sistema de gestión de órdenes en tiempo real con alertas, comandas e impresión automática.
+                </p>
+                <a href="bartender.html" class="option-button">
+                    Acceder al Panel
+                </a>
+            </div>
+
+            <!-- Admin -->
+            <div class="option-card admin">
+                <span class="badge">Próximamente</span>
+                <div class="option-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="option-title">Administración</h3>
+                <p class="option-description">
+                    Panel administrativo con reportes de ventas, gestión de productos, precios e inventario.
+                </p>
+                <span class="option-button" style="opacity: 0.5; cursor: not-allowed;">
+                    En Desarrollo
+                </span>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="features">
+            <h2>Características del Sistema</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="feature-text">Pagos con Dinelco</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <div class="feature-text">Impresión de Comandas</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="feature-text">Alertas en Tiempo Real</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="feature-text">100% Táctil</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-beer"></i>
+                    </div>
+                    <div class="feature-text">+30 Productos</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="feature-text">Súper Rápido</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Info -->
+        <div class="demo-info">
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">🎯 Modo Demostración</h3>
+            <p style="color: #7f8c8d;">
+                El sistema está en modo demo. Los pagos y órdenes son simulados para propósitos de prueba.
+            </p>
+            <div class="demo-credentials">
+                <div class="credential">
+                    <div class="credential-label">Terminal ID</div>
+                    <div class="credential-value">DEMO-001</div>
+                </div>
+                <div class="credential">
+                    <div class="credential-label">Bar</div>
+                    <div class="credential-value">BarTouch Demo</div>
+                </div>
+                <div class="credential">
+                    <div class="credential-label">Ubicación</div>
+                    <div class="credential-value">Asunción, Paraguay</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
